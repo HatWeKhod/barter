@@ -3,7 +3,7 @@ Barter
 
 Barter is an interface that connects you to your community and allows you to trade items with other users and share the story behind them.
 
-Barter is currently available at http://barter-app.herokuapp.com
+Barter is currently available at http://barter.cfapps.io
 
 ![main](http://i.imgur.com/fqESTsL.png)
 
