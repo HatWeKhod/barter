@@ -111,5 +111,58 @@ $rootScope.$broadcast('angucomplete-ie8:clearInput');
                             console.log('ERROR :(');
                         });
   }
-     //$scope.fbnotify();
+  
+  
+      $scope.appRatingModalShow = false;
+            $scope.toggleAppFeedbackModal = function () {
+                $scope.appRatingModalShow = !$scope.appRatingModalShow;
+            };
+            $rootScope.giveFeedbackToApp = function (user_email, user_message) {
+//                if(!user_email){
+//                    alert('Email Required');
+//                    return false;
+//                }   
+                if(!user_message){
+                    alert('Enter a Message');
+                    return false;
+                }
+                console.log(user_email);
+                console.log(user_message);
+                console.log($rootScope.fbId);
+                $http.post('/send_feedback', {'user_email': user_email, 'user_message': user_message, 'user_name': $rootScope.name, fbId: $rootScope.fbId})
+                        .success(function (data, status, headers, config) {
+                            console.log('Mail sent');
+                            $scope.toggleAppFeedbackModal();
+                             $scope.showFeedbackButton=false;
+//                            alert('Thanks For Your Feedback');
+                        })
+                        .error(function (data, status) {
+                            console.log('Error sending Mail');
+                                                alert('Error Occured');
+
+                        });
+            }
+//            $scope.is_feedback_given = localStorage.getItem('feedback_to_app');
+                                $scope.showFeedbackButton=false;
+
+            console.log($rootScope.fbId);
+            if ($rootScope.fbId) {
+
+                $http.get('/user_gave_feedback/' + $rootScope.fbId)
+                        .success(function (data, status, headers, config) {
+                            console.log(data);
+                            console.log('done');
+                            if (!data) {
+                                $scope.showFeedbackButton=true;
+//                                $scope.toggleAppFeedbackModal();
+                            }
+
+
+                        })
+                        .error(function (data, status, headers, config) {
+                            console.log(data);
+                            console.log('not done');
+                        });
+
+            }
         });

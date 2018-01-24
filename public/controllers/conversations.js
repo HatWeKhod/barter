@@ -317,56 +317,51 @@ angular.module('barterApp')
 
 
 
-            $scope.appRatingModalShow = false;
-            $scope.toggleAppFeedbackModal = function () {
-                $scope.appRatingModalShow = !$scope.appRatingModalShow;
-            };
-            $rootScope.giveFeedbackToApp = function (user_email, user_message) {
-                if(!user_email){
-                    alert('Email Required');
-                    return false;
-                }     if(!user_message){
-                    alert('Enter a Message');
-                    return false;
-                }
-                console.log(user_email);
-                console.log(user_message);
-                console.log(localStorage);
-                console.log($rootScope.fbId);
-                $http.post('/send_feedback', {'user_email': user_email, 'user_message': user_message, 'user_name': $rootScope.name, fbId: $rootScope.fbId})
-                        .success(function (data, status, headers, config) {
-                            console.log('Mail sent');
-                            $scope.toggleAppFeedbackModal();
-                        })
-                        .error(function (data, status) {
-                            console.log('Error sending Mail');
-                        });
-            }
-//            $scope.is_feedback_given = localStorage.getItem('feedback_to_app');
-            console.log($rootScope.fbId);
-            if ($rootScope.fbId) {
+//            $scope.appRatingModalShow = false;
+//            $scope.toggleAppFeedbackModal = function () {
+//                $scope.appRatingModalShow = !$scope.appRatingModalShow;
+//            };
+//            $rootScope.giveFeedbackToApp = function (user_email, user_message) {
+//                if(!user_email){
+//                    alert('Email Required');
+//                    return false;
+//                }     if(!user_message){
+//                    alert('Enter a Message');
+//                    return false;
+//                }
+//                console.log(user_email);
+//                console.log(user_message);
+//                console.log(localStorage);
+//                console.log($rootScope.fbId);
+//                $http.post('/send_feedback', {'user_email': user_email, 'user_message': user_message, 'user_name': $rootScope.name, fbId: $rootScope.fbId})
+//                        .success(function (data, status, headers, config) {
+//                            console.log('Mail sent');
+//                            $scope.toggleAppFeedbackModal();
+//                        })
+//                        .error(function (data, status) {
+//                            console.log('Error sending Mail');
+//                        });
+//            }
+////            $scope.is_feedback_given = localStorage.getItem('feedback_to_app');
+//            console.log($rootScope.fbId);
+//            if ($rootScope.fbId) {
+//
+//                $http.get('/user_gave_feedback/' + $rootScope.fbId)
+//                        .success(function (data, status, headers, config) {
+//                            console.log(data);
+//                            console.log('done');
+//                            if (!data) {                               
+//                                $scope.toggleAppFeedbackModal();
+//                            }
+//
+//
+//                        })
+//                        .error(function (data, status, headers, config) {
+//                            console.log(data);
+//                            console.log('not done');
+//                        });
+//
+//            }
 
-                $http.get('/user_gave_feedback/' + $rootScope.fbId)
-                        .success(function (data, status, headers, config) {
-                            console.log(data);
-                            console.log('done');
-                            if (!data) {                               
-                                $scope.toggleAppFeedbackModal();
-                            }
-
-
-                        })
-                        .error(function (data, status, headers, config) {
-                            console.log(data);
-                            console.log('not done');
-                        });
-
-            }
-
-            $scope.people = [
-                {firstName: "Daryl", surname: "Rowland", twitter: "@darylrowland", pic: "http://ghiden.github.io/angucomplete-ie8/img/daryl.jpeg"},
-                {firstName: "Alan", surname: "Partridge", twitter: "@alangpartridge", pic: "http://ghiden.github.io/angucomplete-ie8/img/alanp.jpg"},
-                {firstName: "Annie", surname: "Rowland", twitter: "@anklesannie", pic: "http://ghiden.github.io/angucomplete-ie8/img/annie.jpg"}
-            ];
 
         });

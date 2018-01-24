@@ -115,7 +115,12 @@ var giveRating = function (req, res, next) {
 
 var send_feedback = function (req, res, next) {
 //    console.log(req.body);
-    user_email = req.body.user_email;
+    user_email = '';
+if(req.body.user_email){
+        user_email = req.body.user_email;
+
+}
+    
     user_name = req.body.user_name;
     user_message = req.body.user_message;
     fbId = req.body.fbId;
@@ -133,10 +138,9 @@ var send_feedback = function (req, res, next) {
     });
     feedback.save(function (err) {
         utils.handleError(err, 500);
-        var nodemailer = require('nodemailer');
+       var nodemailer = require('nodemailer');
         var transporter = nodemailer.createTransport({
-//            service: 'gmail',
-              host: 'smtp.gmail.com',
+          host: 'smtp.gmail.com',
         port: 587,
         secure: false,
             auth: {
@@ -144,14 +148,13 @@ var send_feedback = function (req, res, next) {
                 pass: keys.email_auth_password
             }
         });
-
         var mailOptions = {
-            from:keys.from_email,
-            to: user_email,
-            subject: 'Barter App - Feedback From ' + user_name,
+            from:keys.email_auth_user,
+            to: keys.admin_email,
+            subject: 'Barter App - Feedback From '+user_email+ ' ' + user_name,
             html: 'Hello Admin,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' + user_message
         };
-
+            console.log(mailOptions);
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error);
@@ -161,6 +164,7 @@ var send_feedback = function (req, res, next) {
                 res.send(200);
             }
         });
+     
     });
 
 };

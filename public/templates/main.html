@@ -1,3 +1,4 @@
+        <a href="javascript:;" target="_blank" class="feedback" ng-click="toggleAppFeedbackModal()" ng-show="showFeedbackButton">Feedback</a>
 <section class='wrapper'>
     <input id="pac-input" placeholder="Set Location Manually" ng-if="fbId" ng-model="user_place_name"/>
     <div class="new" style="display: none;color:white;">
@@ -68,5 +69,17 @@
             <button>Send Message</button>
         </form>
         <img class='cross' src='/styles/images/cross.png' ng-click='togglePostModal()'/>
+    </div>
+     <div ng-click='toggleAppFeedbackModal()' class='modalMask' ng-show='appRatingModalShow'></div>
+    <div class='modal conversationModal' ng-show='appRatingModalShow' style='height: 200px; left: 40%;width: 30%;'>
+        <h2>Give Us Feedback</h2>
+
+        <form ng-submit='giveFeedbackToApp(user_email,user_message)'>
+                       <input class='replyInput'  ng-model='user_email' type='email'  placeholder='Enter Your Email'></input>
+                       <br>
+            <textarea  rows="4" cols="4" class='replyInput' type='text' ng-model='user_message' placeholder='Type a message!' style="margin-top: 20px;"></textarea>
+            <button>Send</button>
+        </form>
+        <img class='cross' src='/styles/images/cross.png' ng-click='toggleAppFeedbackModal()' />
     </div>
 </section>
