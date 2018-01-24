@@ -1,5 +1,15 @@
 angular.module('barterApp')
-        .controller('ConvCtrl', function ($scope, $location, $http, $rootScope) {
+        .controller('ConvCtrl', function ($scope, $location, $http, $rootScope, $route, $window) {
+
+//            console.log( angular.element(document).height());
+            var window_height = $window.innerHeight;
+            console.log(window_height);
+//            var result = document.getElementsByClassName("conversationModal");
+//            var wrappedResult = angular.element(result).css('height', window_height-150 + 'px');
+            $scope.isReadonly = false; // default test value
+            $scope.changeOnHover = true; // default test value
+            $scope.maxValue = 5; // default test value
+            $scope.ratingValue = 0;
             $scope.sendMessage = function (conversation) {
                 $scope.data = {
                     '_id': conversation._id,
@@ -21,16 +31,19 @@ angular.module('barterApp')
                             console.log('Error sending message');
                         });
             };
-
+            $scope.postsSpinnerDisplay = false;
             $scope.renderMessages = function () {
+                $scope.postsSpinnerDisplay = true;
                 $http.get('/posts')
                         .success(function (data, status, headers, config) {
                             console.log('Success fetching messages');
                             $scope.posts = data;
+                            $scope.postsSpinnerDisplay = false;
                             $scope.yourPosts();
                         })
                         .error(function (data, status, headers, config) {
                             console.log('Error fetching messages');
+                            $scope.postsSpinnerDisplay = false;
                         });
             };
 
@@ -79,13 +92,17 @@ angular.module('barterApp')
             };
 
             $scope.respondToBarter = function (conversation, post, type) {
-                $http.put('/barter/' + type + '/' + conversation._id)
+                return_post_id = '';
+                if (conversation.requestingUser.return_post_id) {
+                    return_post_id = conversation.requestingUser.return_post_id;
+                }
+                $http.put('/barter/' + type + '/' + conversation._id, {return_post_id: return_post_id})
                         .success(function (data, status, headers, config) {
                             console.log('post to /barter/' + type + ' accepted');
                             if (type === 'accept') {
                                 conversation.accepted = true;
+                                post.completed = true;
                             }
-                            post.completed = true;
                             $scope.toggleConversationModal();
                         })
                         .error(function (data, status, headers, config) {
@@ -101,6 +118,37 @@ angular.module('barterApp')
                 for (var i = 0; i < $scope.posts.length; i++) {
                     var post = $scope.posts[i];
                     post.show = (post.fbId === $rootScope.fbId) ? true : false;
+                    post.rejected = false;
+                    for (var j = 0; j < post.conversations.length; j++) {
+                        var conversation = post.conversations[j];
+                        if (conversation.accepted === false) {
+                            post.rejected = true;
+                            return false;
+                        }
+                    }
+                }
+            };
+
+
+            $scope.yourOffers = function () {
+                $scope.post_type = 'Your Offers';
+                for (var i = 0; i < $scope.posts.length; i++) {
+                    var post = $scope.posts[i];
+                    post.show = false;
+                    post.rejected = false;
+                    if (post.fbId == $rootScope.fbId) {
+                        for (var j = 0; j < post.conversations.length; j++) {
+                            var conversation = post.conversations[j];
+                            conversation.show = false;
+                            if (conversation.requestingUser.fbId.toString() != $rootScope.fbId) {
+                                post.show = conversation.show = true;
+                            }
+                            if (conversation.accepted === false) {
+                                post.rejected = true;
+                                return false;
+                            }
+                        }
+                    }
                 }
             };
 
@@ -109,12 +157,17 @@ angular.module('barterApp')
                 for (var i = 0; i < $scope.posts.length; i++) {
                     var post = $scope.posts[i];
                     post.show = false;
+                    post.rejected = false;
                     if (post.fbId !== $rootScope.fbId) {
                         for (var j = 0; j < post.conversations.length; j++) {
                             var conversation = post.conversations[j];
                             conversation.show = false;
                             if (conversation.requestingUser.fbId.toString() === $rootScope.fbId) {
                                 post.show = conversation.show = true;
+                            }
+                            if (conversation.accepted === false) {
+                                post.rejected = true;
+                                return false;
                             }
                         }
                     }
@@ -129,6 +182,7 @@ angular.module('barterApp')
                         post.show = false;
                     } else {
                         if (post.fbId === $rootScope.fbId) {
+                            post.ratingValue = post.requester_barter_rating;
                             post.show = true;
                             for (var j = 0; j < post.conversations.length; j++) {
                                 post.conversations[j].show = true;
@@ -138,6 +192,7 @@ angular.module('barterApp')
                                 var conversation = post.conversations[k];
                                 conversation.show = false;
                                 if (conversation.requestingUser.fbId.toString() === $rootScope.fbId) {
+                                    post.ratingValue = post.poster_barter_rating;
                                     post.show = conversation.show = true;
                                 }
                             }
@@ -163,15 +218,47 @@ angular.module('barterApp')
             };
 
             $rootScope.conversationModalShow = false;
+            $scope.showReturnPost = false;
             $rootScope.toggleConversationModal = function (conversation, post) {
-                $scope.conversationModalShow = !$scope.conversationModalShow;
+
+                $scope.showReturnPost = false;
                 if (conversation) {
                     $rootScope.setConversationModal(conversation, post);
+                } else {
+                    $scope.conversationModalShow = !$scope.conversationModalShow;
                 }
                 $scope.displayButton();
             };
 
             $rootScope.setConversationModal = function (conversation, post) {
+                $scope.userNamePopup = post.name;
+                if (post.fbId == $rootScope.fbId) {
+                    $scope.userNamePopup = conversation.requestingUser.name;
+                }
+                if (conversation.requestingUser.return_post_id) {
+                    $scope.returnItemText = "Requester's Post Item Details";
+                    if (post.fbId != $rootScope.fbId) {
+                        $scope.returnItemText = 'Your  Return Item Details';
+                    }
+                    $scope.postsSpinnerDisplay = true;
+                    $http.get('/post/' + conversation.requestingUser.return_post_id)
+                            .success(function (data, status, headers, config) {
+                                console.log('Success fetching single Post');
+                                console.log(data);
+                                $scope.postsSpinnerDisplay = false;
+                                $scope.returnPost = data;
+                                $scope.showReturnPost = true;
+                                $scope.postsSpinnerDisplay = false;
+                                $scope.conversationModalShow = !$scope.conversationModalShow;
+                            })
+                            .error(function (data, status, headers, config) {
+                                console.log('Error fetching messages');
+                                $scope.conversationModalShow = !$scope.conversationModalShow;
+                                $scope.postsSpinnerDisplay = false;
+                            });
+                } else {
+                    $scope.conversationModalShow = !$scope.conversationModalShow;
+                }
                 $rootScope.modalConversation = conversation;
                 $rootScope.modalPost = post;
             };
@@ -189,4 +276,97 @@ angular.module('barterApp')
                     $scope.button = false;
                 }
             };
+
+
+            $rootScope.ratingModalShow = false;
+            $rootScope.toggleRatingModal = function (conversation, post) {
+                $scope.ratingModalShow = !$scope.ratingModalShow;
+                if (conversation) {
+                    $rootScope.setRatingModal(conversation, post);
+                }
+            };
+            $rootScope.setRatingModal = function (conversation, post) {
+                $scope.userNameRatingPopup = post.name;
+                if (post.fbId == $rootScope.fbId) {
+                    $scope.userNameRatingPopup = conversation.requestingUser.name;
+                }
+                $rootScope.modalConversation = conversation;
+                $rootScope.modalPost = post;
+            };
+
+            $scope.giveRating = function (post, conversation) {
+                $http.post('/rating', {
+                    '_id': conversation._id,
+                    'from': $rootScope.name,
+                    'rating_from_fbId': $rootScope.fbId,
+                    'post_id': post._id,
+                    'post_requesting_user_fbId': conversation.requestingUser.fbId,
+                    'poster_fbId': post.fbId,
+                    'ratingValue': $scope.ratingValue
+                })
+                        .success(function (data, status, headers, config) {
+                            console.log('User Rated');
+                            $scope.toggleRatingModal();
+                            $route.reload();
+                        })
+                        .error(function (data, status) {
+                            console.log('Error sending message');
+                        });
+            };
+
+
+
+
+            $scope.appRatingModalShow = false;
+            $scope.toggleAppFeedbackModal = function () {
+                $scope.appRatingModalShow = !$scope.appRatingModalShow;
+            };
+            $rootScope.giveFeedbackToApp = function (user_email, user_message) {
+                if(!user_email){
+                    alert('Email Required');
+                    return false;
+                }     if(!user_message){
+                    alert('Enter a Message');
+                    return false;
+                }
+                console.log(user_email);
+                console.log(user_message);
+                console.log(localStorage);
+                console.log($rootScope.fbId);
+                $http.post('/send_feedback', {'user_email': user_email, 'user_message': user_message, 'user_name': $rootScope.name, fbId: $rootScope.fbId})
+                        .success(function (data, status, headers, config) {
+                            console.log('Mail sent');
+                            $scope.toggleAppFeedbackModal();
+                        })
+                        .error(function (data, status) {
+                            console.log('Error sending Mail');
+                        });
+            }
+//            $scope.is_feedback_given = localStorage.getItem('feedback_to_app');
+            console.log($rootScope.fbId);
+            if ($rootScope.fbId) {
+
+                $http.get('/user_gave_feedback/' + $rootScope.fbId)
+                        .success(function (data, status, headers, config) {
+                            console.log(data);
+                            console.log('done');
+                            if (!data) {                               
+                                $scope.toggleAppFeedbackModal();
+                            }
+
+
+                        })
+                        .error(function (data, status, headers, config) {
+                            console.log(data);
+                            console.log('not done');
+                        });
+
+            }
+
+            $scope.people = [
+                {firstName: "Daryl", surname: "Rowland", twitter: "@darylrowland", pic: "http://ghiden.github.io/angucomplete-ie8/img/daryl.jpeg"},
+                {firstName: "Alan", surname: "Partridge", twitter: "@alangpartridge", pic: "http://ghiden.github.io/angucomplete-ie8/img/alanp.jpg"},
+                {firstName: "Annie", surname: "Rowland", twitter: "@anklesannie", pic: "http://ghiden.github.io/angucomplete-ie8/img/annie.jpg"}
+            ];
+
         });

@@ -1,0 +1,26 @@
+    <div class='box postForm'>
+  <h1><a href='#' class='logo'>Barter</a></h1>
+  <form ng-submit='updateImage()' >
+    <div>
+      <p>What's it called?</p>
+      <input type='text' ng-model='editItemName' ng-required='true' autofocus='autofocus' ></input>
+    </div>
+    <div>
+      <p>Tell us about it.</p>
+      <input type='text' ng-model='editDescription' ng-required='true'></input>
+    </div>
+    <div>
+      <p>What's the condition?</p>
+      <input type='text' ng-model='editCondition' ng-required='true'></input>
+    </div>
+    <div>
+      <p>Upload an image!</p>
+      <input type='file' accept='image/*' image='image' resize-max-height='300' resize-max-width='250' resize-quality='0.7' />
+      <p ng-show='image'>Is this correct?</p>
+      <img height="250" width="250" ng-show='image' ng-src='{{image.resized.dataURL||image}} '/>
+    </div>
+    <button ng-disabled='disabled'>Submit</button>
+    <!--<button type='reset'>Clear</button>-->
+  </form>
+  <img ng-show='postSpinnerDisplay' src='/styles/images/ajax-loader.gif'/>
+<div>

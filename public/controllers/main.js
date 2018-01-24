@@ -35,17 +35,24 @@ angular.module('barterApp')
                 }
             };
 
-            $scope.sendNewConversation = function (recipient) {
+            $scope.sendNewConversation = function (recipient,selectedPost) {
+             
                 if (recipient.fbId === $rootScope.fbId) {
                     alert('Cannot trade with yourself');
                     $rootScope.togglePostModal();
                     $scope.newConversation = '';
                     return;
                 }
+                console.log(selectedPost);
+                if(!selectedPost ||!selectedPost.originalObject || !selectedPost.originalObject._id){
+                        alert('You Need to select atleast one item in order to barter');
+                        return ;
+                }
                 $scope.data = {
                     'requestingUser': {
                         'fbId': $rootScope.fbId,
-                        'name': $rootScope.name
+                        'name': $rootScope.name,
+                        'return_post_id':selectedPost.originalObject._id
                     },
                     'message': $scope.newConversation,
                     'from': $rootScope.name,
@@ -80,6 +87,7 @@ angular.module('barterApp')
 
             $rootScope.postModalShow = false;
             $rootScope.togglePostModal = function () {
+$rootScope.$broadcast('angucomplete-ie8:clearInput');
                 $scope.postModalShow = !$scope.postModalShow;
             };
 
@@ -88,8 +96,20 @@ angular.module('barterApp')
                 MapService.trigger(post.__gm_id);
             };
 
+
             $rootScope.spinnerDisplay = false;
             $rootScope.spinnerToggle = function () {
                 $rootScope.spinnerDisplay = !$rootScope.spinnerDisplay;
             };
+            
+  $scope.fbnotify=function(){
+           $http.get('/fbnotify', $scope.data)
+                        .success(function (data, status, headers, config) {
+                            console.log('SUCCESS!');
+                        })
+                        .error(function (data, status) {
+                            console.log('ERROR :(');
+                        });
+  }
+     //$scope.fbnotify();
         });

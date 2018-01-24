@@ -4,9 +4,13 @@ html(lang="en")
     meta(charset='utf-8')
     title= Barter
     link(rel='stylesheet' href='styles/mains.css')
+    link(rel='stylesheet' href='lib/angular-rating/main.css')
+    link(rel='stylesheet' href='lib/angular-rating/fontawesome.css')
+    link(rel='stylesheet' href='ang-autocomplete/angucomplete-ie8.css')
+   
   body(ng-app='barterApp')
-    a(href='http://hackreactor.com')
-               // img.corner(src='http://i.imgur.com/x86kKmF.png' alt='Built at Hack Reactor')
+    a(href='https://digitizedbarter.github.io/barter/' target="_blank")
+                   img.corner(src='styles/images/sideimage.png' alt='Built at GitHub' )
     div.container(ng-view)
       //- Google Maps
       script(src='https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false')
@@ -19,6 +23,8 @@ html(lang="en")
       script(src='lib/lodash/dist/lodash.min.js')
       script(src='lib/markerclusterer/markerclusterer.js')
       script(src='lib/OverlappingMarkerSpiderfier/oms.min.js')
+      script(src='lib/angular-rating/main.js')
+      script(src='ang-autocomplete/dist/angucomplete-ie8.min.js')
 
       //- App
       script(src='app.js')
