@@ -1,7 +1,8 @@
 node_modules/
-#public/lib/angular/
-#public/lib/angular-route/
-#public/lib/angularjs-imageupload/
-#public/lib/lodash
+public/lib/angular/
+public/lib/angular-route/
+public/lib/angularjs-imageupload/
+public/lib/lodash
 Additional/
 config/keys.js
+/nbproject/private/
