@@ -1,5 +1,5 @@
 angular.module('barterApp')
-        .factory('MapService', function ($http, $rootScope,$route) {
+        .factory('MapService', function ($http, $rootScope, $route) {
             var service = {};
 
             service.styles = [
@@ -142,25 +142,25 @@ angular.module('barterApp')
                 if ($rootScope.user_lat && $rootScope.user_long) {
                     var selected_lat = $rootScope.user_lat;
                     var selected_long = $rootScope.user_long;
-                      service.center = new google.maps.LatLng(selected_lat, selected_long);
-                        service.map.setZoom(16);
-                        service.map.setCenter(service.center);
-                        $rootScope.spinnerToggle();
+                    service.center = new google.maps.LatLng(selected_lat, selected_long);
+                    service.map.setZoom(16);
+                    service.map.setCenter(service.center);
+                    $rootScope.spinnerToggle();
                 } else {
                     navigator.geolocation.getCurrentPosition(function (position) {
-                        var   selected_lat = position.coords.latitude;
-                        var   selected_long = position.coords.longitude;
+                        var selected_lat = position.coords.latitude;
+                        var selected_long = position.coords.longitude;
                         service.center = new google.maps.LatLng(selected_lat, selected_long);
                         service.map.setZoom(16);
                         service.map.setCenter(service.center);
                         $rootScope.spinnerToggle();
-                            $rootScope.$digest();
+                        $rootScope.$digest();
                     }, function (error) {
                         console.log(error);
                         if (error.code == error.PERMISSION_DENIED)
                         {
-                                                             alert("Location Required. You have one of two options: Either Set location manually on map before posting Or Allow browser to automatically capture your location");
-                                                             $route.reload();
+                            alert('Location Required. Either Enter Your Home Location in map Or Change Your Browser Settings to Enable location');
+                            $route.reload();
                         }
                     });
                 }
@@ -201,9 +201,12 @@ angular.module('barterApp')
                             service.markers = [];
 
                             var infobox = new InfoBox(service.infoboxOptions);
-
+                            var your_posts = [];
                             for (i = 0; i < length; i++) {
-                                if (!$rootScope.posts[i].completed) {
+                                var post = $rootScope.posts[i];
+                                console.log('post.user_average_score',post.user_average_score);
+                                                                if (!$rootScope.posts[i].completed) {
+                                     if (post.fbId === $rootScope.fbId) your_posts.push(post);
                                     marker = service.createMarker(i);
                                     var val = parseInt(i) + parseInt(1);
                                     marker.set("__gm_id", val);
@@ -218,6 +221,8 @@ angular.module('barterApp')
                                     service.setInfoBoxContent(marker, i, infobox);
                                 }
                             }
+                            $rootScope.your_posts = your_posts;
+                            console.log(' $rootScope.your_posts', $rootScope.your_posts);
                             google.maps.event.addListener(infobox, 'domready', function () {
                                 document.getElementById('barterButton').addEventListener('click', function (e) {
                                     $rootScope.spinnerToggle();
@@ -263,7 +268,7 @@ angular.module('barterApp')
             service.trigger = function (gm_id) {
                 for (var i = 0; i < service.markers.length; i++) {
                     var marker = service.markers[i];
-                    console.log(marker);
+//                    console.log(marker);
                     if (marker.__gm_id === gm_id) {
 
 //        service.center = new google.maps.LatLng(marker.position.ob,marker.position.pb);

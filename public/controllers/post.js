@@ -1,7 +1,6 @@
 angular.module('barterApp')
         .controller('PostCtrl', function ($scope, $location, $http, $rootScope, $routeParams, $route) {
 
-            console.log('$rootScope.editPostData', $rootScope.editPostData);
             if ($rootScope.editPostData) {
                 $scope.editItemName = $rootScope.editPostData.itemName;
                 $scope.editCondition = $rootScope.editPostData.condition;
@@ -69,7 +68,7 @@ angular.module('barterApp')
                         console.log(error);
                         if (error.code == error.PERMISSION_DENIED)
                         {
-                                                       alert("Location Required. You have one of two options: Either Set location manually on map before posting Or Allow browser to automatically capture your location");
+                            alert('Location Required. Either Enter Your Home Location in map Or Change Your Browser Settings to Enable location');
                             $route.reload();
                         }
                     });
@@ -130,7 +129,7 @@ angular.module('barterApp')
                         console.log(error);
                         if (error.code == error.PERMISSION_DENIED)
                         {
-                                                    alert("Location Required. You have one of two options: Either Set location manually on map before posting Or Allow browser to automatically capture your location");
+                            alert('Location Required. Either Enter Your Home Location in map Or Change Your Browser Settings to Enable location');
                             $route.reload();
 
                         }

@@ -7,7 +7,9 @@ module.exports = function(passport, FacebookStrategy, FbUsers){
   console.log('ENV used is',env);
 
   // Callback used to find or create FbUser in the database
-  var findOrCreateUser = function(accessToken, refreshToken, profile, done){
+  var findOrCreateUser = function(req,accessToken, refreshToken, profile, done){
+        console.log('accessToken',accessToken);
+        req.session.user_access_token = accessToken;
     FbUsers.findOne({fbId : profile.id}, function (err, oldUser){
       if(oldUser){
         done(null,oldUser);
@@ -27,7 +29,8 @@ module.exports = function(passport, FacebookStrategy, FbUsers){
   passport.use(new FacebookStrategy({
     clientID: keys.clientID,
     clientSecret: keys.clientSecret,
-    callbackURL: keys.URL
+    callbackURL: keys.URL,
+     passReqToCallback: true 
   }, findOrCreateUser));
 
   // Serialized and deserialized methods when got from session

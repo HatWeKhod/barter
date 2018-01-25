@@ -19,9 +19,10 @@ module.exports = function(passport){
   app.set('view engine', 'jade');
   app.use(stylus.middleware({ src: __dirname + '/../public', compile: compile }));
   app.use(express.static(path.join(__dirname, '/../public')));
+  app.use('/ang-autocomplete', express.static(__dirname + './../node_modules/angucomplete-ie8/'));
   app.use(express.cookieParser());
   app.use(express.session({ secret: keys.secret }));
-    app.use(express.json({limit: '50mb'}));
+  app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
   app.use(express.bodyParser());
   app.use(express.logger('dev'));

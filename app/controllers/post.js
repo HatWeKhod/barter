@@ -1,13 +1,94 @@
 var Post = require('../models/post').Post,
         Conversation = require('../models/conversation').Conversation,
+        FbUsers = require('../models/facebook').FbUsers,
         Message = require('../models/message').Message,
         utils = require('../utils'),
         _ = require('lodash');
+
+var getUserRating = function (fbId, callback) {
+    FbUsers.findOne({fbId: fbId}, function (err, fbuser) {
+        var user_average_score = 0;
+        if (fbuser) {
+            if (fbuser.people_rate_count) {
+                user_average_score = fbuser.barter_score / fbuser.people_rate_count;
+            }
+        }
+
+        callback && callback(user_average_score);
+
+    });
+    console.log('here_user_average_score', user_average_score);
+    return user_average_score;
+}
+
+
+
 // Send back all posts
 var posts = function (req, res, next) {
-    Post.find({}, function (err, posts) {
+    Post.find({}).exec()
+            .then(function (posts) {
+                var all_posts = [];
+                var length = posts.length;
+                posts.forEach(function (post, index) {
+
+                    FbUsers.findOne({fbId: post.fbId}).exec().then(function (fbuser) {
+                        var user_average_score = 0;
+                        if (fbuser) {
+                            if (fbuser.people_rate_count) {
+                                user_average_score = fbuser.barter_score / fbuser.people_rate_count;
+                            }
+                        }
+                        post.user_average_score = Math.round(user_average_score.toFixed(2));
+                        all_posts.push(post);
+                        if (all_posts.length === length) {
+                            res.send(200, all_posts);
+                        }
+                    });
+                });
+            });
+
+};
+//var posts = function (req, res, next) {
+//    Post.find({}, function (err, posts) {
+//        utils.handleError(err, 500);
+//        var all_posts = [];
+//        posts.forEach(function (post) {
+//            var user_average_score = 0;
+//    let newBookmark = FbUsers.findOne({fbId: post.fbId}, function (err, fbuser) {
+//        var user_average_score = 0;
+//        if (fbuser) {
+//            if (fbuser.people_rate_count) {
+//               user_average_score = fbuser.barter_score / fbuser.people_rate_count;
+//            }
+//        }
+//            
+//  post.user_average_score = user_average_score;
+//                            console.log('post.user_average_score', post.user_average_score);
+//
+//                all_posts.push(post);
+//    });
+//              
+//
+//
+//  
+//   
+//                console.log('posting',post.user_average_score);
+//
+////            setTimeout(function () {
+//                post.user_average_score = user_average_score;
+//                            console.log('post.user_average_score', post.user_average_score);
+//
+//                all_posts.push(post);
+////            }, 3000);
+//        });
+////        console.log('all_posts',all_posts);
+//        res.send(200, all_posts);
+//    });
+//};
+var getpost = function (req, res, next) {
+    Post.findById({_id: req.params.id}, function (err, post) {
         utils.handleError(err, 500);
-        res.send(200, posts);
+        res.send(200, post);
     });
 };
 
@@ -34,7 +115,6 @@ var deletePost = function (req, res, next) {
 };
 
 
-
 // Update post and save it to the database
 var updatePost = function (req, res, next) {
 
@@ -57,6 +137,7 @@ var updatePost = function (req, res, next) {
 module.exports = {
     posts: posts,
     post: postItem,
+    getpost: getpost,
     deletePost: deletePost,
     updatePost: updatePost
 };

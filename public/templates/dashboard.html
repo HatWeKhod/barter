@@ -1,26 +1,114 @@
 <div class='box conversations' data-ng-init='renderMessages()'>
-  <h1><a href='#' class='logo'>Barter</a></h1>
-  <button ng-click='yourPosts()'>Your Posts</button>
-  <button ng-click='requests()'> Your Requests</button>
-  <button ng-click='completed()'>Completed</button>
-  <input class='searchDashboard' type='text' placeholder='Search posts!' autofocus='autofocus' ng-model='searchDashboard'></input>
-   <h4 style="margin: 20px 0 0 0;">{{post_type}}</h4>
-  <section class='conversationsContainer'>
-    <div class='conversationContainer' ng-repeat='post in posts | filter:search | orderBy:"createdAt":true' ng-show='post.show'>
-      <div class='imageContainer'>
-        <img src={{post.image}} />
-        <button class='deletePost' ng-click='deletePost(post, posts)'>Delete Post</button>
-      </div>
-      <div class='postDescription'>
-        <img ng-show='!post.completed' class='check' src='/styles/images/checkbox-unchecked.png' />
-        <img ng-show='post.completed' class='check' src='/styles/images/checkbox-checked.png' />
-        <p><span class='underline'>Item Name</span>: {{post.itemName}}</p>
-        <p><span class='underline'>Description</span>: {{post.description}}</p>
-        <p><span class='underline'>Condition</span>:  {{post.condition}}</p>
-        <p><span class='underline'>Owner</span>: {{post.name}}</p>
-        <p id='date'><span class='underline'>Created</span>: {{post.createdAt | date:'MM/dd @ h:mma'}}</p>
-
-      </div>
+    <h1><a href='' class='logo'>Barter</a></h1>
+    <div style="  width: 100%;margin: 5px;">
+        <input class='searchDashboard' type='text' placeholder='Search posts!' autofocus='autofocus' ng-model='searchDashboard'></input>
     </div>
-  </section>
+
+    <div>
+        <button ng-click='yourPosts()' >Your Posts</button>
+        <button ng-click='requests()'> Your Requests</button>
+        <button ng-click='yourOffers()'>Your Offers</button>
+        <button ng-click='completed()'>Completed</button>
+        <!--<button ng-click='toggleAppFeedbackModal()' ng-if="!$scope.is_feedback_given">Feedback to App</button>-->
+
+    </div>
+    <h4 style="margin: 20px 0 0 0;">{{post_type}}</h4>
+    <img ng-show="postsSpinnerDisplay" src="/styles/images/ajax-loader.gif" class="">
+
+    <section class='conversationsContainer'>
+        <div class='conversationContainer' ng-repeat='post in posts| filter:search | orderBy:"createdAt":true' ng-show='post.show' ng-class="{post_rejected: post.rejected==true}">
+            <div class='imageContainer'>
+                <img src='{{post.image}}' />
+                <button class='deletePost' ng-click='deletePost(post, posts)'>Delete Post</button>
+            </div>
+            <div class='postDescription'>
+                <img ng-show='!post.completed' class='check' src='/styles/images/checkbox-unchecked.png' />
+                <img ng-show='post.completed' class='check' src='/styles/images/checkbox-checked.png' />
+                <p><span class='underline'>Item Name</span>: {{post.itemName}}</p>
+                <p><span class='underline'>Description</span>: {{post.description}}</p>
+                <p><span class='underline'>Condition</span>:  {{post.condition}}</p>
+                <p><span class='underline'>Owner</span>: {{post.name}}</p>
+                    <span ng-if="post.user_average_score!=0"><angular-star-rating max="5" value='post.user_average_score'  is-readonly='true' ></angular-star-rating></span></h2>
+            <span ng-if="post.user_average_score==0">UnRated</h2></span>
+                <p id='date'><span class='underline'>Created</span>: {{post.createdAt| date:'MM/dd @ h:mma'}}</p>
+                <div class='conversation' ng-repeat='conversation in post.conversations| orderBy:"createdAt":true'>
+                    <hr/>
+                    <div style="margin:10px 0px;">
+                        <div  ng-if="post.fbId == fbId">
+                            <span class='underline'>Conversation with</span>: {{conversation.requestingUser.name}}
+                        </div>   
+                        <div  ng-if="post.fbId != fbId">
+                            <span class='underline'>Conversation with</span>: {{post.name}}
+                        </div>
+                       <img ng-show='post.completed && conversation.accepted' class='thumb' src='/styles/images/thumbs-up.png' />
+                        <img ng-show='conversation.accepted === false' class='thumb' src='/styles/images/thumbs-down.png' />
+                    </div>
+                    <button ng-click='toggleConversationModal(conversation, post)'>View Conversation</button>
+                                        <button ng-if="post_type == 'Completed Posts' && (fbId == post.fbId || fbId == conversation.requestingUser.fbId) && ((fbId == post.fbId && post.requester_barter_rating == 0) || (fbId == conversation.requestingUser.fbId && post.poster_barter_rating == 0))" ng-click='toggleRatingModal(conversation, post)'>Give Rating</button>
+                  
+                    <angular-star-rating max="maxValue" value='post.ratingValue'   is-readonly='true' ng-if="post_type == 'Completed Posts' && (fbId == post.fbId || fbId == conversation.requestingUser.fbId) && ((fbId == post.fbId && post.requester_barter_rating != 0) || (fbId == conversation.requestingUser.fbId && post.poster_barter_rating != 0))" ></angular-star-rating>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div ng-click='toggleConversationModal()' class='modalMask' ng-show='conversationModalShow'></div>
+    <div class='modal conversationModal' ng-show='conversationModalShow'>
+        <h2>Conversation with: {{userNamePopup}}</h2>
+        <button ng-show='button' ng-click='respondToBarter(modalConversation, modalPost, "accept")'>Accept Barter</button>
+        <button ng-show='button' ng-click='respondToBarter(modalConversation, modalPost, "reject")'>Reject Barter</button>
+        <button ng-click='deleteConversation(modalConversation, modalPost)'>Delete Conversation</button>
+        <div class='' ng-show='showReturnPost'>
+            <h4 >{{returnItemText}}</h4>
+            <section  class='post'>
+                <img style="width: 20%" src='{{returnPost.image}}'/>
+                <div class='postText' style="width:76%;">
+                    <h2 id='itemName'><span class='underline '>Item Name</span>: {{returnPost.itemName}}</h2>
+
+                    <h2 id='description'><span class='underline'>Description</span>: {{returnPost.description}}</h2>
+                    <h2 id='condition'><span class='underline'>Condition</span>: {{returnPost.condition}}</h2>
+                    <h2 id='name'><span class='underline'>Contact</span>: {{returnPost.name}}
+                        <!--<span>({{barter_score/people_rate_count}})</span></h2>-->
+                        <h2 id='date'><span class='underline'>Created</span>: {{returnPost.createdAt| date:'MM/dd @ h:mma'}}</h2>
+                </div>
+            </section>
+        </div>
+        <div class='messageContainer' style="border-radius: 10px;">
+            <div class='messages' ng-repeat='message in modalConversation.messages| orderBy:"sentAt":false' >
+                <p><span class='underline'>{{message.from}}</span>:<span class='date'> ({{message.sentAt| date:'MM/dd @ h:mma'}})</span> {{message.message}}</p>
+            </div>
+        </div>
+        <form ng-submit='sendMessage(modalConversation)'>
+            <textarea  rows="4" cols="4" class='replyInput' type='text' ng-model='modalConversation.reply' placeholder='Type a message!'></textarea>
+            <button>Send</button>
+        </form>
+        <img class='cross' src='/styles/images/cross.png' ng-click='toggleConversationModal()' />
+    </div>
+
+
+
+    <div ng-click='toggleRatingModal()' class='modalMask' ng-show='ratingModalShow'></div>
+    <div class='modal conversationModal' ng-show='ratingModalShow' style='height: 200px;'>
+        <h2>Rate your total barter experience with: {{userNameRatingPopup}}</h2>
+
+        <form ng-submit='giveRating(modalPost, modalConversation)'>
+            <angular-star-rating max="maxValue" value='ratingValue' hover='changeOnHover' is-readonly='isReadonly'></angular-star-rating>
+            <!--<input class='replyInput' type='text' ng-model='modalConversation.reply' placeholder='Type a message!'></input>-->
+            <p>Your rating value: {{ratingValue}} / {{maxValue}}</p>
+            <button>Send</button>
+        </form>
+        <img class='cross' src='/styles/images/cross.png' ng-click='toggleRatingModal()' />
+    </div>
+    
+<!--    <div ng-click='toggleAppFeedbackModal()' class='modalMask' ng-show='appRatingModalShow'></div>
+    <div class='modal conversationModal' ng-show='appRatingModalShow' style='height: 200px; left: 40%;width: 30%;'>
+        <h2>Give Us Feedback</h2>
+
+        <form ng-submit='giveFeedbackToApp(user_email,user_message)'>
+                       <input class='replyInput'  ng-model='user_email' type='email'  placeholder='Enter Your Email'></input>
+                       <br>
+            <textarea  rows="4" cols="4" class='replyInput' type='text' ng-model='user_message' placeholder='Type a message!' style="margin-top: 20px;"></textarea>
+            <button>Send</button>
+        </form>
+        <img class='cross' src='/styles/images/cross.png' ng-click='toggleAppFeedbackModal()' />
+    </div>-->
 </div>

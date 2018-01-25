@@ -1,4 +1,4 @@
-angular.module('barterApp', ['imageupload', 'ngRoute'])
+angular.module('barterApp', ['imageupload', 'ngRoute','angular-star-rating','angucomplete-ie8'])
 .config(function($httpProvider, $locationProvider, $routeProvider){
 
   // Success callback, just return the response
@@ -27,7 +27,7 @@ angular.module('barterApp', ['imageupload', 'ngRoute'])
   var checkLoggedIn = function($q, $http, $location, $rootScope){
     var deferred = $q.defer();
     $http.get('/loggedIn').success(function(res){
-      if(res !== '401'){
+        if(res !== '401'){
         $rootScope.name = res.name;
         $rootScope.fbId = res.fbId;
         deferred.resolve();
@@ -68,11 +68,15 @@ angular.module('barterApp', ['imageupload', 'ngRoute'])
   .when('/login', {
     templateUrl: '/templates/login.html',
     controller: 'MapCtrl'
+  })  .when('/fbnotify', {
+    templateUrl: '/templates/main.html',
+    controller: 'MapCtrl',
+    resolve: resolve
   })
   .otherwise({
     redirectTo: '/'
   });
-}) 
+})
 .run(function($rootScope, $http){
   $rootScope.logout = function(){
     $http.post('/auth/facebook');

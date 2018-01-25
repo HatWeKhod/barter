@@ -18,13 +18,18 @@ module.exports = function(app, passport, db){
     successRedirect: '/',
     failureRedirect: '/'
   }));
+  
+  app.get('/fbnotify',auth,barterCtrl.fbnotify);
+  app.post('/fbnotify?fb_source=notification',loginCtrl.loggedIn);
 
   // Post Controls
   app.get('/posts', auth, postCtrl.posts);
+  app.get('/post/:id', auth, postCtrl.getpost);
   app.post('/post', auth, postCtrl.post);
   app.delete('/post/:id', auth, postCtrl.deletePost);
   //Update Post
       app.post('/updatePost', auth, postCtrl.updatePost);
+
 
   // Message Controls
   app.post('/conversation', auth, messageCtrl.sendNewConversation);
@@ -34,4 +39,19 @@ module.exports = function(app, passport, db){
   // Barter Request Controls
   app.put('/barter/accept/:id', auth, barterCtrl.acceptBarter);
   app.put('/barter/reject/:id', auth, barterCtrl.rejectBarter);
+
+//Rating
+
+  app.post('/rating', auth, messageCtrl.giveRating);
+  
+  
+  //App Feedback
+    app.get('/user_gave_feedback/:id', auth, messageCtrl.user_gave_feedback);
+    app.post('/send_feedback', auth, messageCtrl.send_feedback);
+
+  
+  //Users
+//    app.get('/user/:id', auth, postCtrl.user);
+
+
 };
