@@ -1,5 +1,8 @@
-<div class='box conversations' data-ng-init='renderMessages()'>
-    <h1><a href='' class='logo'>Barter</a></h1>
+<div class='box conversations dashboard_conversations' data-ng-init='renderMessages()'>
+    <!--<h1><a href='' class='logo'>Barter</a></h1>-->
+     <a href="">
+       <img src="/styles/images/HatWeKhood.png" class="hat_We_hod_logo">
+   </a>
     <div style="  width: 100%;margin: 5px;">
         <input class='searchDashboard' type='text' placeholder='Search posts!' autofocus='autofocus' ng-model='searchDashboard'></input>
     </div>
@@ -58,7 +61,7 @@
         <button ng-show='button' ng-click='respondToBarter(modalConversation, modalPost, "reject")'>Reject Barter</button>
         <button ng-click='deleteConversation(modalConversation, modalPost)'>Delete Conversation</button>
         <div class='' ng-show='showReturnPost'>
-            <h4 >{{returnItemText}}</h4>
+            <h4 style="color:#676767" >{{returnItemText}}</h4>
             <section  class='post'>
                 <img style="width: 20%" src='{{returnPost.image}}'/>
                 <div class='postText' style="width:76%;">

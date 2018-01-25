@@ -26,7 +26,7 @@ angular.module('barterApp')
 
             service.initialize = function () {
                 service.zoom = 11;
-                service.center = new google.maps.LatLng(37.7837749, -122.4167);
+                service.center = new google.maps.LatLng(30.0444, 31.2357);
                 service.mapTypeId = google.maps.MapTypeId.ROADMAP;
                 google.maps.visualRefresh = true;
 

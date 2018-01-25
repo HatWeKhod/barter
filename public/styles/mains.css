@@ -100,7 +100,8 @@ body {
 }
 body {
     margin: 0;
-    background: #3a6f85;
+    background: #fff;
+    /*background: #3a6f85;*/
     padding: 10px;
 }
 .sidebar {
@@ -111,7 +112,8 @@ body {
     border: 5px solid #000;
     padding: 20px;
     margin: 20px 0;
-    background-color: #dadada;
+    background-color: #1E2424;
+/*    background-color: #dadada;*/
     text-align: center;
 }
 .sidebar h4 {
@@ -197,7 +199,7 @@ body {
     padding: 20px;
     margin: auto;
     text-align: center;
-    background-color: #dadada;
+    background-color: #1E2424;
 }
 .conversations {
     height: 39em;
@@ -385,7 +387,23 @@ form.ng-invalid-autocomplete-required input {
     right: 0px;
     font-size: 14px;
     margin: 2px;
-    color: #fff;
+    color: #ED7B01;
     position: fixed;
     z-index: 101;
+}
+.sidebar p, .sidebar h1, .sidebar ol li , .sidebar h4{
+    color: #fff;
+}
+.hat_We_hod_logo {
+    width: 140px;
+    margin-top: -15px;
+}
+.postForm p{
+    color: #fff;
+}
+.dashboard_conversations h4{
+        color: #fff;
+}
+.postForm input,.conversations  input{
+    color: #fff;
 }

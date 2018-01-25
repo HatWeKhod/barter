@@ -14,7 +14,7 @@ module.exports = function(passport){
 
   // Config
   var app = express();
-  var port = process.env.PORT || 9000;
+  var port = process.env.PORT || 9001;
   app.set('views', __dirname + '/../app/views');
   app.set('view engine', 'jade');
   app.use(stylus.middleware({ src: __dirname + '/../public', compile: compile }));

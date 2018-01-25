@@ -1,4 +1,4 @@
-        <a href="javascript:;" target="_blank" class="feedback" ng-click="toggleAppFeedbackModal()" ng-show="showFeedbackButton">Feedback</a>
+        <a href="javascript:;"  class="feedback" ng-click="toggleAppFeedbackModal()" ng-show="showFeedbackButton">Feedback</a>
 <section class='wrapper'>
     <input id="pac-input" placeholder="Set Location Manually" ng-if="fbId" ng-model="user_place_name"/>
     <div class="new" style="display: none;color:white;">
@@ -12,8 +12,11 @@
     </section>
     <section class='sidebar'>
         <img class='spinner' src='/styles/images/ajax-loader.gif' ng-show='spinnerDisplay'/>
-        <h1>
-            <a class='logo' href=''>Barter</a>
+          <a href="">
+   <img src="/styles/images/HatWeKhood.png" class="hat_We_hod_logo">
+   </a> <h1>
+<!--            <a class='logo' href=''>Barter</a>-->
+
         </h1>
         <button ng-click='updateLocation()'>Search Nearby</button>
         <button ng-click='postRedirect()'>Post an item</button>
