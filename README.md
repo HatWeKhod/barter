@@ -70,7 +70,7 @@ The dashboard is used to keep track of trade requests, messages, and posts.
 - **git**: version control magician
 - **npm**: package commander-in-chief for back-end libraries
 - **Bower**: package commander-in-chief for front-end libraries
-- **Heroku**: server
+- **Pivotal Web Services**: server
 
 ## Challenges
 
