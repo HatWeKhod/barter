@@ -1,9 +1,9 @@
-Barter
+HatWeKhod
 ======
 
-Barter is an interface that connects you to your community and allows you to trade items with other users and share the story behind them.
+HatWeKhod is an interface that connects you to your community and allows you to trade items with other users and share the story behind them.
 
-Barter is currently available at http://barter.cfapps.io
+HatWeKhod is currently available at http://hatwekhod.cfapps.io
 
 ![main](http://i.imgur.com/fqESTsL.png)
 
@@ -70,7 +70,7 @@ The dashboard is used to keep track of trade requests, messages, and posts.
 - **git**: version control magician
 - **npm**: package commander-in-chief for back-end libraries
 - **Bower**: package commander-in-chief for front-end libraries
-- **Pivotal Web Services**: server
+- **Pivotal Web Services**: PaaS
 
 ## Challenges
 
@@ -80,4 +80,4 @@ The dashboard is used to keep track of trade requests, messages, and posts.
 
 ## Author
 
-[Ryan Roxas](https://github.com/rohaus)
+Derivative work of [Ryan Roxas](https://github.com/rohaus)
