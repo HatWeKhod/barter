@@ -78,6 +78,15 @@ The dashboard is used to keep track of trade requests, messages, and posts.
 
 - Another obstacle was to design for a fluid and intuitive user experience. This was accomplished by allowing instant search in the sidebar and by using two versions of clustering to simplify the geospatial search process.
 
+
+## Deployment
+- Login into your PWS account from https://login.run.pivotal.io/login. Go to Pivotal Web Services. Click on Tools Section . Firstly        Download and Install the Cloud Foundry CLI . After that Use "cf login -a api.run.pivotal.io"  Command for login. After Successful login, One can make changes into required files and use the following Command to update the app :
+  - git add --all
+  - git commit -m "your message"
+  - cf push "your app name"
+
+  These commands will update and deploy the files on PWS automatically.
+   
 ## Author
 
 Derivative work of [Ryan Roxas](https://github.com/rohaus)
