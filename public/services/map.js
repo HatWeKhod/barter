@@ -1,5 +1,5 @@
 angular.module('barterApp')
-        .factory('MapService', function ($http, $rootScope, $route) {
+        .factory('MapService', function ($http, $rootScope, $route,$anchorScroll, $window,$timeout) {
             var service = {};
 
             service.styles = [
@@ -164,7 +164,11 @@ angular.module('barterApp')
                         }
                     });
                 }
-
+ if ($window.innerWidth < 1000) {
+   $timeout( function(){
+           $anchorScroll();
+        }, 1000 );
+                }
             };
             service.infoboxOptions = {
                 disableAutoPan: false,
@@ -173,7 +177,7 @@ angular.module('barterApp')
                 zIndex: null,
                 boxStyle: {
                     background: 'url("https://raw.githubusercontent.com/mindgruve/google-infobox/master/examples/tipbox.gif") no-repeat',
-                    width: '280px'
+                    width: '270px'
                 },
                 closeBoxMargin: '12px 4px 2px 2px',
                 closeBoxURL: 'https://raw.githubusercontent.com/google/earthenterprise/master/earth_enterprise/src/maps/mapfiles/close.gif',
@@ -265,17 +269,25 @@ angular.module('barterApp')
                 });
             };
 
-            service.trigger = function (gm_id) {
+                 service.trigger = function (gm_id) {
+                var bounds = new google.maps.LatLngBounds();
                 for (var i = 0; i < service.markers.length; i++) {
                     var marker = service.markers[i];
 //                    console.log(marker);
                     if (marker.__gm_id === gm_id) {
-
+                        bounds.extend(marker.getPosition());
 //        service.center = new google.maps.LatLng(marker.position.ob,marker.position.pb);
                         service.center = new google.maps.LatLng(marker.getPosition().lat(), marker.getPosition().lng());
                         service.map.setCenter(service.center);
                         service.map.setZoom(16);
+                        service.map.fitBounds(bounds);
+                        var listener = google.maps.event.addListener(service.map, "idle", function () {
+                            if (service.map.getZoom() > 16)
+                                service.map.setZoom(16);
+                            google.maps.event.removeListener(listener);
+                        });
                         google.maps.event.trigger(marker, 'mouseup');
+//                        service.map.setOptions({maxZoom: null});
                         $rootScope.spinnerToggle();
                         break;
                     }

@@ -5,3 +5,4 @@ node_modules/
 #public/lib/lodash
 Additional/
 config/keys.js
+/nbproject/private/
