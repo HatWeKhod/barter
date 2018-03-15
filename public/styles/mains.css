@@ -203,7 +203,7 @@ width: 95%;
     background-color: #dadada;
 }
 .conversations {
-    height: 39em;
+    /*height: 39em;*/
     width: 34em;
     overflow: auto;
 }
