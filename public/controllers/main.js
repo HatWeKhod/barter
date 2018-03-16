@@ -1,5 +1,5 @@
 angular.module('barterApp')
-        .controller('MapCtrl', function ($scope, $location, $http, $rootScope, MapService) {
+        .controller('MapCtrl', function ($scope, $location, $http, $rootScope, MapService,$anchorScroll, $window,$timeout) {
             $scope.initialize = function () {
                 $rootScope.spinnerToggle();
                 MapService.initialize();
@@ -45,7 +45,7 @@ angular.module('barterApp')
                 }
                 console.log(selectedPost);
                 if(!selectedPost ||!selectedPost.originalObject || !selectedPost.originalObject._id){
-                        alert('You Need to select atleast one item in order to barter');
+                        alert('You Need to select at least one item in order to barter');
                         return ;
                 }
                 $scope.data = {
@@ -94,6 +94,11 @@ $rootScope.$broadcast('angucomplete-ie8:clearInput');
             $rootScope.zoomInPost = function (post) {
                 $rootScope.spinnerToggle();
                 MapService.trigger(post.__gm_id);
+	  if ($window.innerWidth < 1000) {
+//   $timeout( function(){
+           $anchorScroll();
+//        }, 3000 );
+                }			
             };
 
 
@@ -166,3 +171,4 @@ $rootScope.$broadcast('angucomplete-ie8:clearInput');
 
             }
         });
+		
