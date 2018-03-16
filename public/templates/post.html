@@ -1,6 +1,6 @@
 <div class='box postForm'>
   <!--<h1><a href='#' class='logo'>Barter</a></h1>-->
-   <a href="">
+   <a href="#/">
    <img src="/styles/images/HatWeKhood.png" class="hat_We_hod_logo">
    </a>
   <form ng-submit='postImage()'>
@@ -18,12 +18,13 @@
     </div>
     <div>
       <p>Upload an image!</p>
-      <input type='file' accept='image/*' image='image' resize-max-height='300' resize-max-width='250' resize-quality='0.7' ng-required='true'/>
+      <input class="file_brows_btn" type='file' accept='image/*' image='image' resize-max-height='300' resize-max-width='250' resize-quality='0.7' ng-required='true'/>
       <p ng-show='image'>Is this correct?</p>
       <img ng-show='image' ng-src='{{image.resized.dataURL}}'/>
     </div>
     <button ng-disabled='disabled'>Submit</button>
     <button type='reset'>Clear</button>
+    <a class="dashboard_btn" href="#/">Back</a>
   </form>
   <img ng-show='postSpinnerDisplay' src='/styles/images/ajax-loader.gif'/>
 <div>

@@ -1,6 +1,6 @@
         <a href="javascript:;"  class="feedback" ng-click="toggleAppFeedbackModal()" ng-show="showFeedbackButton">Feedback</a>
 <section class='wrapper'>
-    <input id="pac-input" placeholder="Set Location Manually" ng-if="fbId" ng-model="user_place_name"/>
+    <input id="pac-input" class="place_input" placeholder="Set Location Manually" ng-if="fbId" ng-model="user_place_name"/>
     <div class="new" style="display: none;color:white;">
         <label for="inputIsiBerita" ng-if="fbId"> Latitude:</label>
         <input type="text" class="form-control" required name="latitude" ng-if="fbId" ng-model="user_lat">
@@ -12,7 +12,7 @@
     </section>
     <section class='sidebar'>
         <img class='spinner' src='/styles/images/ajax-loader.gif' ng-show='spinnerDisplay'/>
-          <a href="">
+          <a href="#/">
    <img src="/styles/images/HatWeKhood.png" class="hat_We_hod_logo">
    </a> <h1>
 <!--            <a class='logo' href=''>Barter</a>-->
@@ -26,7 +26,7 @@
         </a>
         <h4>
             Take a look in your area:
-            <input type='text' placeholder='Search posts!' autofocus='autofocus' ng-model='searchText'></input>
+            <input type='text' placeholder='Search posts!' autofocus='autofocus' ng-model='searchText' class="search_box"></input>
         </h4>
         <section class='postsContainer'>
             <div class='searchPosts' ng-repeat='post in posts| filter:search | orderBy:"createdAt":true' ng-show='!post.completed'>
@@ -38,7 +38,7 @@
                         <h2 id='description'><span class='underline'>Description</span>: {{post.description}}</h2>
                         <h2 id='condition'><span class='underline'>Condition</span>: {{post.condition}}</h2>
                         <h2 id='name'><span class='underline'>Contact</span>: {{post.name}}
-                            <span ng-if="post.user_average_score!=0"><angular-star-rating max="5"   is-readonly='true'  value='post.user_average_score'></angular-star-rating></span></h2>
+                            <span class="rating_y"  ng-if="post.user_average_score!=0"><angular-star-rating max="5"   is-readonly='true'  value='post.user_average_score'></angular-star-rating></span></h2>
                         <span ng-if="post.user_average_score==0">UnRated</h2></span>
                             <h2 id='date'><span class='underline'>Created</span>: {{post.createdAt| date:'MM/dd @ h:mma'}}</h2>
                     </div>

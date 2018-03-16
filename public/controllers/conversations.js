@@ -123,7 +123,7 @@ angular.module('barterApp')
                         var conversation = post.conversations[j];
                         if (conversation.accepted === false) {
                             post.rejected = true;
-                            return false;
+//                            return false;
                         }
                     }
                 }
@@ -145,7 +145,7 @@ angular.module('barterApp')
                             }
                             if (conversation.accepted === false) {
                                 post.rejected = true;
-                                return false;
+//                                return false;
                             }
                         }
                     }
@@ -167,7 +167,7 @@ angular.module('barterApp')
                             }
                             if (conversation.accepted === false) {
                                 post.rejected = true;
-                                return false;
+//                                return false;
                             }
                         }
                     }

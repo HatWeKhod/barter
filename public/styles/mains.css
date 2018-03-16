@@ -62,7 +62,7 @@ input[type='text'] {
     width: 98% !important;
 }
 .searchDashboard {
-    width: 40%;
+    width: 95%;
 }
 typography.styl,
 body {
@@ -120,7 +120,10 @@ body {
     margin: 15px 0;
 }
 .sidebar h4 input {
-    width: 40%;
+    /*width: 40%;*/
+}
+.search_box{
+width: 95%;
 }
 .postsContainer {
     padding: 5px;
@@ -202,7 +205,7 @@ body {
     background-color: #1E2424;
 }
 .conversations {
-    height: 39em;
+    /*height: 39em;*/
     width: 34em;
     overflow: hidden;
 }
@@ -271,8 +274,13 @@ img.thumb {
     width: 78%;
 }
 .spinner {
+    /*left: 2em;*/
+	/*background: rgba(255, 255, 255, 0.7) none repeat scroll 0 0;*/
+    border-radius: 50%;
+    left: 40%;
     position: absolute;
-    left: 2em;
+    top: 50%;
+    z-index: 1;
 }
 #map-canvas {
     height: 39em;
@@ -406,4 +414,96 @@ form.ng-invalid-autocomplete-required input {
 }
 .postForm input,.conversations  input{
     color: #fff;
+}
+
+
+
+.place_input{
+top:10px !important;
+}
+.file_brows_btn{
+left: 40px;
+    position: relative;
+}
+.dashboard_btn{
+background-color: #595b5b;
+    border: 1px solid #333434;
+    border-radius: 4px;
+    box-shadow: 0 1px #737373 inset;
+    color: #c6c8c8;
+    font-family: "Poiret One";
+    font-size: 17px;
+    letter-spacing: 0;
+    line-height: 1.313rem;
+    padding: 0 0.563rem;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.69);
+    vertical-align: top;
+	text-decoration: none;
+}
+@media screen and (max-width: 999px) {
+    .box.sidebar.login{
+        width:86%;
+    }
+    #map-canvas.login{
+        width:86% !important;
+    }
+    .wrapper{
+        width:90% !important;
+    }
+    #map-canvas{
+        width: 85% !important;
+    }
+    .sidebar{
+        width:85%;
+    }
+    .conversationContainer{
+        width:auto;
+    }
+    .conversations {
+        width:auto;
+    }
+    .conversationModal{
+       width: auto!important;
+max-height: 410px;
+overflow:auto;
+top:25% !important;
+    }
+    .post{
+        text-align: center;
+    }
+    .postForm {
+        width:auto;
+    }
+}
+@media screen and (max-width: 767px) {
+.rating_y{
+float: left;
+    margin: 10px 0;
+    width: 100%;
+}
+.modal{
+width:auto;
+}
+}
+@media screen and (max-width: 436px) {
+    .corner{
+        width:27%;
+    }
+    .feedback{
+        font-size: 9px !important;
+        margin:0px !important;
+    }
+}
+@media screen and (max-width: 415px) {
+.place_input{
+top:50px !important;
+left:10px !important;
+}
+.postForm input [type='text']{
+    width: 25% !important;
+}
+
+.postForm input,.conversations  input{
+ width:90%;
+}
 }
