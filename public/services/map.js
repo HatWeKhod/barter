@@ -94,7 +94,7 @@ angular.module('barterApp')
                             service.map.setZoom(17); // Why 17? Because it looks good.
                         }
                         marker.setIcon(/** @type {google.maps.Icon} */ ({
-                            url: 'http://maps.google.com/mapfiles/ms/icons/red.png',
+                            url: 'https://maps.google.com/mapfiles/ms/icons/red.png',
                             size: new google.maps.Size(71, 71),
                             origin: new google.maps.Point(0, 0),
                             anchor: new google.maps.Point(17, 34),
@@ -227,21 +227,21 @@ angular.module('barterApp')
                             }
                             $rootScope.your_posts = your_posts;
                             console.log(' $rootScope.your_posts', $rootScope.your_posts);
-                            google.maps.event.addListener(infobox, 'domready', function () {
-                                document.getElementById('barterButton').addEventListener('click', function (e) {
-                                    $rootScope.spinnerToggle();
-                                    $rootScope.recipient = {};
-                                    $rootScope.recipient.itemName = document.getElementById('itemName').textContent.split(': ')[1];
-                                    $rootScope.recipient.description = document.getElementById('description').textContent.split(': ')[1];
-                                    $rootScope.recipient.condition = document.getElementById('condition').textContent.split(': ')[1];
-                                    $rootScope.recipient.name = document.getElementById('name').textContent.split(': ')[1];
-                                    $rootScope.recipient.fbId = document.getElementById('fbId').textContent;
-                                    $rootScope.recipient._id = document.getElementById('_id').textContent;
-                                    $rootScope.togglePostModal();
-                                    $rootScope.$digest();
-                                    $rootScope.spinnerToggle();
-                                });
-                            });
+//                            google.maps.event.addListener(infobox, 'domready', function () {
+//                                document.getElementById('barterButton').addEventListener('click', function (e) {
+//                                    $rootScope.spinnerToggle();
+//                                    $rootScope.recipient = {};
+//                                    $rootScope.recipient.itemName = document.getElementById('itemName').textContent.split(': ')[1];
+//                                    $rootScope.recipient.description = document.getElementById('description').textContent.split(': ')[1];
+//                                    $rootScope.recipient.condition = document.getElementById('condition').textContent.split(': ')[1];
+//                                    $rootScope.recipient.name = document.getElementById('name').textContent.split(': ')[1];
+//                                    $rootScope.recipient.fbId = document.getElementById('fbId').textContent;
+//                                    $rootScope.recipient._id = document.getElementById('_id').textContent;
+//                                    $rootScope.togglePostModal();
+//                                    $rootScope.$digest();
+//                                    $rootScope.spinnerToggle();
+//                                });
+//                            });
                             var mc = new MarkerClusterer(service.map, service.markers, service.mcOptions);
                             $rootScope.spinnerToggle();
                         })
@@ -250,7 +250,7 @@ angular.module('barterApp')
             };
 
             service.infoboxContent = function (i) {
-                return '<div class="infobox"><img src="' + $rootScope.posts[i].image + '"/>' +
+                return '<div class="infobox"><img  style="height:130px;" src="' + $rootScope.posts[i].image + '"/>' +
                         '<h2 id="itemName">Item Name: ' + $rootScope.posts[i].itemName + '</h2>' +
                         '<h2 id="description">Description: ' + $rootScope.posts[i].description + '</h2>' +
                         '<h2 id="condition">Condition: ' + $rootScope.posts[i].condition + '</h2>' +
@@ -266,6 +266,24 @@ angular.module('barterApp')
                     infobox.open(service.map, marker);
                     infobox.setContent(service.infoboxContent(i));
                     $rootScope.spinnerToggle();
+                     console.log(document.getElementById('barterButton'));
+                    $timeout(function () {
+                        if (document.getElementById('barterButton')) {
+                            document.getElementById('barterButton').addEventListener('click', function (e) {
+                                $rootScope.spinnerToggle();
+                                $rootScope.recipient = {};
+                                $rootScope.recipient.itemName = document.getElementById('itemName').textContent.split(': ')[1];
+                                $rootScope.recipient.description = document.getElementById('description').textContent.split(': ')[1];
+                                $rootScope.recipient.condition = document.getElementById('condition').textContent.split(': ')[1];
+                                $rootScope.recipient.name = document.getElementById('name').textContent.split(': ')[1];
+                                $rootScope.recipient.fbId = document.getElementById('fbId').textContent;
+                                $rootScope.recipient._id = document.getElementById('_id').textContent;
+                                $rootScope.togglePostModal();
+                                $rootScope.$digest();
+                                $rootScope.spinnerToggle();
+                            });
+                        }
+                    }, 1000);
                 });
             };
 
