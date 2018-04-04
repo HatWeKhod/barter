@@ -1,0 +1,376 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E22C7D651F961F4800CB2CC0 /* Reach.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22C7D641F961F4800CB2CC0 /* Reach.swift */; };
+		E2E12AD81F8CACED00D87A1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E12AD71F8CACED00D87A1A /* AppDelegate.swift */; };
+		E2E12ADA1F8CACED00D87A1A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E12AD91F8CACED00D87A1A /* ViewController.swift */; };
+		E2E12ADD1F8CACED00D87A1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E12ADB1F8CACED00D87A1A /* Main.storyboard */; };
+		E2E12ADF1F8CACED00D87A1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E12ADE1F8CACED00D87A1A /* Assets.xcassets */; };
+		E2E12AE21F8CACED00D87A1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E12AE01F8CACED00D87A1A /* LaunchScreen.storyboard */; };
+		E2E12AF41F8CACFD00D87A1A /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E12AEB1F8CACFD00D87A1A /* SVIndefiniteAnimatedView.m */; };
+		E2E12AF51F8CACFD00D87A1A /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E12AED1F8CACFD00D87A1A /* SVProgressAnimatedView.m */; };
+		E2E12AF61F8CACFD00D87A1A /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E2E12AEF1F8CACFD00D87A1A /* SVProgressHUD.bundle */; };
+		E2E12AF71F8CACFD00D87A1A /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E12AF11F8CACFD00D87A1A /* SVProgressHUD.m */; };
+		E2E12AF81F8CACFD00D87A1A /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E12AF31F8CACFD00D87A1A /* SVRadialGradientLayer.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E22C7D641F961F4800CB2CC0 /* Reach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reach.swift; sourceTree = "<group>"; };
+		E2E12AD41F8CACED00D87A1A /* FbWebApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FbWebApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2E12AD71F8CACED00D87A1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E2E12AD91F8CACED00D87A1A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E2E12ADC1F8CACED00D87A1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E2E12ADE1F8CACED00D87A1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E2E12AE11F8CACED00D87A1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E2E12AE31F8CACED00D87A1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2E12AEA1F8CACFD00D87A1A /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		E2E12AEB1F8CACFD00D87A1A /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		E2E12AEC1F8CACFD00D87A1A /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
+		E2E12AED1F8CACFD00D87A1A /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressAnimatedView.m; sourceTree = "<group>"; };
+		E2E12AEE1F8CACFD00D87A1A /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		E2E12AEF1F8CACFD00D87A1A /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		E2E12AF01F8CACFD00D87A1A /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		E2E12AF11F8CACFD00D87A1A /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		E2E12AF21F8CACFD00D87A1A /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		E2E12AF31F8CACFD00D87A1A /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
+		E2E12AF91F8CAD0C00D87A1A /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E2E12AD11F8CACED00D87A1A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E2E12ACB1F8CACED00D87A1A = {
+			isa = PBXGroup;
+			children = (
+				E2E12AD61F8CACED00D87A1A /* FbWebApp */,
+				E2E12AD51F8CACED00D87A1A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E2E12AD51F8CACED00D87A1A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E2E12AD41F8CACED00D87A1A /* FbWebApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E2E12AD61F8CACED00D87A1A /* FbWebApp */ = {
+			isa = PBXGroup;
+			children = (
+				E22C7D641F961F4800CB2CC0 /* Reach.swift */,
+				E2E12AD71F8CACED00D87A1A /* AppDelegate.swift */,
+				E2E12AD91F8CACED00D87A1A /* ViewController.swift */,
+				E2E12ADB1F8CACED00D87A1A /* Main.storyboard */,
+				E2E12ADE1F8CACED00D87A1A /* Assets.xcassets */,
+				E2E12AE01F8CACED00D87A1A /* LaunchScreen.storyboard */,
+				E2E12AE31F8CACED00D87A1A /* Info.plist */,
+				E2E12AE91F8CACFD00D87A1A /* SVProgressHUD */,
+				E2E12AF91F8CAD0C00D87A1A /* Bridging-Header.h */,
+			);
+			path = FbWebApp;
+			sourceTree = "<group>";
+		};
+		E2E12AE91F8CACFD00D87A1A /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				E2E12AEA1F8CACFD00D87A1A /* SVIndefiniteAnimatedView.h */,
+				E2E12AEB1F8CACFD00D87A1A /* SVIndefiniteAnimatedView.m */,
+				E2E12AEC1F8CACFD00D87A1A /* SVProgressAnimatedView.h */,
+				E2E12AED1F8CACFD00D87A1A /* SVProgressAnimatedView.m */,
+				E2E12AEE1F8CACFD00D87A1A /* SVProgressHUD-Prefix.pch */,
+				E2E12AEF1F8CACFD00D87A1A /* SVProgressHUD.bundle */,
+				E2E12AF01F8CACFD00D87A1A /* SVProgressHUD.h */,
+				E2E12AF11F8CACFD00D87A1A /* SVProgressHUD.m */,
+				E2E12AF21F8CACFD00D87A1A /* SVRadialGradientLayer.h */,
+				E2E12AF31F8CACFD00D87A1A /* SVRadialGradientLayer.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E2E12AD31F8CACED00D87A1A /* FbWebApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2E12AE61F8CACED00D87A1A /* Build configuration list for PBXNativeTarget "FbWebApp" */;
+			buildPhases = (
+				E2E12AD01F8CACED00D87A1A /* Sources */,
+				E2E12AD11F8CACED00D87A1A /* Frameworks */,
+				E2E12AD21F8CACED00D87A1A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FbWebApp;
+			productName = FbWebApp;
+			productReference = E2E12AD41F8CACED00D87A1A /* FbWebApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E2E12ACC1F8CACED00D87A1A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = brst;
+				TargetAttributes = {
+					E2E12AD31F8CACED00D87A1A = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = EQ9VK5985S;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = E2E12ACF1F8CACED00D87A1A /* Build configuration list for PBXProject "FbWebApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E2E12ACB1F8CACED00D87A1A;
+			productRefGroup = E2E12AD51F8CACED00D87A1A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E2E12AD31F8CACED00D87A1A /* FbWebApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E2E12AD21F8CACED00D87A1A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2E12AE21F8CACED00D87A1A /* LaunchScreen.storyboard in Resources */,
+				E2E12ADF1F8CACED00D87A1A /* Assets.xcassets in Resources */,
+				E2E12ADD1F8CACED00D87A1A /* Main.storyboard in Resources */,
+				E2E12AF61F8CACFD00D87A1A /* SVProgressHUD.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E2E12AD01F8CACED00D87A1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2E12ADA1F8CACED00D87A1A /* ViewController.swift in Sources */,
+				E2E12AF81F8CACFD00D87A1A /* SVRadialGradientLayer.m in Sources */,
+				E2E12AD81F8CACED00D87A1A /* AppDelegate.swift in Sources */,
+				E2E12AF71F8CACFD00D87A1A /* SVProgressHUD.m in Sources */,
+				E22C7D651F961F4800CB2CC0 /* Reach.swift in Sources */,
+				E2E12AF41F8CACFD00D87A1A /* SVIndefiniteAnimatedView.m in Sources */,
+				E2E12AF51F8CACFD00D87A1A /* SVProgressAnimatedView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E2E12ADB1F8CACED00D87A1A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E2E12ADC1F8CACED00D87A1A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E2E12AE01F8CACED00D87A1A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E2E12AE11F8CACED00D87A1A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E2E12AE41F8CACED00D87A1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Demski (9Y3676NBJY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Demski (9Y3676NBJY)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 34QW5F2D72;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "5dbbc451-c209-4c0f-a283-31bccd9e1955";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E2E12AE51F8CACED00D87A1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Demski (9Y3676NBJY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Demski (9Y3676NBJY)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 34QW5F2D72;
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "5dbbc451-c209-4c0f-a283-31bccd9e1955";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E2E12AE71F8CACED00D87A1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Demski (9Y3676NBJY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = EQ9VK5985S;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = FbWebApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.webapps2.tbi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FbWebApp/Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		E2E12AE81F8CACED00D87A1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Demski (9Y3676NBJY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = EQ9VK5985S;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = FbWebApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.webapps2.tbi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FbWebApp/Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E2E12ACF1F8CACED00D87A1A /* Build configuration list for PBXProject "FbWebApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2E12AE41F8CACED00D87A1A /* Debug */,
+				E2E12AE51F8CACED00D87A1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E2E12AE61F8CACED00D87A1A /* Build configuration list for PBXNativeTarget "FbWebApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2E12AE71F8CACED00D87A1A /* Debug */,
+				E2E12AE81F8CACED00D87A1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E2E12ACC1F8CACED00D87A1A /* Project object */;
+}
