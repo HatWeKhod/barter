@@ -159,7 +159,7 @@ angular.module('barterApp')
                         console.log(error);
                         if (error.code == error.PERMISSION_DENIED)
                         {
-                            alert('Location Required. Either Enter Your Home Location in map Or Change Your Browser Settings to Enable location');
+                            alert('Location required - please enter your barter location on map, or allow location access.');
                             $route.reload();
                         }
                     });
