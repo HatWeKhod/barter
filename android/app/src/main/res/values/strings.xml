@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Barter</string>
+    <string name="message">Please Enable all permissions</string>
+
+    <string name="web_url">https://barter.cfapps.io/</string>
+
+    <string name="allow">Allow</string>
+    <string name="block">Block</string>
+    <string name="alert_message">"Barter" Would like to access your location.</string>
+
+    <string name="image_chooser">Image Chooser</string>
+    <string name="file_name">file:</string>
+    <string name="photo_path">PhotoPath</string>
+    <string name="file_chooser">File Chooser</string>
+    <string name="file_browser">File Browser</string>
+    <string name="image_type">*/*</string>
+
+    <string name="image_error">Image file creation failed</string>
+    <string name="simple_date">yyyyMMdd_HHmmss</string>
+    <string name="img_name">img_</string>
+    <string name="_name">_</string>
+    <string name="file_extension">.jpg</string>
+
+    <string name="network_msg">Network not available.</string>
+    <string name="ok_text">Ok</string>
+</resources>
