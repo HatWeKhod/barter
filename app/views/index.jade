@@ -6,7 +6,7 @@ html(lang="en")
     link(rel='stylesheet' href='styles/mains.css?v=1.1')
     link(rel='stylesheet' href='lib/angular-rating/main.css')
     link(rel='stylesheet' href='lib/angular-rating/fontawesome.css')
-    link(rel='stylesheet' href='ang-autocomplete/angucomplete-ie8.css')
+    link(rel='stylesheet' href='lib/angucomplete-ie8/angucomplete-ie8.css')
    html
   head
   body
@@ -41,8 +41,6 @@ html(lang="en")
     // /Yandex.Metrika counter
 
   body(ng-app='barterApp')
-    a(href='https://hatwekhod.github.io/barter/' target="_blank")
-                   img.corner(src='styles/images/sideimage.png' alt='Built at GitHub' )
     div.container(ng-view)
       //- Google Maps
       script(src='https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false')
@@ -56,7 +54,11 @@ html(lang="en")
       script(src='lib/markerclusterer/markerclusterer.js')
       script(src='lib/OverlappingMarkerSpiderfier/oms.min.js')
       script(src='lib/angular-rating/main.js')
-      script(src='ang-autocomplete/dist/angucomplete-ie8.min.js')
+      script(src='lib/angular-translate/angular-translate.js')
+      script(src='lib/angular-cookies/angular-cookies.js')
+      script(src='lib/angular-translate-storage-cookie/angular-translate-storage-cookie.js')
+      script(src='lib/angular-translate-storage-local/angular-translate-storage-local.js')
+      script(src='lib/angucomplete-ie8/dist/angucomplete-ie8.min.js')
 
       //- App
       script(src='app.js')

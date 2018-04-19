@@ -440,6 +440,42 @@ background-color: #595b5b;
     vertical-align: top;
 	text-decoration: none;
 }
+
+/*//arabic css starts*/
+.arabic_app{
+    direction: rtl;
+}
+.arabic_app .editIcon {
+    left: 25px;
+    right:unset;
+}
+.arabic_app .barterPostModal {
+    text-align: right;
+}
+.arabic_app .file_brows_btn {
+right:40px;
+}
+.arabic_app .messageContainer {
+  text-align: right;
+}
+.arabic_app .corner_anchor img{
+ left:0;
+ transform: rotate(-90deg);
+}
+.arabic_app .feedback  {
+left: 0;
+    right: unset;
+}
+.arabic_app .postText {
+    text-align: right;
+}
+@media screen and (min-width: 1000px) {
+.arabic_app #map-canvas {
+    float: right;
+}.arabic_app .sidebar {
+    float: right;
+}
+}
 @media screen and (max-width: 999px) {
     .box.sidebar.login{
         width:86%;

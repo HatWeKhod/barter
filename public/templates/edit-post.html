@@ -1,30 +1,34 @@
-    <div class='box postForm'>
+   <div  ng-class="{'arabic_app': lang == 'ar'}">     
+    <a class="corner_anchor" href="https://hatwekhod.github.io/barter/" target="_blank"><img src="styles/images/sideimage.png" alt="Built at GitHub" class="corner"></a>
+    <button ng-show="lang == 'en'" ng-click="updateLanguage('ar')" translate="BUTTON_LANG_AR"></button>
+  <button ng-show="lang == 'ar'" ng-click="updateLanguage('en')" translate="BUTTON_LANG_EN"></button>
+  <div class='box postForm'>
 <!--  <h1><a href='#' class='logo'>Barter</a></h1>-->
  <a href="#/">
    <img src="/styles/images/HatWeKhood.png" class="hat_We_hod_logo">
    </a>
   <form ng-submit='updateImage()' >
     <div>
-      <p>What's it called?</p>
+            <p>{{ 'WHAT_ITS_CALLED' | translate }}</p>
       <input type='text' ng-model='editItemName' ng-required='true' autofocus='autofocus' ></input>
     </div>
     <div>
-      <p>Tell us about it.</p>
+       <p>{{ 'TELL_US' | translate }}</p>
       <input type='text' ng-model='editDescription' ng-required='true'></input>
     </div>
     <div>
-      <p>What's the condition?</p>
+    <p>{{ 'WHAT_IS_CONDITION' | translate }}</p>
       <input type='text' ng-model='editCondition' ng-required='true'></input>
     </div>
     <div>
-      <p>Upload an image!</p>
+      <p>{{ 'UPLOAD_IMAGE' | translate }}</p>
       <input class="file_brows_btn" type='file' accept='image/*' image='image' resize-max-height='300' resize-max-width='250' resize-quality='0.7' />
-      <p ng-show='image'>Is this correct?</p>
+         <p ng-show='image'>{{ 'IS_CORRECT' | translate }}</p>
       <img height="250" width="250" ng-show='image' ng-src='{{image.resized.dataURL||image}} '/>
     </div>
-    <button ng-disabled='disabled'>Submit</button>
-    <a class="dashboard_btn" href="#/">Back</a>
+     <button ng-disabled='disabled'>{{ 'SUBMIT' | translate }}</button>
+    <a class="dashboard_btn" href="#/">{{ 'BACK' | translate }}</a>
     <!--<button type='reset'>Clear</button>-->
   </form>
   <img ng-show='postSpinnerDisplay' src='/styles/images/ajax-loader.gif'/>
-<div>
+<div></div>

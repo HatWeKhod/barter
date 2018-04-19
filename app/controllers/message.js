@@ -138,7 +138,7 @@ if(req.body.user_email){
     });
     feedback.save(function (err) {
         utils.handleError(err, 500);
-       var nodemailer = require('nodemailer');
+            var nodemailer = require('nodemailer');
         var transporter = nodemailer.createTransport({
           host: 'smtp.gmail.com',
         port: 587,
@@ -157,13 +157,15 @@ if(req.body.user_email){
             console.log(mailOptions);
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log(error);
-                utils.handleError(error, 500);
+                console.log('in_error',error);
+              //  utils.handleError(error, 500);
+                  res.send(500);
             } else {
                 console.log('Email sent: ' + info.response);
                 res.send(200);
             }
         });
+       
      
     });
 

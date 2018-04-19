@@ -1,20 +1,26 @@
-<section class='wrapper'>
+<div  ng-class="{'arabic_app': lang == 'ar'}">    
+    <a class="corner_anchor" href="https://hatwekhod.github.io/barter/" target="_blank"><img src="styles/images/sideimage.png" alt="Built at GitHub" class="corner"></a>
+<!--<select ng-options="language | translate for language in ctrl.languages" ng-model="ctrl.language" ng-change="ctrl.updateLanguage()"></select>-->
+ <button ng-show="lang == 'en'" ng-click="updateLanguage('ar')" translate="BUTTON_LANG_AR"></button>
+  <button ng-show="lang == 'ar'" ng-click="updateLanguage('en')" translate="BUTTON_LANG_EN"></button>
+  <section class='wrapper'>
   <section class='box sidebar login'>
     <!--<h1 class='logo'>Barter</h1>-->
     <a href="#/"><img src="/styles/images/HatWeKhood.png" width="180" height="150"></a>
     <hr/>
-    <h1>What is Barter?</h1>
-    <p>Barter is an interface that connects you to your community and allows you to trade items with other users and share the story behind them.</p>
+    <h1>{{'WHAT_IS_BARTER' | translate}}</h1>
+     <p>{{'BARTER_INFO'| translate}}</p>
     <hr/>
-    <h1>Try it out</h1>
+    <h1>{{'TRY_IT_OUT' |translate}}</h1>
     <ol>
-      <li>Log in with Facebook</li>
-      <li>Browse items within your community with our map</li>
-      <li>Find an item you like and start your trade</li>
+     <li>{{'LOGIN_WITH_FB'|translate}}</li>
+      <li>{{'BROWSE_ITEMS'|translate}}</li>
+      <li>{{'FIND_ITEM'|translate}}</li>
     </ol>
     <hr/>
-    <a href='/auth/facebook'><button>Login with Facebook</button></a>
+     <a href='/auth/facebook'><button>{{'LOGIN_FB'|translate}}</button></a>
   </section>
   <section class='login' id='map-canvas' data-ng-init='initialize()'>
   </section>
 </section>
+</div>

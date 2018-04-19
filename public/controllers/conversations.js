@@ -1,5 +1,5 @@
 angular.module('barterApp')
-        .controller('ConvCtrl', function ($scope, $location, $http, $rootScope, $route, $window) {
+        .controller('ConvCtrl', function ($scope, $location, $http, $rootScope, $route, $window,$translate) {
 
 //            console.log( angular.element(document).height());
             var window_height = $window.innerHeight;
@@ -362,6 +362,19 @@ angular.module('barterApp')
 //                        });
 //
 //            }
+$scope.updateLanguage = function(langKey) {
+    $translate.use(langKey);
+  };
+   $rootScope.$on('$translateChangeSuccess', function(event, data) {
+      var language = data.language;
 
+      $rootScope.lang = language;
+
+      $rootScope.default_direction = language === 'ar' ? 'rtl' : 'ltr';
+      $rootScope.opposite_direction = language === 'ar' ? 'ltr' : 'rtl';
+
+      $rootScope.default_float = language === 'ar' ? 'right' : 'left';
+      $rootScope.opposite_float = language === 'ar' ? 'left' : 'right';
+    });
 
         });
