@@ -96,7 +96,7 @@ angular.module('barterApp', ['imageupload', 'ngRoute', 'angular-star-rating', 'p
                 SEND: "إرسال",
                 FEEDBACK: "قل لنا رأيك",
                 WRITE_FEEDBACK:"اكتب رأيك و اقتراحاتك",
-                ENTER_MAIL: "أدخل بريدك الالكتروني",
+                ENTER_MAIL: "ادخل بريدك الإلكتروني (اختياري)",
                 TYPE_MESSAGE: "اكتب رسالة!",
                 SEARCH_YOUR_POSTS: "البحث مشاركاتك",
                 WHAT_DID_YOU_WANT_TO_SAY: "ماذا تريد أن تقول؟",

@@ -447,7 +447,7 @@ background-color: #595b5b;
 }
 .arabic_app .editIcon {
     left: 25px;
-    right:unset;
+    right:auto;
 }
 .arabic_app .barterPostModal {
     text-align: right;
@@ -461,10 +461,11 @@ right:40px;
 .arabic_app .corner_anchor img{
  left:0;
  transform: rotate(-90deg);
+ -webkit-transform:  rotate(-90deg);
 }
 .arabic_app .feedback  {
 left: 0;
-    right: unset;
+    right: auto;
 }
 .arabic_app .postText {
     text-align: right;
