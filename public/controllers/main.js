@@ -1,5 +1,5 @@
 angular.module('barterApp')
-        .controller('MapCtrl', function ($scope, $location, $http, $rootScope, MapService, $anchorScroll, $window,$timeout) {
+        .controller('MapCtrl', function ($scope, $location, $http, $rootScope, MapService, $anchorScroll, $window,$timeout,$translate) {
             $scope.initialize = function () {
                 $rootScope.spinnerToggle();
                 MapService.initialize();
@@ -170,5 +170,20 @@ $rootScope.$broadcast('angucomplete-ie8:clearInput');
                         });
 
             }
+            $scope.updateLanguage = function(langKey) {
+                console.log(langKey);
+    $translate.use(langKey);
+  };
+   $rootScope.$on('$translateChangeSuccess', function(event, data) {
+      var language = data.language;
+                console.log('language',language);
+      $rootScope.lang = language;
+
+      $rootScope.default_direction = language === 'ar' ? 'rtl' : 'ltr';
+      $rootScope.opposite_direction = language === 'ar' ? 'ltr' : 'rtl';
+
+      $rootScope.default_float = language === 'ar' ? 'right' : 'left';
+      $rootScope.opposite_float = language === 'ar' ? 'left' : 'right';
+    });
         });
 		

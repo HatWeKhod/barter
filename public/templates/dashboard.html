@@ -1,18 +1,23 @@
-<div class='box conversations dashboard_conversations' data-ng-init='renderMessages()'>
+<div  ng-class="{'arabic_app': lang == 'ar'}">          
+    <a class="corner_anchor" href="https://hatwekhod.github.io/barter/" target="_blank"><img src="styles/images/sideimage.png" alt="Built at GitHub" class="corner"></a>
+    <button ng-show="lang == 'en'" ng-click="updateLanguage('ar')" translate="BUTTON_LANG_AR"></button>
+  <button ng-show="lang == 'ar'" ng-click="updateLanguage('en')" translate="BUTTON_LANG_EN"></button>
+  
+  <div class='box conversations dashboard_conversations' data-ng-init='renderMessages()'>
     <!--<h1><a href='' class='logo'>Barter</a></h1>-->
      <a href="#/">
        <img src="/styles/images/HatWeKhood.png" class="hat_We_hod_logo">
    </a>
     <div style="  width: 100%;margin: 5px;">
-        <input class='searchDashboard' type='text' placeholder='Search posts!' autofocus='autofocus' ng-model='searchDashboard'></input>
+              <input class='searchDashboard' type='text' placeholder="{{ 'SEARCH_POSTS' | translate }}" autofocus='autofocus' ng-model='searchDashboard'></input>
     </div>
 
     <div>
-        <button ng-click='yourPosts()' >Your Posts</button>
-        <button ng-click='requests()'> Your Requests</button>
-        <button ng-click='yourOffers()'>Your Offers</button>
-        <button ng-click='completed()'>Completed</button>
-        <a class="dashboard_btn" href="#/">Back</a>
+       <button ng-click='yourPosts()' >{{ 'YOUR_POSTS' | translate }}</button>
+        <button ng-click='requests()'> {{ 'YOUR_REQUESTS' | translate }}</button>
+        <button ng-click='yourOffers()'>{{ 'YOUR_OFFERS' | translate }}</button>
+        <button ng-click='completed()'> {{ 'COMPLETED' | translate }}</button>
+        <a class="dashboard_btn" href="#/">{{ 'BACK' | translate }}</a>
         <!--<button ng-click='toggleAppFeedbackModal()' ng-if="!$scope.is_feedback_given">Feedback to App</button>-->
 
     </div>
@@ -23,32 +28,32 @@
         <div class='conversationContainer' ng-repeat='post in posts| filter:search | orderBy:"createdAt":true' ng-show='post.show' ng-class="{post_rejected: post.rejected==true}">
             <div class='imageContainer'>
                 <img src='{{post.image}}' />
-                <button class='deletePost' ng-click='deletePost(post, posts)'>Delete Post</button>
+          <button class='deletePost' ng-click='deletePost(post, posts)'>{{ 'DELETE_POST' | translate }}</button>
             </div>
             <div class='postDescription'>
                 <img ng-show='!post.completed' class='check' src='/styles/images/checkbox-unchecked.png' />
                 <img ng-show='post.completed' class='check' src='/styles/images/checkbox-checked.png' />
-                <p><span class='underline'>Item Name</span>: {{post.itemName}}</p>
-                <p><span class='underline'>Description</span>: {{post.description}}</p>
-                <p><span class='underline'>Condition</span>:  {{post.condition}}</p>
-                <p><span class='underline'>Owner</span>: {{post.name}}</p>
+                       <p><span class='underline'>{{ 'ITEM_NAME' | translate }}</span>: {{post.itemName}}</p>
+                <p><span class='underline'>{{ 'DESCRIPTION' | translate }}</span>: {{post.description}}</p>
+                <p><span class='underline'>{{ 'CONDITION' | translate }}</span>:  {{post.condition}}</p>
+                <p><span class='underline'>{{ 'OWNER' | translate }}</span>: {{post.name}}</p>
                     <span ng-if="post.user_average_score!=0"><angular-star-rating max="5" value='post.user_average_score'  is-readonly='true' ></angular-star-rating></span></h2>
-            <span ng-if="post.user_average_score==0">UnRated</h2></span>
-                <p id='date'><span class='underline'>Created</span>: {{post.createdAt| date:'MM/dd @ h:mma'}}</p>
+            <span ng-if="post.user_average_score==0">{{ 'UNRATED' | translate }}</h2></span>
+                <p id='date'><span class='underline'>{{ 'CREATED' | translate }}</span>: {{post.createdAt| date:'MM/dd @ h:mma'}}</p>
                 <div class='conversation' ng-repeat='conversation in post.conversations| orderBy:"createdAt":true'>
                     <hr/>
                     <div style="margin:10px 0px;">
                         <div  ng-if="post.fbId == fbId">
-                            <span class='underline'>Conversation with</span>: {{conversation.requestingUser.name}}
+                            <span class='underline'>{{ 'CONVERSATION_WITH' | translate }}</span>: {{conversation.requestingUser.name}}
                         </div>   
                         <div  ng-if="post.fbId != fbId">
-                            <span class='underline'>Conversation with</span>: {{post.name}}
+                            <span class='underline'>{{ 'CONVERSATION_WITH' | translate }}</span>: {{post.name}}
                         </div>
                        <img ng-show='post.completed && conversation.accepted' class='thumb' src='/styles/images/thumbs-up.png' />
                         <img ng-show='conversation.accepted === false' class='thumb' src='/styles/images/thumbs-down.png' />
                     </div>
-                    <button ng-click='toggleConversationModal(conversation, post)'>View Conversation</button>
-                                        <button ng-if="post_type == 'Completed Posts' && (fbId == post.fbId || fbId == conversation.requestingUser.fbId) && ((fbId == post.fbId && post.requester_barter_rating == 0) || (fbId == conversation.requestingUser.fbId && post.poster_barter_rating == 0))" ng-click='toggleRatingModal(conversation, post)'>Give Rating</button>
+                    <button ng-click='toggleConversationModal(conversation, post)'>{{ 'CONVERSATION_VIEW' | translate }}</button>
+                                        <button ng-if="post_type == 'Completed Posts' && (fbId == post.fbId || fbId == conversation.requestingUser.fbId) && ((fbId == post.fbId && post.requester_barter_rating == 0) || (fbId == conversation.requestingUser.fbId && post.poster_barter_rating == 0))" ng-click='toggleRatingModal(conversation, post)'>{{ 'GIVE_RATING' | translate }}</button>
                   
                     <angular-star-rating max="maxValue" value='post.ratingValue'   is-readonly='true' ng-if="post_type == 'Completed Posts' && (fbId == post.fbId || fbId == conversation.requestingUser.fbId) && ((fbId == post.fbId && post.requester_barter_rating != 0) || (fbId == conversation.requestingUser.fbId && post.poster_barter_rating != 0))" ></angular-star-rating>
                 </div>
@@ -57,22 +62,22 @@
     </section>
     <div ng-click='toggleConversationModal()' class='modalMask' ng-show='conversationModalShow'></div>
     <div class='modal conversationModal' ng-show='conversationModalShow'>
-        <h2>Conversation with: {{userNamePopup}}</h2>
-        <button ng-show='button' ng-click='respondToBarter(modalConversation, modalPost, "accept")'>Accept Barter</button>
-        <button ng-show='button' ng-click='respondToBarter(modalConversation, modalPost, "reject")'>Reject Barter</button>
+             <h2>{{ 'CONVERSATION_WITH' | translate }}: {{userNamePopup}}</h2>
+   <button ng-show='button' ng-click='respondToBarter(modalConversation, modalPost, "accept")'>{{ 'ACCEPT_BARTER' | translate }}</button>
+        <button ng-show='button' ng-click='respondToBarter(modalConversation, modalPost, "reject")'>{{ 'REJECT_BARTER' | translate }}</button>
         <button ng-click='deleteConversation(modalConversation, modalPost)'>Delete Conversation</button>
         <div class='' ng-show='showReturnPost'>
             <h4 style="color:#676767" >{{returnItemText}}</h4>
             <section  class='post'>
                 <img style="width: 20%" src='{{returnPost.image}}'/>
                 <div class='postText' style="width:76%;">
-                    <h2 id='itemName'><span class='underline '>Item Name</span>: {{returnPost.itemName}}</h2>
+                    <h2 id='itemName'><span class='underline '>{{ 'ITEM_NAME' | translate }}</span>: {{returnPost.itemName}}</h2>
 
-                    <h2 id='description'><span class='underline'>Description</span>: {{returnPost.description}}</h2>
-                    <h2 id='condition'><span class='underline'>Condition</span>: {{returnPost.condition}}</h2>
-                    <h2 id='name'><span class='underline'>Contact</span>: {{returnPost.name}}
+                  <h2 id='description'><span class='underline'>{{ 'DESCRIPTION' | translate }}</span>: {{returnPost.description}}</h2>
+             <h2 id='condition'><span class='underline'>{{ 'CONDITION' | translate }}</span>: {{returnPost.condition}}</h2>
+                    <h2 id='name'><span class='underline'>{{ 'CONTACT' | translate }}</span>: {{returnPost.name}}
                         <!--<span>({{barter_score/people_rate_count}})</span></h2>-->
-                        <h2 id='date'><span class='underline'>Created</span>: {{returnPost.createdAt| date:'MM/dd @ h:mma'}}</h2>
+                         <h2 id='date'><span class='underline'>{{ 'CREATED' | translate }}</span>: {{returnPost.createdAt| date:'MM/dd @ h:mma'}}</h2>
                 </div>
             </section>
         </div>
@@ -82,8 +87,8 @@
             </div>
         </div>
         <form ng-submit='sendMessage(modalConversation)'>
-            <textarea  rows="4" cols="4" class='replyInput' type='text' ng-model='modalConversation.reply' placeholder='Type a message!'></textarea>
-            <button>Send</button>
+            <textarea  rows="4" cols="4" class='replyInput' type='text' ng-model='modalConversation.reply' placeholder="{{ 'TYPE_MESSAGE' | translate }}"></textarea>
+                <button>{{ 'SEND' | translate }}</button>
         </form>
         <img class='cross' src='/styles/images/cross.png' ng-click='toggleConversationModal()' />
     </div>
@@ -92,13 +97,13 @@
 
     <div ng-click='toggleRatingModal()' class='modalMask' ng-show='ratingModalShow'></div>
     <div class='modal conversationModal' ng-show='ratingModalShow' style='height: 200px;'>
-        <h2>Rate your total barter experience with: {{userNameRatingPopup}}</h2>
+        <h2>{{ 'RATE_EXPERIENCE' | translate }} {{userNameRatingPopup}}</h2>
 
         <form ng-submit='giveRating(modalPost, modalConversation)'>
             <angular-star-rating max="maxValue" value='ratingValue' hover='changeOnHover' is-readonly='isReadonly'></angular-star-rating>
             <!--<input class='replyInput' type='text' ng-model='modalConversation.reply' placeholder='Type a message!'></input>-->
-            <p>Your rating value: {{ratingValue}} / {{maxValue}}</p>
-            <button>Send</button>
+          <p>{{ 'YOUR_RATING_VALUE' | translate }}{{ratingValue}} / {{maxValue}}</p>
+            <button>{{ 'SEND' | translate }}</button>
         </form>
         <img class='cross' src='/styles/images/cross.png' ng-click='toggleRatingModal()' />
     </div>
@@ -115,4 +120,5 @@
         </form>
         <img class='cross' src='/styles/images/cross.png' ng-click='toggleAppFeedbackModal()' />
     </div>-->
+</div>
 </div>

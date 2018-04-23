@@ -8,6 +8,12 @@
   "dependencies": {
     "angularjs-imageupload-directive": "*",
     "angular-route": "~1.2.0-rc.3",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "angular-translate-storage-local": "^2.17.0",
+    "angular-translate-storage-cookie": "^2.17.0",
+   "angucomplete-ie8": "^0.1.2",
+    "angular-cookies": "1.5.2",
+    "angular": "^1.6.9",
+    "angular-translate": "^2.17.0"
   }
 }
