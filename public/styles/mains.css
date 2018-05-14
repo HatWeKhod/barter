@@ -16,7 +16,8 @@ button {
     font-size: 15px;
     line-height: 1.313rem;
     letter-spacing: 0;
-    color: #c6c8c8;
+/*    color: #c6c8c8;*/
+   color: #fff;
     text-shadow: 0 -1px rgba(0,0,0,0.69);
     vertical-align: top;
     background-color: #595b5b;
@@ -269,6 +270,7 @@ img.thumb {
     top: 0;
     right: 0;
     border: 0;
+    /*width:175px;*/
 }
 .imageContainer > img {
     width: 78%;
@@ -390,7 +392,7 @@ form.ng-invalid-autocomplete-required input {
     border:4px solid #dc2a2a;
 }
 
-.feedback{
+/*.feedback{
     float: right;
     right: 0px;
     font-size: 14px;
@@ -398,6 +400,18 @@ form.ng-invalid-autocomplete-required input {
     color: #ED7B01;
     position: fixed;
     z-index: 101;
+    padding:9px 6px;
+}*/
+.feedback{
+    /*float: right;*/
+    /*right: 0px;*/
+    font-size: 14px;
+    margin:0px 2px;
+/*    color: #ED7B01;*/
+    color: #fff;
+    /*position: fixed;*/
+    z-index: 101;
+    /*padding:9px 6px;*/
 }
 .sidebar p, .sidebar h1, .sidebar ol li , .sidebar h4{
     color: #fff;
@@ -440,6 +454,13 @@ background-color: #595b5b;
     vertical-align: top;
 	text-decoration: none;
 }
+a.corner_anchor {
+    padding-left: 48px;
+}
+
+ol li {
+    text-align: left;
+}
 
 /*//arabic css starts*/
 .arabic_app{
@@ -464,34 +485,65 @@ right:40px;
  -webkit-transform:  rotate(-90deg);
 }
 .arabic_app .feedback  {
-left: 0;
-    right: auto;
+}
+.arabic_app .feedbackModal {
+        left: 43% !important;
+}
+.arabic_app ol li {
+    text-align:right;
 }
 .arabic_app .postText {
     text-align: right;
 }
+.arabic_app .try_it_out {
+    text-align: right !important;
+}
+
 @media screen and (min-width: 1000px) {
 .arabic_app #map-canvas {
     float: right;
 }.arabic_app .sidebar {
-    float: right;
+    float: right; 
+}
+}
+
+@media screen and (min-width: 1300px)and (min-width: 1366px) {
+a.corner_anchor {
+  padding-left: 132px;
+}
+}
+@media screen and (min-width: 1000px)and (min-width: 1280px) {
+a.corner_anchor {
+    padding-left: 90px;
 }
 }
 @media screen and (max-width: 999px) {
+    .feedbackModal{
+        left:45% !important;
+    }
+    .arabic_app .feedbackModal {
+        left: 51% !important;
+}
     .box.sidebar.login{
-        width:86%;
+        /*width:86%;*/
+        width:100%;
     }
     #map-canvas.login{
-        width:86% !important;
+        /*width:86% !important;*/
+        width:100% !important;
     }
     .wrapper{
         width:90% !important;
     }
     #map-canvas{
-        width: 85% !important;
+/*        width: 85% !important;*/
+        width: 100% !important;
+         box-sizing: border-box;
     }
     .sidebar{
-        width:85%;
+        /*width:85%;*/
+        width:100%;
+         box-sizing: border-box;
     }
     .conversationContainer{
         width:auto;
@@ -524,10 +576,10 @@ width:auto;
 }
 @media screen and (max-width: 436px) {
     .corner{
-        width:27%;
+        /*width:27%;*/
     }
     .feedback{
-        font-size: 9px !important;
+        /*font-size: 9px !important;*/
         margin:0px !important;
     }
 }
@@ -543,4 +595,12 @@ left:10px !important;
 .postForm input,.conversations  input{
  width:90%;
 }
+a.corner_anchor {
+    padding-left: 19px;
+}
+}
+@media screen and (max-width: 320px) {
+    a.corner_anchor {
+     padding-left: 16px;
+    }
 }
