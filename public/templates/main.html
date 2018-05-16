@@ -4,7 +4,8 @@
     <button ng-show="lang == 'en'" ng-click="updateLanguage('ar')" translate="BUTTON_LANG_AR"></button>
   <button ng-show="lang == 'ar'" ng-click="updateLanguage('en')" translate="BUTTON_LANG_EN"></button>  
   <!--<a href="javascript:;"  class="feedback" ng-click="toggleAppFeedbackModal()" ng-show="showFeedbackButton">{{ 'FEEDBACK' | translate }}</a>-->
-  <a href="javascript:;"  class="feedback" ng-click="toggleAppFeedbackModal()" >{{ 'FEEDBACK' | translate }}</a>
+<!--  <a href="javascript:;"  class="feedback" ng-click="toggleAppFeedbackModal()" >{{ 'FEEDBACK' | translate }}</a>-->
+  <button href="javascript:;"  class="feedback" ng-click="toggleAppFeedbackModal()" translate="FEEDBACK"></button>
 <section class='wrapper'>
   <input id="pac-input" class="place_input" placeholder="{{ 'SET_LOCATION_MANUALLY' | translate }}" ng-if="fbId" ng-model="user_place_name"/>
     <div class="new" style="display: none;color:white;">
@@ -30,7 +31,7 @@
         <a href='#' ng-click='logout()'>
           <button>{{ 'LOGOUT' | translate }}</button>
         </a>
-        <h4>
+        <h4 class=" try_it_out ">
                {{ 'TAKE_LOOK' | translate }}
              <input type='text' placeholder="{{ 'SEARCH_POSTS' | translate }}" autofocus='autofocus' ng-model='searchText' class="search_box"></input>
         </h4>
@@ -80,7 +81,7 @@
         <img class='cross' src='/styles/images/cross.png' ng-click='togglePostModal()'/>
     </div>
      <div ng-click='toggleAppFeedbackModal()' class='modalMask' ng-show='appRatingModalShow'></div>
-    <div class='modal conversationModal' ng-show='appRatingModalShow' style='height: 200px; left: 40%;width: 30%;'>
+    <div class='modal conversationModal feedbackModal' ng-show='appRatingModalShow' style='height: 200px; left: 40%;width: 30%;top:45% !important;'>
           <h2>{{ 'GIVE_FEEDBACK' | translate }} </h2>
 
         <form ng-submit='giveFeedbackToApp(user_email,user_message)'>
