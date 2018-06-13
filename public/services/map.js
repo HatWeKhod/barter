@@ -1,5 +1,5 @@
 angular.module('barterApp')
-        .factory('MapService', function ($http, $rootScope, $route, $anchorScroll,$window,$timeout) {
+        .factory('MapService', function ($http, $rootScope, $route, $anchorScroll,$window,$timeout,$translate) {
             var service = {};
 
             service.styles = [
@@ -29,7 +29,6 @@ angular.module('barterApp')
                 service.center = new google.maps.LatLng(30.0444, 31.2357);
                 service.mapTypeId = google.maps.MapTypeId.ROADMAP;
                 google.maps.visualRefresh = true;
-
                 var mapOptions = {
                     zoom: service.zoom,
                     center: service.center,
@@ -44,12 +43,14 @@ angular.module('barterApp')
 //    ----------------------           location autocomplete starts
 
                 setTimeout(function () {
-
-                    var input = /** @type {!HTMLInputElement} */ (
+//if(!$rootScope.showFbFriendsPostsOnly){
+     var input = /** @type {!HTMLInputElement} */ (
                             document.getElementById('pac-input'));
                     service.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
                     var autocomplete = new google.maps.places.Autocomplete(input);
                     autocomplete.bindTo('bounds', service.map);
+//}
+                   
 
                     var infowindow = new google.maps.InfoWindow();
                     var marker = new google.maps.Marker({
@@ -196,7 +197,10 @@ angular.module('barterApp')
             };
 
             service.addMarkers = function (coords) {
-                $http.get('/posts')
+//                $http.get('/posts')
+                console.log($rootScope.showFbFriendsPostsOnly);
+var show_fb_friends_data=$rootScope.showFbFriendsPostsOnly;
+                   $http.post('/posts', {fb_friends:show_fb_friends_data})
                         .success(function (data, status, headers, config) {
                             $rootScope.posts = data;
 
@@ -206,10 +210,12 @@ angular.module('barterApp')
 
                             var infobox = new InfoBox(service.infoboxOptions);
                             var your_posts = [];
+                             var main_post_count=0;
                             for (i = 0; i < length; i++) {
                                 var post = $rootScope.posts[i];
                                 console.log('post.user_average_score',post.user_average_score);
-                                                                if (!$rootScope.posts[i].completed) {
+                                                                                               if (!$rootScope.posts[i].completed) {
+                                                                    main_post_count++;
                                      if (post.fbId === $rootScope.fbId) your_posts.push(post);
                                     marker = service.createMarker(i);
                                     var val = parseInt(i) + parseInt(1);
@@ -225,6 +231,8 @@ angular.module('barterApp')
                                     service.setInfoBoxContent(marker, i, infobox);
                                 }
                             }
+                            
+                            $rootScope.main_post_count = main_post_count;
                             $rootScope.your_posts = your_posts;
                             console.log(' $rootScope.your_posts', $rootScope.your_posts);
 //                            google.maps.event.addListener(infobox, 'domready', function () {
@@ -250,14 +258,25 @@ angular.module('barterApp')
             };
 
             service.infoboxContent = function (i) {
-                return '<div class="infobox"><img style="height:130px;" src="' + $rootScope.posts[i].image + '"/>' +
-                        '<h2 id="itemName">Item Name: ' + $rootScope.posts[i].itemName + '</h2>' +
-                        '<h2 id="description">Description: ' + $rootScope.posts[i].description + '</h2>' +
-                        '<h2 id="condition">Condition: ' + $rootScope.posts[i].condition + '</h2>' +
-                        '<h2 id="name">Contact: ' + $rootScope.posts[i].name + '</h2>' +
+           length=15;
+     itemName=   $rootScope.posts[i].itemName.length > length ? $rootScope.posts[i].itemName.substring(0, length - 3) + '...' :  $rootScope.posts[i].itemName;
+     description=   $rootScope.posts[i].description.length > length ? $rootScope.posts[i].description.substring(0, length - 3) + '...' :  $rootScope.posts[i].description;
+     condition=   $rootScope.posts[i].condition.length > length ? $rootScope.posts[i].condition.substring(0, length - 3) + '...' :  $rootScope.posts[i].condition;
+     name=   $rootScope.posts[i].name.length > length ? $rootScope.posts[i].name.substring(0, length - 3) + '...' :  $rootScope.posts[i].name;
+         
+                itemName_text=$translate.instant('ITEM_NAME');
+                description_text=$translate.instant('DESCRIPTION');
+                condition_text=$translate.instant('CONDITION');
+                name_text=$translate.instant('CONTACT');
+                barter_text=$translate.instant('TITLE');
+                return '<div class="infobox"><div class="imgBarterDiv"><img class="imgBarter" style="" src="' + $rootScope.posts[i].image + '"/> </div>' +
+                        '<h2 id="itemName">'+itemName_text+': ' + itemName + '</h2>' +
+                        '<h2 id="description">'+description_text+': ' + description+ '</h2>' +
+                        '<h2 id="condition">'+condition_text+': ' + condition+ '</h2>' +
+                        '<h2 id="name">'+name_text+': ' + name + '</h2>' +
                         '<h2 id="fbId">' + $rootScope.posts[i].fbId + '</h2>' +
                         '<h2 id="_id">' + $rootScope.posts[i]._id + '</h2>' +
-                        '<button id="barterButton">Barter</button></div>';
+                        '<button id="barterButton">'+barter_text+'</button></div>';
             };
 
             service.setInfoBoxContent = function (marker, i, infobox) {

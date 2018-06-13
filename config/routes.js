@@ -6,25 +6,43 @@ module.exports = function(app, passport, db){
 
   // Middleware used to determine if the user is authenticated
   var auth = function (req, res, next){
-    !req.isAuthenticated() ? res.send(401) : next();
+//          if(req.session.user) {
+//                next();
+//          } else {
+                !req.isAuthenticated() ? res.send(401) : next();
+//          }
   };
 //    console.log(loginCtrl.index);
   // Login Routes
   app.get('/', loginCtrl.index);
   app.get('/loggedIn', loginCtrl.loggedIn);
   app.get('/logout', loginCtrl.loggedOut);
-  app.get('/auth/facebook', passport.authenticate('facebook'));
+  app.get('/auth/facebook', passport.authenticate('facebook',{ scope: 'user_friends'}));
+     
   app.get('/auth/callback/facebook', passport.authenticate('facebook', {
+      failureRedirect: '/',
+      failureFlash : true ,
     successRedirect: '/',
-    failureRedirect: '/'
-  }));
-  
+//    failureRedirect: '/',
+   
+  }), function(req, res) {
+    // Explicitly save the session before redirecting!
+//        console.log('redirected',req);
+//        console.log('redirected_session',req.session);
+//    req.session.save(() => {
+//         
+//      res.redirect('/');
+//    })
+  });
+
   app.get('/fbnotify',auth,barterCtrl.fbnotify);
   app.post('/fbnotify?fb_source=notification',loginCtrl.loggedIn);
 
   // Post Controls
   app.get('/posts', auth, postCtrl.posts);
+  app.post('/posts', auth, postCtrl.posts);
   app.get('/post/:id', auth, postCtrl.getpost);
+    app.post('/getpostimage', auth, postCtrl.getpostimage);
   app.post('/post', auth, postCtrl.post);
   app.delete('/post/:id', auth, postCtrl.deletePost);
   //Update Post

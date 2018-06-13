@@ -18,6 +18,7 @@ var postSchema = new mongoose.Schema({
   },
   'createdAt': { 'type': Date, 'default': Date.now },
   'image': String,
+  'image_full': String,
   'conversations': [conversationSchema]
 });
 

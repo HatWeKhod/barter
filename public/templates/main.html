@@ -5,6 +5,7 @@
   <button ng-show="lang == 'ar'" ng-click="updateLanguage('en')" translate="BUTTON_LANG_EN"></button>  
   <!--<a href="javascript:;"  class="feedback" ng-click="toggleAppFeedbackModal()" ng-show="showFeedbackButton">{{ 'FEEDBACK' | translate }}</a>-->
 <!--  <a href="javascript:;"  class="feedback" ng-click="toggleAppFeedbackModal()" >{{ 'FEEDBACK' | translate }}</a>-->
+ 
   <button href="javascript:;"  class="feedback" ng-click="toggleAppFeedbackModal()" translate="FEEDBACK"></button>
 <section class='wrapper'>
   <input id="pac-input" class="place_input" placeholder="{{ 'SET_LOCATION_MANUALLY' | translate }}" ng-if="fbId" ng-model="user_place_name"/>
@@ -28,12 +29,16 @@
           <button ng-click='updateLocation()'>{{ 'SEARCH_NEARBY' | translate }}</button>
         <button ng-click='postRedirect()'>{{ 'POST_ITEM' | translate }}</button>
         <button ng-click='convRedirect()'>{{ 'DASHBOARD' | translate }}</button>
+         <button ng-show="showFbFriendsPostsOnly == 'true'"href="javascript:;"  class="feedback" ng-click="showFbFriendsPosts()" translate="ALL_POSTS"></button>
+  <button ng-show="showFbFriendsPostsOnly == 'false'" href="javascript:;"  class="feedback" ng-click="showFbFriendsPosts()" translate="POSTS_FB_FRIENDS"></button>
         <a href='#' ng-click='logout()'>
           <button>{{ 'LOGOUT' | translate }}</button>
         </a>
+        <!--<br>-->
+        
         <h4 class=" try_it_out ">
                {{ 'TAKE_LOOK' | translate }}
-             <input type='text' placeholder="{{ 'SEARCH_POSTS' | translate }}" autofocus='autofocus' ng-model='searchText' class="search_box"></input>
+             <input type='text' placeholder="{{ 'SEARCH_IN' | translate }} {{main_post_count}} {{ 'POSTS' | translate }}" autofocus='autofocus' ng-model='searchText' class="search_box"></input>
         </h4>
         <section class='postsContainer'>
             <div class='searchPosts' ng-repeat='post in posts| filter:search | orderBy:"createdAt":true' ng-show='!post.completed'>

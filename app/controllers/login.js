@@ -5,6 +5,12 @@ var index = function (req, res, next) {
 
 // Check if user is logged in
 var loggedIn = function (req, res) {
+    console.log('session',req.session);
+//    if(req.isAuthenticated()) {
+//        req.session.user = req.user;
+//    }
+    console.log('req.isAuthenticated', req.isAuthenticated());
+    console.log('session--',req.session);
   res.send(req.isAuthenticated() ? req.user : '401');
 };
 
