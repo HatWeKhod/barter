@@ -1,5 +1,5 @@
 angular.module('barterApp')
-        .controller('MapCtrl', function ($scope, $location, $http, $rootScope, MapService, $anchorScroll, $window,$timeout,$translate) {
+        .controller('MapCtrl', function ($scope, $location, $http, $rootScope, MapService, $anchorScroll, $window, $timeout, $translate,$route) {
             $scope.initialize = function () {
                 $rootScope.spinnerToggle();
                 MapService.initialize();
@@ -35,8 +35,8 @@ angular.module('barterApp')
                 }
             };
 
-            $scope.sendNewConversation = function (recipient,selectedPost) {
-             
+            $scope.sendNewConversation = function (recipient, selectedPost) {
+
                 if (recipient.fbId === $rootScope.fbId) {
                     alert('Cannot trade with yourself');
                     $rootScope.togglePostModal();
@@ -44,15 +44,15 @@ angular.module('barterApp')
                     return;
                 }
                 console.log(selectedPost);
-                if(!selectedPost ||!selectedPost.originalObject || !selectedPost.originalObject._id){
-                        alert('You Need to select at least one item in order to barter');
-                        return ;
+                if (!selectedPost || !selectedPost.originalObject || !selectedPost.originalObject._id) {
+                    alert('You Need to select at least one item in order to barter');
+                    return;
                 }
                 $scope.data = {
                     'requestingUser': {
                         'fbId': $rootScope.fbId,
                         'name': $rootScope.name,
-                        'return_post_id':selectedPost.originalObject._id
+                        'return_post_id': selectedPost.originalObject._id
                     },
                     'message': $scope.newConversation,
                     'from': $rootScope.name,
@@ -70,7 +70,9 @@ angular.module('barterApp')
             };
 
             $scope.search = function (post) {
+//                console.log(post.itemName);
                 var contains = function (search) {
+//                    console.log(search);
                     return _.contains(post.itemName.toLowerCase(), search) ||
                             _.contains(post.description.toLowerCase(), search) ||
                             _.contains(post.condition.toLowerCase(), search) ||
@@ -87,18 +89,27 @@ angular.module('barterApp')
 
             $rootScope.postModalShow = false;
             $rootScope.togglePostModal = function () {
-$rootScope.$broadcast('angucomplete-ie8:clearInput');
+                $rootScope.$broadcast('angucomplete-ie8:clearInput');
                 $scope.postModalShow = !$scope.postModalShow;
             };
 
             $rootScope.zoomInPost = function (post) {
                 $rootScope.spinnerToggle();
                 MapService.trigger(post.__gm_id);
-	   if ($window.innerWidth < 1000) {
+                      $http.post('/getpostimage', {id:post._id})
+                        .success(function (data, status, headers, config) {
+                            image=document.getElementsByClassName('imgBarter')[0];
+                            image.src=data;
+                            console.log('SUCCESS!');
+                        })
+                        .error(function (data, status) {
+                            console.log('ERROR :(');
+                        });
+                if ($window.innerWidth < 1000) {
 //   $timeout( function(){
-           $anchorScroll();
+                    $anchorScroll();
 //        }, 3000 );
-                }			
+                }
             };
 
 
@@ -106,28 +117,45 @@ $rootScope.$broadcast('angucomplete-ie8:clearInput');
             $rootScope.spinnerToggle = function () {
                 $rootScope.spinnerDisplay = !$rootScope.spinnerDisplay;
             };
-            
-  $scope.fbnotify=function(){
-           $http.get('/fbnotify', $scope.data)
+
+            $scope.fbnotify = function () {
+                $http.get('/fbnotify', $scope.data)
                         .success(function (data, status, headers, config) {
                             console.log('SUCCESS!');
                         })
                         .error(function (data, status) {
                             console.log('ERROR :(');
                         });
-  }
-  
-  
-      $scope.appRatingModalShow = false;
+            }
+
+
+            $scope.appRatingModalShow = false;
             $scope.toggleAppFeedbackModal = function () {
                 $scope.appRatingModalShow = !$scope.appRatingModalShow;
+            };
+            if (!angular.isDefined($rootScope.showFbFriendsPostsOnly)) {
+                $rootScope.showFbFriendsPostsOnly = 'false';
+            }
+            $scope.showFbFriendsPosts = function () {
+                console.log($rootScope.fbId);
+//                $rootScope.showFbFriendsPostsOnly = !$rootScope.showFbFriendsPostsOnly;
+if($rootScope.showFbFriendsPostsOnly=='false'){
+    $rootScope.showFbFriendsPostsOnly='true';
+}else{
+    $rootScope.showFbFriendsPostsOnly='false';
+}
+//                $rootScope.showFbFriendsPostsOnly = !$rootScope.showFbFriendsPostsOnly;
+//                $rootScope.spinnerToggle();
+//                MapService.initialize();
+$route.reload();
+
             };
             $rootScope.giveFeedbackToApp = function (user_email, user_message) {
 //                if(!user_email){
 //                    alert('Email Required');
 //                    return false;
 //                }   
-                if(!user_message){
+                if (!user_message) {
                     alert('Enter a Message');
                     return false;
                 }
@@ -138,17 +166,17 @@ $rootScope.$broadcast('angucomplete-ie8:clearInput');
                         .success(function (data, status, headers, config) {
                             console.log('Mail sent');
                             $scope.toggleAppFeedbackModal();
-                             $scope.showFeedbackButton=false;
+                            $scope.showFeedbackButton = false;
 //                            alert('Thanks For Your Feedback');
                         })
                         .error(function (data, status) {
                             console.log('Error sending Mail');
-                                                alert('Error Occured');
+                            alert('Error Occured');
 
                         });
             }
 //            $scope.is_feedback_given = localStorage.getItem('feedback_to_app');
-                                $scope.showFeedbackButton=false;
+            $scope.showFeedbackButton = false;
 
             console.log($rootScope.fbId);
             if ($rootScope.fbId) {
@@ -158,7 +186,7 @@ $rootScope.$broadcast('angucomplete-ie8:clearInput');
                             console.log(data);
                             console.log('done');
                             if (!data) {
-                                $scope.showFeedbackButton=true;
+                                $scope.showFeedbackButton = true;
 //                                $scope.toggleAppFeedbackModal();
                             }
 
@@ -170,20 +198,20 @@ $rootScope.$broadcast('angucomplete-ie8:clearInput');
                         });
 
             }
-            $scope.updateLanguage = function(langKey) {
+            $scope.updateLanguage = function (langKey) {
                 console.log(langKey);
-    $translate.use(langKey);
-  };
-   $rootScope.$on('$translateChangeSuccess', function(event, data) {
-      var language = data.language;
-                console.log('language',language);
-      $rootScope.lang = language;
+                $translate.use(langKey);
+            };
+            $rootScope.$on('$translateChangeSuccess', function (event, data) {
+                var language = data.language;
+                console.log('language', language);
+                $rootScope.lang = language;
 
-      $rootScope.default_direction = language === 'ar' ? 'rtl' : 'ltr';
-      $rootScope.opposite_direction = language === 'ar' ? 'ltr' : 'rtl';
+                $rootScope.default_direction = language === 'ar' ? 'rtl' : 'ltr';
+                $rootScope.opposite_direction = language === 'ar' ? 'ltr' : 'rtl';
 
-      $rootScope.default_float = language === 'ar' ? 'right' : 'left';
-      $rootScope.opposite_float = language === 'ar' ? 'left' : 'right';
-    });
+                $rootScope.default_float = language === 'ar' ? 'right' : 'left';
+                $rootScope.opposite_float = language === 'ar' ? 'left' : 'right';
+            });
         });
 		

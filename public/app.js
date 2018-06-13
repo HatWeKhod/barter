@@ -64,7 +64,10 @@ angular.module('barterApp', ['imageupload', 'ngRoute', 'angular-star-rating', 'p
                 SUBMIT: "Submit",
                 CLEAR: "Clear",
                 SET_LOCATION_MANUALLY: "Set Location Manually",
-
+                POSTS_FB_FRIENDS: "Posts from Facebook Friends",
+ALL_POSTS:"All Posts",
+SEARCH_IN:"Search in",
+POSTS:"Posts",
             }).translations('ar', {
                 BUTTON_LANG_AR: "العربية",
                 BUTTON_LANG_EN: "English",
@@ -106,7 +109,7 @@ angular.module('barterApp', ['imageupload', 'ngRoute', 'angular-star-rating', 'p
                 YOUR_OFFERS: "المعروض عليك",
                 COMPLETED: "مقايضات تمت",
                 BACK: "رجوع",
-                DELETE_POST: "حذف آخر",
+                DELETE_POST: "حذف المشاركة",
                 OWNER: "صاحب",
                 CONVERSATION_WITH: "محادثة مع",
                 CONVERSATION_VIEW: "مشاهدة المحادثة",
@@ -124,6 +127,10 @@ angular.module('barterApp', ['imageupload', 'ngRoute', 'angular-star-rating', 'p
                 SUBMIT: "تمام كده",
                 CLEAR: "إبدأ من جديد",
                 SET_LOCATION_MANUALLY: "تحديد المنطقة يدوياٌ",
+                                POSTS_FB_FRIENDS: "مشاركات أصدقاء الفيسبوك",
+ALL_POSTS:"جميع المشاركات",
+SEARCH_IN:"إبحث في",
+POSTS:"مشاركة !"
 
             });
             $translateProvider.useSanitizeValueStrategy('sanitizeParameters');

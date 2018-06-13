@@ -1,5 +1,5 @@
 angular.module('barterApp')
-        .controller('ConvCtrl', function ($scope, $location, $http, $rootScope, $route, $window,$translate) {
+        .controller('ConvCtrl', function ($scope, $location, $http, $rootScope, $route, $window, $translate) {
 
 //            console.log( angular.element(document).height());
             var window_height = $window.innerHeight;
@@ -10,6 +10,8 @@ angular.module('barterApp')
             $scope.changeOnHover = true; // default test value
             $scope.maxValue = 5; // default test value
             $scope.ratingValue = 0;
+                    SEARCH_IN = $translate.instant('SEARCH_IN');
+                POSTS = $translate.instant('POSTS');
             $scope.sendMessage = function (conversation) {
                 $scope.data = {
                     '_id': conversation._id,
@@ -115,10 +117,11 @@ angular.module('barterApp')
 
             $scope.yourPosts = function () {
                 $scope.post_type = 'Your Posts';
+                var your_post_count = 0;
                 for (var i = 0; i < $scope.posts.length; i++) {
                     var post = $scope.posts[i];
                     post.show = (post.fbId === $rootScope.fbId) ? true : false;
-                    post.rejected = false;
+                                       post.rejected = false;
                     for (var j = 0; j < post.conversations.length; j++) {
                         var conversation = post.conversations[j];
                         if (conversation.accepted === false) {
@@ -126,12 +129,21 @@ angular.module('barterApp')
 //                            return false;
                         }
                     }
+                     if (post.show==true) {
+                        your_post_count++;
+                    }
+                }
+                if(your_post_count){
+                                            $scope.placeHolder = SEARCH_IN +' ' +your_post_count + ' '+ POSTS;
+                }else{
+                                     $scope.placeHolder ='';
                 }
             };
 
 
             $scope.yourOffers = function () {
                 $scope.post_type = 'Your Offers';
+                var your_offer_count = 0;
                 for (var i = 0; i < $scope.posts.length; i++) {
                     var post = $scope.posts[i];
                     post.show = false;
@@ -149,11 +161,20 @@ angular.module('barterApp')
                             }
                         }
                     }
+                 if (post.show==true) {
+                                                        your_offer_count++;
+                   }
+                }
+                if(your_offer_count){
+                                    $scope.placeHolder = SEARCH_IN +' ' + your_offer_count +' ' + POSTS;
+                }else{
+                                     $scope.placeHolder ='';
                 }
             };
 
             $scope.requests = function () {
                 $scope.post_type = 'Your Requests';
+                var your_requests_count = 0;
                 for (var i = 0; i < $scope.posts.length; i++) {
                     var post = $scope.posts[i];
                     post.show = false;
@@ -171,11 +192,20 @@ angular.module('barterApp')
                             }
                         }
                     }
+                   if (post.show==true) {
+                                                        your_requests_count++;
+                   }
+                }
+                if(your_requests_count){
+                                    $scope.placeHolder = SEARCH_IN +' ' + your_requests_count +' ' + POSTS;
+                }else{
+                                     $scope.placeHolder ='';
                 }
             };
 
             $scope.completed = function () {
                 $scope.post_type = 'Completed Posts';
+                var completed_posts_count = 0;
                 for (var i = 0; i < $scope.posts.length; i++) {
                     var post = $scope.posts[i];
                     if (!post.completed) {
@@ -198,7 +228,16 @@ angular.module('barterApp')
                             }
                         }
                     }
+                 if (post.show==true) {
+                                                        completed_posts_count++;
+                   }
                 }
+                if(completed_posts_count){
+                                    $scope.placeHolder = SEARCH_IN +' ' + completed_posts_count +' ' + POSTS;
+                }else{
+                                     $scope.placeHolder ='';
+                }
+
             };
 
             $scope.search = function (post) {
@@ -362,19 +401,19 @@ angular.module('barterApp')
 //                        });
 //
 //            }
-$scope.updateLanguage = function(langKey) {
-    $translate.use(langKey);
-  };
-   $rootScope.$on('$translateChangeSuccess', function(event, data) {
-      var language = data.language;
+            $scope.updateLanguage = function (langKey) {
+                $translate.use(langKey);
+            };
+            $rootScope.$on('$translateChangeSuccess', function (event, data) {
+                var language = data.language;
 
-      $rootScope.lang = language;
+                $rootScope.lang = language;
 
-      $rootScope.default_direction = language === 'ar' ? 'rtl' : 'ltr';
-      $rootScope.opposite_direction = language === 'ar' ? 'ltr' : 'rtl';
+                $rootScope.default_direction = language === 'ar' ? 'rtl' : 'ltr';
+                $rootScope.opposite_direction = language === 'ar' ? 'ltr' : 'rtl';
 
-      $rootScope.default_float = language === 'ar' ? 'right' : 'left';
-      $rootScope.opposite_float = language === 'ar' ? 'left' : 'right';
-    });
+                $rootScope.default_float = language === 'ar' ? 'right' : 'left';
+                $rootScope.opposite_float = language === 'ar' ? 'left' : 'right';
+            });
 
         });

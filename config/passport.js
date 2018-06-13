@@ -9,6 +9,10 @@ module.exports = function(passport, FacebookStrategy, FbUsers){
   // Callback used to find or create FbUser in the database
   var findOrCreateUser = function(req,accessToken, refreshToken, profile, done){
         console.log('accessToken',accessToken);
+        console.log('refreshToken',refreshToken);
+//        console.log('profile',profile);
+        
+      
         req.session.user_access_token = accessToken;
     FbUsers.findOne({fbId : profile.id}, function (err, oldUser){
       if(oldUser){

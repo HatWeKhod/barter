@@ -11,7 +11,6 @@ module.exports = function(passport){
   var compile = function(str, path) {
     return stylus(str).set('filename', path);
   };
-
   // Config
   var app = express();
   var port = process.env.PORT || 9001;
@@ -20,16 +19,23 @@ module.exports = function(passport){
   app.use(stylus.middleware({ src: __dirname + '/../public', compile: compile }));
   app.use(express.static(path.join(__dirname, '/../public')));
   app.use('/ang-autocomplete', express.static(__dirname + './../node_modules/angucomplete-ie8/'));
-  app.use(express.cookieParser());
-  app.use(express.session({ secret: keys.secret }));
+  var flash = require('connect-flash');
+  app.use(flash());
   app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
+const MongoStore = require('connect-mongo')(express);
+app.configure(function() {
   app.use(express.bodyParser());
-  app.use(express.logger('dev'));
+  app.use(express.cookieParser('your secret here'));
+app.use(express.session({secret:'keyboard cat', cookie:{maxAge: 1000 * 86400}, store: new MongoStore({ url: keys.DB })}));
   app.use(passport.initialize());
   app.use(passport.session());
+});
+
+
+
   app.listen(port, function() {
-   
+  
     console.log('Listening on ' + port);
   });
 
