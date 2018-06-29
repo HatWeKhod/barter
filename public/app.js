@@ -198,11 +198,20 @@ POSTS:"مشاركة !"
                     .when('/login', {
                         templateUrl: '/templates/login.html',
                         controller: 'MapCtrl'
-                    }).when('/fbnotify', {
-                templateUrl: '/templates/main.html',
-                controller: 'MapCtrl',
-                resolve: resolve
-            })
+                    })
+                    .when('/barter-system-egypt', {
+                        templateUrl: '/templates/barter-system-egypt.html',
+                        controller: 'MapCtrl'
+                    })
+                    .when('/barter-trade-venezuela', {
+                        templateUrl: '/templates/barter-trade-venezuela.html',
+                        controller: 'MapCtrl'
+                    })
+                    .when('/fbnotify', {
+                        templateUrl: '/templates/main.html',
+                        controller: 'MapCtrl',
+                        resolve: resolve
+                    })
                     .otherwise({
                         redirectTo: '/'
                     });

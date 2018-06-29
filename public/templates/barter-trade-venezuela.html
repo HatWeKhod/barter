@@ -1,0 +1,40 @@
+<div ng-class="{'arabic_app': lang == 'ar'}">
+    <a class="corner_anchor" href="https://hatwekhod.github.io/barter/" target="_blank">
+        <img src="styles/images/sideimage.png" alt="Built at GitHub" class="corner">
+    </a>
+    <!--<select ng-options="language | translate for language in ctrl.languages" ng-model="ctrl.language" ng-change="ctrl.updateLanguage()"></select>-->
+    <button ng-show="lang == 'en'" ng-click="updateLanguage('ar')" translate="BUTTON_LANG_AR"></button>
+    <button ng-show="lang == 'ar'" ng-click="updateLanguage('en')" translate="BUTTON_LANG_EN"></button>
+    <section class='wrapper'>
+        <section class='box sidebar login'>
+            <!--<h1 class='logo'>Barter</h1>-->
+            <a href="#/">
+                <img src="/styles/images/HatWeKhood.png" width="180" height="150">
+            </a>
+            <hr/>
+            <h1>{{'WHAT_IS_BARTER' | translate}}</h1>
+            <p>{{'BARTER_INFO'| translate}}</p>
+            <hr/>
+            <h1>{{'TRY_IT_OUT' |translate}}</h1>
+            <ol>
+                <li>{{'LOGIN_WITH_FB'|translate}}</li>
+                <li>{{'BROWSE_ITEMS'|translate}}</li>
+                <li>{{'FIND_ITEM'|translate}}</li>
+            </ol>
+            <hr/>
+            <a href='/auth/facebook'>
+                <button>{{'LOGIN_FB'|translate}}</button>
+            </a>
+        </section>
+        <section class='login common-data'>
+            <h1>Barter System To Make Your Goals Immune To Market Threats</h1>
+            <h2>It's the smartest alternative to deal with a currency crisis.</h2>
+            <h3>Barter system to dilute the currency hyperinflation issue.</h3>
+            <p>When trade and commerce across the world are revolutionized by electronic money and cryptocurrency, the barter system is set to claim its importance, again! To have the simplest of understanding, barter is the exchange of one good or service for the other good or service, without involving money in the process. The barter system was a common practice during ancient times, all over the world.</p>
+            <p>Barter was even a part of regular trading economics in Venezuela too but it has been replaced by money, electronic money and now cryptocurrency. However, increasing currency hyperinflation poses a serious threat to prevailing businesses and other non-profit motives. So switching to barter system offers immunity to your goals and assures sustainability. </p>
+            <p>Hat we Khod offers you an unmatched opportunity to practice bartering to connect with your community and at the same time allows you to trade articles with other others of the community and share the story. This could be an interesting way to increase activity within the group and strengthen its bonding. Using the barter system is a smart approach to counter the increasing threat of currency crisis across the world, and particularly in Venezuela. </p>
+            <p>Often the critics of the barter system may attempt to ridicule the idea with discouraging claims. However, there are many reasons to not subscribe to their views. This typical system of trading can simplify trade like nothing else – you give off something that you don’t need in exchange of useful things.  If the barter system is used for a business, then you can also avoid issues related to foreign exchange, the balance of payments and others. </p>
+
+        </section>
+    </section>
+</div>

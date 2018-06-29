@@ -506,6 +506,36 @@ text-align:right;
     text-align: right !important;
 }
 
+/* new added css */
+
+.common-data h1, h2, h3, h4 {
+
+    padding: 5px 0px;
+    margin: 0;
+}
+.common-data h1 {
+    font-size: 18px;
+}
+.common-data h2 {
+    font-size: 18px;
+} 
+.common-data h3, h4 {
+    font-size: 16px;
+
+}  
+.common-data ul { margin: 0;     padding: 10px 0;  }
+
+.common-data ul li {
+    background: url(list-style.png) no-repeat 8px 4px;
+    list-style: none;
+    padding-left: 24px;
+}
+.common-data img {     
+    float: left;
+    margin-right: 15px; 
+}
+/* new added css */
+
 @media screen and (min-width: 1000px) {
 .arabic_app #map-canvas {
     float: right;

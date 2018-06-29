@@ -1,0 +1,40 @@
+<div ng-class="{'arabic_app': lang == 'ar'}">
+    <a class="corner_anchor" href="https://hatwekhod.github.io/barter/" target="_blank">
+        <img src="styles/images/sideimage.png" alt="Built at GitHub" class="corner">
+    </a>
+    <!--<select ng-options="language | translate for language in ctrl.languages" ng-model="ctrl.language" ng-change="ctrl.updateLanguage()"></select>-->
+    <button ng-show="lang == 'en'" ng-click="updateLanguage('ar')" translate="BUTTON_LANG_AR"></button>
+    <button ng-show="lang == 'ar'" ng-click="updateLanguage('en')" translate="BUTTON_LANG_EN"></button>
+    <section class='wrapper'>
+        <section class='box sidebar login'>
+            <!--<h1 class='logo'>Barter</h1>-->
+            <a href="#/">
+                <img src="/styles/images/HatWeKhood.png" width="180" height="150">
+            </a>
+            <hr/>
+            <h1>{{'WHAT_IS_BARTER' | translate}}</h1>
+            <p>{{'BARTER_INFO'| translate}}</p>
+            <hr/>
+            <h1>{{'TRY_IT_OUT' |translate}}</h1>
+            <ol>
+                <li>{{'LOGIN_WITH_FB'|translate}}</li>
+                <li>{{'BROWSE_ITEMS'|translate}}</li>
+                <li>{{'FIND_ITEM'|translate}}</li>
+            </ol>
+            <hr/>
+            <a href='/auth/facebook'>
+                <button>{{'LOGIN_FB'|translate}}</button>
+            </a>
+        </section>
+        <section class='login common-data'>
+            <h1>Endorsing Barter System For A Better Future </h1>
+            <h2>The barter system is a way to counter currency hyperinflation.</h2>
+            <h3>It's a smarter way to immune yourself from current currency crisis across the world.</h3>
+            <p>When the civilization is at the peak of its development, aided by dynamic forces stretching its limits, unforeseeable challenges create a deadlock phase. The world is connected through trade and commerce and it is great but at the same time, fluctuation in different currency rates affect the process and world economy at large. Why not then follow our forefathers? Barter system in ancient Egypt significantly helped in forming a robust business scenario and economy. </p>
+            <p>Taking a page out from the glorious history of ancient Egypt, Hat we Khod brings you an opportunity to make your purpose immune to the hazards of currency hyperinflation. Though Egypt currency crisis is much less but having a good alternative is a smarter plan. So we bring you a platform where you can connect to your community and trade items with other users following the barter system, and even share your story with us.</p>
+            <p>The monetary system is complex and can create issues with transactions. If you want to trade across the border then you can avoid foreign exchange crisis and adverse balance of payments - these are some of the crucial hurdles and you can successfully avoid them by bartering. Not just these, by endorsing barter system you can also ensure optimal utilization of personal and natural resources without any wastage. It creates a perfect ecosystem for the community that stands by each other. </p>
+            <p>Often we tend to ignore what helped us make our 'present'. It's time to get back to the past and endorse bartering as a means of procuring our needs and requirements, in a more sustainable way. </p>
+
+        </section>
+    </section>
+</div>
