@@ -67,7 +67,7 @@ var AppRoutingModule = /** @class */ (function () {
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\n"
+module.exports = "<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -199,7 +199,7 @@ var AppModule = /** @class */ (function () {
 /***/ "./src/app/core/components/conversation-rating/conversation-rating.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{ 'RATE_EXPERIENCE' | translate }} {{userNameRatingPopup}}</h2>\n<a class=\"close\" (click)=\"close()\">×</a>\n<mat-dialog-content>\n  <ngb-rating [(rate)]=\"ratingValue\" [readonly]=\"false\" max=\"5\" (rateChange)=\"rate()\"></ngb-rating>\n  <p>{{ 'YOUR_RATING_VALUE' | translate }}{{ratingValue}} / 5</p>\n</mat-dialog-content>\n<mat-dialog-actions>\n  <button class=\"round-g-btn\" (click)=\"onSubmit()\">{{ 'SEND' | translate }}</button>\n</mat-dialog-actions>\n"
+module.exports = "<h2 mat-dialog-title>{{ 'RATE_EXPERIENCE' | translate }} {{userNameRatingPopup}}</h2>\r\n<a class=\"close\" (click)=\"close()\">×</a>\r\n<mat-dialog-content>\r\n  <ngb-rating [(rate)]=\"ratingValue\" [readonly]=\"false\" max=\"5\" (rateChange)=\"rate()\"></ngb-rating>\r\n  <p>{{ 'YOUR_RATING_VALUE' | translate }}{{ratingValue}} / 5</p>\r\n</mat-dialog-content>\r\n<mat-dialog-actions>\r\n  <button class=\"round-g-btn\" (click)=\"onSubmit()\">{{ 'SEND' | translate }}</button>\r\n</mat-dialog-actions>\r\n"
 
 /***/ }),
 
