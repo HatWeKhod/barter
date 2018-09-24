@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   search_key: string;
   items: any = [];
   isTracking = false;
-  zoom: number = 8;
+  zoom: number = 12;
   lat: number = 30.0444;
   lng: number = 31.2357;
   markers: any[] = [];

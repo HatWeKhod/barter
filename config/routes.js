@@ -37,37 +37,37 @@ module.exports = function (app, passport) {
     //    })
   });
 
-  app.get('/fbnotify', barterCtrl.fbnotify);
+  app.get('/fbnotify', auth, barterCtrl.fbnotify);
   app.post('/fbnotify?fb_source=notification', loginCtrl.loggedIn);
 
   // Post Controls
-  app.get('/posts', postCtrl.posts);
+  app.get('/posts', auth, postCtrl.posts);
   app.post('/posts', postCtrl.posts);
-  app.get('/post/:id', postCtrl.getpost);
-  app.post('/getpostimage', postCtrl.getpostimage);
-  app.post('/post', postCtrl.post);
-  app.delete('/post/:id', postCtrl.deletePost);
+  app.get('/post/:id', auth, postCtrl.getpost);
+  app.post('/getpostimage', auth, postCtrl.getpostimage);
+  app.post('/post', auth, postCtrl.post);
+  app.delete('/post/:id', auth, postCtrl.deletePost);
   //Update Post
-  app.post('/updatePost', postCtrl.updatePost);
+  app.post('/updatePost', auth, postCtrl.updatePost);
 
 
   // Message Controls
-  app.post('/conversation', messageCtrl.sendNewConversation);
-  app.post('/message', messageCtrl.sendMessage);
-  app.delete('/conversation/:id', messageCtrl.deleteConversation);
+  app.post('/conversation', auth, messageCtrl.sendNewConversation);
+  app.post('/message', auth, messageCtrl.sendMessage);
+  app.delete('/conversation/:id', auth, messageCtrl.deleteConversation);
 
   // Barter Request Controls
-  app.put('/barter/accept/:id', barterCtrl.acceptBarter);
-  app.put('/barter/reject/:id', barterCtrl.rejectBarter);
+  app.put('/barter/accept/:id', auth, barterCtrl.acceptBarter);
+  app.put('/barter/reject/:id', auth, barterCtrl.rejectBarter);
 
   //Rating
 
-  app.post('/rating', messageCtrl.giveRating);
+  app.post('/rating', auth, messageCtrl.giveRating);
 
 
   //App Feedback
-  app.get('/user_gave_feedback/:id', messageCtrl.user_gave_feedback);
-  app.post('/send_feedback', messageCtrl.send_feedback);
+  app.get('/user_gave_feedback/:id', auth, messageCtrl.user_gave_feedback);
+  app.post('/send_feedback', auth, messageCtrl.send_feedback);
 
 
   //Users

@@ -21,7 +21,7 @@
       </div>
       <div class="col-lg-9 pull-left">
         <div class="card mt-4 ">
-          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" mapTypeId="roadmap">
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
             <agm-marker-cluster imagePath="assets/images/m" averageCenter="true" minimumClusterSize="2">
               <agm-marker *ngFor="let m of items; let i = index" (markerClick)="openWindow(m._id)" [latitude]="m.loc.coordinates[1] + offsets[i].lat"
                 [longitude]="m.loc.coordinates[0] + offsets[i].lon">
@@ -82,8 +82,9 @@
                     <li>
                       <span>{{ 'CREATED' | translate }}:</span> {{post.createdAt| date:'MM/dd @ h:mma'}}</li>
                   </ul>
-                  <button type="button " class="btn btn-warning " (click)="openWindow(post._id)">{{ 'BARTER_LOC' |
-                    translate }}</button>
+                  <a (click)="openConversation(post)">view</a>
+                  <!-- <button type="button " class="btn btn-warning " (click)="openWindow(post._id)">{{ 'BARTER_LOC' |
+                    translate }}</button> -->
                 </div>
                 <div class="clearfix "></div>
               </div>

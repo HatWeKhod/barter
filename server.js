@@ -1,18 +1,25 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var app = express();
+var router = express.Router();
 var mongoose = require('mongoose'),
+  path = require('path'),
+  stylus = require('stylus'),
   env = process.env['NODE_ENV'] || 'development',
   keys;
 var passport = require('passport');
 var flash = require('connect-flash');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var FbUsers = require('./models/facebook').FbUsers;
-
+const MongoStore = require('connect-mongo')(session);
+var compile = function (str, path) {
+  return stylus(str).set('filename', path);
+};
 keys = (env === 'production') ? require('./config/productionKeys')[env] : require('./config/keys')[env];
 mongoose.Promise = require('bluebird');
 mongoose.connect(keys.DB, {
@@ -21,20 +28,41 @@ mongoose.connect(keys.DB, {
   .then(() => console.log('connection succesful'))
   .catch((err) => console.error(err));
 app.use(logger('dev'));
-app.use(cookieParser()); // read cookies (needed for auth)
+
+app.use(stylus.middleware({
+  src: __dirname + '/dist',
+  compile: compile
+}));
+
+
 app.use(bodyParser.urlencoded({
   extended: true,
   limit: '52428800'
 })); // get information from html forms
+
 app.use(bodyParser.json({
   limit: '52428800'
 }));
+
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/', express.static(path.join(__dirname, 'dist')));
+
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(session({
+  store: new MongoStore({
+    url: keys.DB
+  }),
+  secret: 'keyboard cat',
+  cookie: {
+    maxAge: 1000 * 86400
+  }
+}))
 
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+
+app.use('/auth/callback/facebook', router);
 
 require('./config/passport')(passport, FacebookStrategy, FbUsers);
 require('./config/routes')(app, passport);
