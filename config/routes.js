@@ -42,7 +42,7 @@ module.exports = function (app, passport) {
 
   // Post Controls
   app.get('/posts', auth, postCtrl.posts);
-  app.post('/posts', postCtrl.posts);
+  app.post('/posts', auth, postCtrl.posts);
   app.get('/post/:id', auth, postCtrl.getpost);
   app.post('/getpostimage', auth, postCtrl.getpostimage);
   app.post('/post', auth, postCtrl.post);

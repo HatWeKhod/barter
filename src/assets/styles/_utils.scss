@@ -191,6 +191,10 @@ li {
     border-radius: 0 10px 10px 0;
 }
 
+.right_side_view .carousel-inner {
+    border-radius: 10px 0px 0px 10px;
+}
+
 .carousel-caption {
     text-align: left;
     left: 5%;
@@ -492,10 +496,10 @@ li {
     border-radius: 0 10px 10px 0;
     padding-left: 3px;
     transition: all .40s ease-out;
+    padding-left: 27px;
 }
 
-.login-block .nav-link:hover {
-    padding-left: 27px;
+.login-block .nav-link:hover {    
     transition: all .40s ease;
     color: #fba71c;
 }
@@ -641,5 +645,10 @@ li {
     padding-left: 0;
 }
 
+.post_image {
+    border-radius: 10px;
+    margin: 15px auto;
+    max-height: 200px;
+}
 
 /*for-responsive-css*/

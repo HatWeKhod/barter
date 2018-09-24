@@ -39,7 +39,7 @@
                                 {{'ERR_IMAGE' | translate}}
                             </div>
                         </div>
-                        <img *ngIf="base64textString" [src]="sanitizer.bypassSecurityTrustUrl(base64textString)" height="300" width="250">
+                        <img class="post_image" *ngIf="base64textString" [src]="sanitizer.bypassSecurityTrustUrl(base64textString)" height="300" width="250">
                         <div class="row">
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary" (click)="addPost()">{{'SUBMIT' | translate}}</button>
