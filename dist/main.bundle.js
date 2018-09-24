@@ -386,7 +386,10 @@ var ConversationComponent = /** @class */ (function () {
         return this._sanitizer.bypassSecurityTrustUrl(image);
     };
     ConversationComponent.prototype.close = function () {
-        this.dialogRef.close();
+        var _this = this;
+        setInterval(function () {
+            _this.dialogRef.close();
+        }, 5000);
     };
     ConversationComponent.prototype.onSubmit = function () {
         var _this = this;

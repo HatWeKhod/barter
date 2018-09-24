@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   search_key: string;
   items: any = [];
   isTracking = false;
-  zoom: number = 12;
+  zoom: number = 8;
   lat: number = 30.0444;
   lng: number = 31.2357;
   markers: any[] = [];
@@ -124,6 +124,10 @@ export class HomeComponent implements OnInit {
     var data = { "fb_friends": this.fb_friends }
     this.postService.getAllPost(data).subscribe(
       res => {
+        console.log(res)
+        this.items = [];
+        this.markers = [];
+        this.all_post_list = [];
         this.items = res;
         this.markers = res;
         this.markers.forEach((marker, index) => {

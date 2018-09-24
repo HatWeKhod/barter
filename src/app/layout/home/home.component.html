@@ -82,9 +82,8 @@
                     <li>
                       <span>{{ 'CREATED' | translate }}:</span> {{post.createdAt| date:'MM/dd @ h:mma'}}</li>
                   </ul>
-                  <a (click)="openConversation(post)">view</a>
-                  <!-- <button type="button " class="btn btn-warning " (click)="openWindow(post._id)">{{ 'BARTER_LOC' |
-                    translate }}</button> -->
+                  <button type="button " class="btn btn-warning " (click)="openWindow(post._id)">{{ 'BARTER_LOC' |
+                    translate }}</button>
                 </div>
                 <div class="clearfix "></div>
               </div>
