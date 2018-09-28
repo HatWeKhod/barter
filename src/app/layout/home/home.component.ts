@@ -8,7 +8,7 @@ declare let google: any
 declare let OverlappingMarkerSpiderfier: any
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ConversationComponent } from '../../core/components/conversation/conversation.component';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -33,7 +33,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private postService: PostService,
     private _sanitizer: DomSanitizer,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastr: ToastrService
   ) {
 
   }

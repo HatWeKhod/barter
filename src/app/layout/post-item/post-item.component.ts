@@ -96,8 +96,8 @@ export class PostItemComponent implements OnInit {
   }
 
   addPost() {
-    if (this.currentLat && this.currentLong) {
-      this.toastr.error("Please allow current location", '', {
+    if (this.currentLat == undefined && this.currentLong == undefined) {
+      this.toastr.error("Please allow your location", '', {
         timeOut: 3000,
       });
       return;
