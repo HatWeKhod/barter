@@ -6,7 +6,7 @@ import { LoadingState } from '../../core/components/loading/loading.component';
 import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
 // var resizebase64 = require('resize-base64');
 import { } from '@types/googlemaps';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-edit-post',
   templateUrl: './edit-post.component.html',
@@ -44,7 +44,8 @@ export class EditPostComponent implements OnInit {
     private router: Router,
     private postService: PostService,
     private sanitizer: DomSanitizer,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -58,7 +59,7 @@ export class EditPostComponent implements OnInit {
       condition: ['', Validators.required],
       image: [this.image, Validators.required],
       itemName: ['', Validators.required],
-      location: ['', Validators.required],
+      location: [''],
       fbId: [this.fbId, Validators.required]
     });
     console.log(this.route.snapshot.params['id'])
@@ -132,11 +133,8 @@ export class EditPostComponent implements OnInit {
     this.file_error = false;
   }
 
-  updatePost() {
-    this.form.patchValue({
-      location: [this.currentLat, this.currentLong]
-    })
-    this.postDetails.location = [this.currentLat, this.currentLong]
+  updatePost() {   
+    
     console.log(this.postDetails)
     if (this.base64textString == undefined) {
       this.file_error = true

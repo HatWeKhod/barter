@@ -6,6 +6,7 @@ import { LoadingState } from '../../core/components/loading/loading.component';
 import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
 // var resizebase64 = require('resize-base64');
 import { } from '@types/googlemaps';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-post-item',
@@ -32,7 +33,8 @@ export class PostItemComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private postService: PostService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -94,33 +96,43 @@ export class PostItemComponent implements OnInit {
   }
 
   addPost() {
-    this.form.patchValue({
-      location: [this.currentLat, this.currentLong]
-    })
-    console.log(this.form.value)
-    if (this.base64textString == undefined) {
-      this.file_error = true
+    if (this.currentLat && this.currentLong) {
+      this.toastr.error("Please allow current location", '', {
+        timeOut: 3000,
+      });
+      return;
     }
-    if (this.form.valid) {
-      this.loading = LoadingState.Processing;
+    else {
+      this.form.patchValue({
+        location: [this.currentLat, this.currentLong]
+      })
       console.log(this.form.value)
-      if (!this.file_error) {
-        this.postService.postItem(this.form.value).subscribe(
-          res => {
-            this.loading = LoadingState.Ready;
-            this.form.reset();
-            console.log(res)
-          },
-          error => {
-            this.loading = LoadingState.Ready;
-            console.log(error)
-          }
-        )
+      if (this.base64textString == undefined) {
+        this.file_error = true
       }
+      if (this.form.valid) {
+        this.loading = LoadingState.Processing;
+        console.log(this.form.value)
+        if (!this.file_error) {
+          this.postService.postItem(this.form.value).subscribe(
+            res => {
+              this.loading = LoadingState.Ready;
+              this.form.reset();
+              console.log(res)
+            },
+            error => {
+              this.loading = LoadingState.Ready;
+              console.log(error)
+            }
+          )
+        }
 
-    } else {
-      this.markFormGroupTouched(this.form)
+      } else {
+        this.markFormGroupTouched(this.form)
+      }
     }
+
+
 
   }
 
