@@ -68,55 +68,63 @@
             <i class="fa fa-chevron-left" aria-hidden="true"></i> {{ 'BACK' | translate }}</button>
         </div>
       </div>
-      <div class="col-lg-9">
+      <div class="col-lg-9 reg-sec-full">
         <div class="row">
-          <div class="card-outline-secondary my-4 col-lg-6">
-            <h2>{{'POSTYOURITEM' | translate}}</h2>
-            <form id="Login" role="form" [formGroup]="form" novalidate>
-              <div class="form-group">
-                <label>{{'WHAT_ITS_CALLED' | translate}}</label>
-                <input type="text" class="form-control" placeholder="" [(ngModel)]="postDetails.itemName"
-                  formControlName="itemName" [ngClass]="displayFieldCss('itemName')">
-                <div class="invalid-feedback" *ngIf="isFieldValid('itemName')">
-                  {{'ERR_TITLE' | translate}}
-                </div>
+          <div class="login-form d-flex align-middle">
+            <div class="main-div margin-10 shadow">
+              <div class="panel">
+                <h2>{{'POSTYOURITEM' | translate}}</h2>
               </div>
-              <div class="form-group">
-                <label>{{'TELL_US' | translate}}</label>
-                <input type="text" class="form-control" placeholder="" [(ngModel)]="postDetails.description"
-                  formControlName="description" [ngClass]="displayFieldCss('description')">
-                <div class="invalid-feedback" *ngIf="isFieldValid('description')">
-                  {{'ERR_DESC' | translate}}
+              <form id="Login" role="form" [formGroup]="form" novalidate>
+                <div class="d-flex justify-content-between">
+                  <div class="form-group">
+                    <label>{{'WHAT_ITS_CALLED' | translate}}</label>
+                    <input type="text" class="form-control" placeholder="" [(ngModel)]="postDetails.itemName"
+                      formControlName="itemName" [ngClass]="displayFieldCss('itemName')">
+                    <div class="invalid-feedback" *ngIf="isFieldValid('itemName')">
+                      {{'ERR_TITLE' | translate}}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>{{'TELL_US' | translate}}</label>
+                    <input type="text" class="form-control" placeholder="" [(ngModel)]="postDetails.description"
+                      formControlName="description" [ngClass]="displayFieldCss('description')">
+                    <div class="invalid-feedback" *ngIf="isFieldValid('description')">
+                      {{'ERR_DESC' | translate}}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>{{'WHAT_IS_CONDITION' | translate}}</label>
+                    <input type="text" class="form-control" placeholder="" [(ngModel)]="postDetails.condition"
+                      formControlName="condition" [ngClass]="displayFieldCss('condition')">
+                    <div class="invalid-feedback" *ngIf="isFieldValid('condition')">
+                      {{'ERR_CONDITION' | translate}}
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label>{{'WHAT_IS_CONDITION' | translate}}</label>
-                <input type="text" class="form-control" placeholder="" [(ngModel)]="postDetails.condition"
-                  formControlName="condition" [ngClass]="displayFieldCss('condition')">
-                <div class="invalid-feedback" *ngIf="isFieldValid('condition')">
-                  {{'ERR_CONDITION' | translate}}
-                </div>
-              </div>
-              <div class="form-group">
-                <label>{{'UPLOAD_IMAGE' | translate}}</label>
-                <input type="file" class="form-control is-invalid" (change)="onImageChange($event)" accept="image/*"
-                  [ngClass]="{
+                <div class="form-group">
+                  <label>{{'UPLOAD_IMAGE' | translate}}</label>
+                  <input type="file" class="form-control is-invalid" (change)="onImageChange($event)" accept="image/*"
+                    [ngClass]="{
                           'is-invalid': file_error,
                           'is-valid': !file_error
                         }">
-                <div class="invalid-feedback" *ngIf="file_error">
-                  {{'ERR_IMAGE' | translate}}
+                  <div class="invalid-feedback" *ngIf="file_error">
+                    {{'ERR_IMAGE' | translate}}
+                  </div>
                 </div>
-              </div>
-              <img class="post_image" *ngIf="base64textString" [src]="sanitizer.bypassSecurityTrustUrl(base64textString)"
-                height="300" width="250">
-              <div class="row">
-                <div class="col-md-12">
-                  <button type="submit" class="btn btn-primary" (click)="updatePost()">{{'SUBMIT' | translate}}</button>
-                  <button type="submit" class="btn btn-primary" (click)="reSet()">{{'CLEAR' | translate}}</button>
+                <img class="post_image" *ngIf="base64textString" [src]="sanitizer.bypassSecurityTrustUrl(base64textString)"
+                  height="300" width="250">
+                <div class="row">
+                  <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary" (click)="updatePost()">{{'SUBMIT' | translate}}</button>
+                  </div>
+                  <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary" (click)="reSet()">{{'CLEAR' | translate}}</button>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>

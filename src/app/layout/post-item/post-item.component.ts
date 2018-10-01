@@ -67,11 +67,7 @@ export class PostItemComponent implements OnInit {
             this.currentLong = +localStorage.getItem('current_lng');
           }
           else {
-            // this.toastr.error("Please allow your location, or set it manually on map", '', {
-            //   timeOut: 3000,
-            // });
-            // localStorage.setItem('set_loc', 'true')
-            // this.router.navigate(['/home']);
+
           }
         });
     } else {
@@ -109,32 +105,41 @@ export class PostItemComponent implements OnInit {
   }
 
   addPost() {
-    this.form.patchValue({
-      location: [this.currentLat, this.currentLong]
-    })
-    console.log(this.form.value)
-    if (this.base64textString == undefined) {
-      this.file_error = true
+    if (this.currentLat == undefined && this.currentLong == undefined) {
+      this.toastr.error("Please allow your location, or set it manually on map", '', {
+        timeOut: 3000,
+      });
+      localStorage.setItem('set_loc', 'true')
+      this.router.navigate(['/home']);
     }
-    if (this.form.valid) {
-      this.loading = LoadingState.Processing;
+    else {
+      this.form.patchValue({
+        location: [this.currentLat, this.currentLong]
+      })
       console.log(this.form.value)
-      if (!this.file_error) {
-        this.postService.postItem(this.form.value).subscribe(
-          res => {
-            this.loading = LoadingState.Ready;
-            this.form.reset();
-            console.log(res)
-          },
-          error => {
-            this.loading = LoadingState.Ready;
-            console.log(error)
-          }
-        )
+      if (this.base64textString == undefined) {
+        this.file_error = true
       }
+      if (this.form.valid) {
+        this.loading = LoadingState.Processing;
+        console.log(this.form.value)
+        if (!this.file_error) {
+          this.postService.postItem(this.form.value).subscribe(
+            res => {
+              this.loading = LoadingState.Ready;
+              this.form.reset();
+              console.log(res)
+            },
+            error => {
+              this.loading = LoadingState.Ready;
+              console.log(error)
+            }
+          )
+        }
 
-    } else {
-      this.markFormGroupTouched(this.form)
+      } else {
+        this.markFormGroupTouched(this.form)
+      }
     }
   }
 
