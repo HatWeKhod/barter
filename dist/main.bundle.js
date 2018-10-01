@@ -36,7 +36,6 @@ module.exports = webpackAsyncContext;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_guard_auth_guard__ = __webpack_require__("./src/app/core/guard/auth.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -45,11 +44,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 
 
-
 var routes = [
     { path: 'login', loadChildren: './login/login.module#LoginModule' },
-    { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [__WEBPACK_IMPORTED_MODULE_2__core_guard_auth_guard__["a" /* AuthGuard */]] }
+    { path: '', loadChildren: './layout/layout.module#LayoutModule' }
 ];
+// { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [AuthGuard] }
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
     }
@@ -363,8 +362,8 @@ var ConversationComponent = /** @class */ (function () {
         console.log(this.info_data);
         console.log(this.items);
         this.form = this.formBuilder.group({
-            post: [null, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required],
-            message: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required]
+            post: [null, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["k" /* Validators */].required],
+            message: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["k" /* Validators */].required]
         });
     };
     ConversationComponent.prototype.getImage = function (image) {
@@ -766,7 +765,7 @@ var ViewConversationComponent = /** @class */ (function () {
         }
         this.getReturnPostDetails(this.conversation.requestingUser.return_post_id);
         this.form = this.formBuilder.group({
-            reply: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required]
+            reply: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["k" /* Validators */].required]
         });
     };
     ViewConversationComponent.prototype.getReturnPostDetails = function (id) {
@@ -964,8 +963,8 @@ var CoreModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_3__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_4__angular_router__["c" /* RouterModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["d" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["i" /* ReactiveFormsModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["e" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["j" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_6__ngx_translate_core__["b" /* TranslateModule */].forRoot({
                     loader: {
                         provide: __WEBPACK_IMPORTED_MODULE_6__ngx_translate_core__["a" /* TranslateLoader */],
@@ -977,8 +976,8 @@ var CoreModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_9_ng2_img_max__["a" /* Ng2ImgMaxModule */],
                 __WEBPACK_IMPORTED_MODULE_10__agm_core__["a" /* AgmCoreModule */].forRoot({
                     // please get your own API key here:
-                    apiKey: 'AIzaSyB3FKbaqonmY-bDPanbzJSH9U7HXF8dpS4'
-                    // apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'
+                    apiKey: 'AIzaSyB3FKbaqonmY-bDPanbzJSH9U7HXF8dpS4',
+                    libraries: ["places"]
                 }),
                 __WEBPACK_IMPORTED_MODULE_11__agm_js_marker_clusterer__["a" /* AgmJsMarkerClustererModule */],
                 __WEBPACK_IMPORTED_MODULE_12__ng_select_ng_select__["a" /* NgSelectModule */],
@@ -1004,8 +1003,8 @@ var CoreModule = /** @class */ (function () {
             exports: [
                 __WEBPACK_IMPORTED_MODULE_3__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_router__["c" /* RouterModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["d" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["i" /* ReactiveFormsModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["e" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["j" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_6__ngx_translate_core__["b" /* TranslateModule */],
                 __WEBPACK_IMPORTED_MODULE_8_angular_font_awesome__["a" /* AngularFontAwesomeModule */],
                 __WEBPACK_IMPORTED_MODULE_9_ng2_img_max__["a" /* Ng2ImgMaxModule */],

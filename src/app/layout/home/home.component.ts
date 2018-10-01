@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, NgZone } from '@angular/core';
 import { PostService } from "../../core/services/post.service";
 import { LoadingState } from '../../core/components/loading/loading.component';
 import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
@@ -9,6 +9,9 @@ declare let OverlappingMarkerSpiderfier: any
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ConversationComponent } from '../../core/components/conversation/conversation.component';
 import { ToastrService } from 'ngx-toastr';
+import { AgmCoreModule, MapsAPILoader } from '@agm/core';
+import { FormControl } from "@angular/forms";
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -29,12 +32,19 @@ export class HomeComponent implements OnInit {
   openedWindow: number = 0;
   closeResult: string;
   name: string;
-  fbId: string;  
+  fbId: string;
+  public searchControl: FormControl;
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+  manual_loc_key: boolean;
   constructor(
     private postService: PostService,
     private _sanitizer: DomSanitizer,
     public dialog: MatDialog,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone,
+    private route: ActivatedRoute,
   ) {
 
   }
@@ -43,7 +53,36 @@ export class HomeComponent implements OnInit {
     this.loading = LoadingState.Processing;
     this.name = localStorage.getItem('name')
     this.fbId = localStorage.getItem('fbId')
-    this.getPostList();    
+    this.getPostList();
+    this.searchControl = new FormControl();
+    this.setManualPosition();
+  }
+
+  setManualPosition() {
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
+      });
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+          //set latitude, longitude and zoom
+          this.lat = place.geometry.location.lat();
+          this.lng = place.geometry.location.lng();
+          localStorage.setItem('current_lat', this.lat.toString())
+          localStorage.setItem('current_lng', this.lng.toString())
+        });
+      });
+    });
+    if ((localStorage.getItem('current_lat') && localStorage.getItem('current_lng')) || localStorage.getItem('set_loc')) {
+      this.manual_loc_key = true;
+    }
   }
 
   openConversation(data) {
@@ -84,7 +123,20 @@ export class HomeComponent implements OnInit {
       this.isTracking = true;
       navigator.geolocation.watchPosition((position) => {
         this.showTrackingPosition(position);
-      });
+      },
+        (error) => {
+          if (localStorage.getItem('current_lat') && localStorage.getItem('current_lng')) {
+            this.lat = +localStorage.getItem('current_lat');
+            this.lng = +localStorage.getItem('current_lng');
+          }
+          else {
+            this.manual_loc_key = true;
+            this.toastr.error("Please allow your location, or set it manually on map", '', {
+              timeOut: 3000,
+            });
+          }
+
+        });
     } else {
       alert("Geolocation is not supported by this browser.");
     }

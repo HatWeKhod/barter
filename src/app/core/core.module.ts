@@ -66,8 +66,8 @@ export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     Ng2ImgMaxModule,
     AgmCoreModule.forRoot({
       // please get your own API key here:
-      apiKey: 'AIzaSyB3FKbaqonmY-bDPanbzJSH9U7HXF8dpS4'
-      // apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'
+      apiKey: 'AIzaSyB3FKbaqonmY-bDPanbzJSH9U7HXF8dpS4',
+      libraries: ["places"]
     }),
     AgmJsMarkerClustererModule,
     NgSelectModule,

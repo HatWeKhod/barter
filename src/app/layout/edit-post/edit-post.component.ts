@@ -52,7 +52,7 @@ export class EditPostComponent implements OnInit {
     this.loading = LoadingState.Processing;
     this.name = localStorage.getItem('name')
     this.fbId = localStorage.getItem('fbId')
-    this.trackMe();
+    // this.trackMe();
     this.form = this.formBuilder.group({
       name: [this.name, Validators.required],
       description: ['', Validators.required],
@@ -93,22 +93,22 @@ export class EditPostComponent implements OnInit {
   }
 
 
-  trackMe() {
-    if (navigator.geolocation) {
-      this.isTracking = true;
-      navigator.geolocation.watchPosition((position) => {
-        this.showTrackingPosition(position);
-      });
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  }
+  // trackMe() {
+  //   if (navigator.geolocation) {
+  //     this.isTracking = true;
+  //     navigator.geolocation.watchPosition((position) => {
+  //       this.showTrackingPosition(position);
+  //     });
+  //   } else {
+  //     alert("Geolocation is not supported by this browser.");
+  //   }
+  // }
 
-  showTrackingPosition(position) {
-    console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);
-    this.currentLat = position.coords.latitude;
-    this.currentLong = position.coords.longitude;
-  }
+  // showTrackingPosition(position) {
+  //   console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);
+  //   this.currentLat = position.coords.latitude;
+  //   this.currentLong = position.coords.longitude;
+  // }
 
   onImageChange(evt) {
     var files = evt.target.files;
