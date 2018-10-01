@@ -317,8 +317,9 @@ li {
 
 .panel h2 {
     color: #faa71d;
-    font-size: 26px;
-    margin: 0 0 8px 0;
+    font-size: 33px;
+    margin: 0 0 20px 0;
+    font-weight: bold;
 }
 
 .panel p {
@@ -337,13 +338,18 @@ li {
     color: #fff;
 }
 
-.login-form {
+.reg-sec-full {
     background: url(../images/registor-bg.jpg) no-repeat 0 0;
     background-size: cover;
+    min-height: 700px;
+}
+
+.mt-15 {
+    margin-top: 15% !important;
 }
 
 .main-div {
-    background: #1e2424;
+    background: #fcfcfc2b;
     border-radius: 5px;
     margin: 10px auto 30px;
     padding: 10px 15px;
@@ -368,7 +374,7 @@ li {
 
 .login-form .btn.btn-primary {
     background: #3e4242 none repeat scroll 0 0;
-    border-color: #4f5050;
+    border-color: #b45f14;
     color: #ffffff;
     font-size: 14px;
     width: 100%;
@@ -378,7 +384,8 @@ li {
 }
 
 .login-form .btn.btn-primary:hover {
-    background: #292929 none repeat scroll 0 0;
+    background: #b45f14 none repeat scroll 0 0;
+    color: #000;
     transition: all .40s ease-out;
 }
 
