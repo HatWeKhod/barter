@@ -67,11 +67,11 @@ export class PostItemComponent implements OnInit {
             this.currentLong = +localStorage.getItem('current_lng');
           }
           else {
-            this.toastr.error("Please allow your location, or set it manually on map", '', {
-              timeOut: 3000,
-            });
-            localStorage.setItem('set_loc', 'true')
-            this.router.navigate(['/home']);
+            // this.toastr.error("Please allow your location, or set it manually on map", '', {
+            //   timeOut: 3000,
+            // });
+            // localStorage.setItem('set_loc', 'true')
+            // this.router.navigate(['/home']);
           }
         });
     } else {
