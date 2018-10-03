@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>{{ 'RATE_EXPERIENCE' | translate }} {{userNameRatingPopup}}</h2>
 <a class="close" (click)="close()">×</a>
-<mat-dialog-content>
+<mat-dialog-content class="{{'direction' | translate}} rating_sec">
   <ngb-rating [(rate)]="ratingValue" [readonly]="false" max="5" (rateChange)="rate()"></ngb-rating>
   <p>{{ 'YOUR_RATING_VALUE' | translate }}{{ratingValue}} / 5</p>
 </mat-dialog-content>
-<mat-dialog-actions>
+<mat-dialog-actions class="{{'direction' | translate}} rating_sec">
   <button class="round-g-btn" (click)="onSubmit()">{{ 'SEND' | translate }}</button>
 </mat-dialog-actions>

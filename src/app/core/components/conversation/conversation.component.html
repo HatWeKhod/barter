@@ -1,6 +1,6 @@
 <div class="popup-model-barter">
     <a class="close" (click)="close()">×</a>
-    <mat-dialog-content>
+    <mat-dialog-content class="{{'direction' | translate}}">
         <form class="conversation_form" [formGroup]="form" novalidate>
             <p>
                 <span class='underline'>{{ 'TO' | translate }}</span>: {{info_data.name}}</p>
