@@ -133,8 +133,8 @@ export class EditPostComponent implements OnInit {
     this.file_error = false;
   }
 
-  updatePost() {   
-    
+  updatePost() {
+
     console.log(this.postDetails)
     if (this.base64textString == undefined) {
       this.file_error = true
@@ -146,12 +146,14 @@ export class EditPostComponent implements OnInit {
         this.postService.updatePost(this.postDetails).subscribe(
           res => {
             this.loading = LoadingState.Ready;
+            this.toastr.success("Post updated successfully", '', {
+              timeOut: 3000,
+            });
             this.router.navigate(['/home']);
             console.log(res)
           },
           error => {
             this.loading = LoadingState.Ready;
-            this.router.navigate(['/home']);
             console.log(error)
           }
         )

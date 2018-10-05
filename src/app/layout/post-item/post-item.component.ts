@@ -128,6 +128,10 @@ export class PostItemComponent implements OnInit {
             res => {
               this.loading = LoadingState.Ready;
               this.form.reset();
+              this.toastr.success("Post uploaded successfully", '', {
+                timeOut: 3000,
+              });
+              this.router.navigate(['/home']);
               console.log(res)
             },
             error => {
