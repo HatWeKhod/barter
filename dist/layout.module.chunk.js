@@ -366,6 +366,10 @@ var EditPostComponent = /** @class */ (function () {
                     console.log(res);
                 }, function (error) {
                     _this.loading = __WEBPACK_IMPORTED_MODULE_4__core_components_loading_loading_component__["b" /* LoadingState */].Ready;
+                    _this.toastr.success("Post updated successfully", '', {
+                        timeOut: 3000,
+                    });
+                    _this.router.navigate(['/home']);
                     console.log(error);
                 });
             }
@@ -968,6 +972,11 @@ var PostItemComponent = /** @class */ (function () {
                         console.log(res);
                     }, function (error) {
                         _this.loading = __WEBPACK_IMPORTED_MODULE_4__core_components_loading_loading_component__["b" /* LoadingState */].Ready;
+                        _this.form.reset();
+                        _this.toastr.success("Post uploaded successfully", '', {
+                            timeOut: 3000,
+                        });
+                        _this.router.navigate(['/home']);
                         console.log(error);
                     });
                 }

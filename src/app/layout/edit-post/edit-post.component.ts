@@ -154,6 +154,10 @@ export class EditPostComponent implements OnInit {
           },
           error => {
             this.loading = LoadingState.Ready;
+            this.toastr.success("Post updated successfully", '', {
+              timeOut: 3000,
+            });
+            this.router.navigate(['/home']);
             console.log(error)
           }
         )
