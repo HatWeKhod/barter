@@ -70,7 +70,7 @@
                                         <button class="btn btn-chat" (click)='toggleConversationModal(conversation, post)'>{{ 'CONVERSATION_VIEW' | translate }}</button>
                                         <button *ngIf="post_type == 'Completed Posts' && (fbId == post.fbId || fbId == conversation.requestingUser.fbId) && ((fbId == post.fbId && post.requester_barter_rating == 0) || (fbId == conversation.requestingUser.fbId && post.poster_barter_rating == 0))"
                                             (click)='toggleRatingModal(conversation, post)'>{{ 'GIVE_RATING' | translate }}</button>
-                                        <ngb-rating [rate]="getRatingValue(post)" [readonly]="true" max="5" *ngIf="post_type == 'Completed Posts' && (fbId == post.fbId || fbId == conversation.requestingUser.fbId) && ((fbId == post.fbId && post.requester_barter_rating != 0) || (fbId == conversation.requestingUser.fbId && post.poster_barter_rating != 0))"></ngb-rating>
+                                        <ngb-rating [rate]="getRatingValue(post)" [readonly]="true" max="5" *ngIf="post_type == 'Completed Posts' && (fbId == post.fbId || fbId == conversation.requestingUser.fbId) && ((fbId == post.fbId && post.requester_barter_rating == 0) || (fbId == conversation.requestingUser.fbId && post.poster_barter_rating == 0))"></ngb-rating>
                                     </div>
                                 </div>
                                 <div class="clearfix "></div>
