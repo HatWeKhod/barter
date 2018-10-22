@@ -45,6 +45,10 @@ export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 
+
+// ng-yandex-metrika
+import { MetrikaModule } from 'ng-yandex-metrika';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -71,6 +75,9 @@ export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     }),
     AgmJsMarkerClustererModule,
     NgSelectModule,
+    MetrikaModule.forRoot(
+      { id: 47293767, webvisor: true }
+    ),
     //----------------Material----------------//
     MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
     MatCardModule, MatCheckboxModule, MatChipsModule, MatStepperModule, MatDatepickerModule,
@@ -105,6 +112,7 @@ export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     AgmCoreModule,
     AgmJsMarkerClustererModule,
     NgSelectModule,
+    MetrikaModule,
     //----------------Material----------------//
     MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
     MatCardModule, MatCheckboxModule, MatChipsModule, MatStepperModule, MatDatepickerModule,
@@ -130,12 +138,7 @@ export class CoreModule {
         LoginService,
         AuthGuard,
         CookieService,
-        MessageService,
-        // {
-        //   provide: HTTP_INTERCEPTORS,
-        //   useClass: DefaultInterceptorService,
-        //   multi: true,
-        // },
+        MessageService
       ]
     };
   }
