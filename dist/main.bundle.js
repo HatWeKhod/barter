@@ -122,22 +122,17 @@ var AppComponent = /** @class */ (function () {
         else {
             localStorage.setItem('lang_key', 'en');
         }
+        var prevPath = this.location.path();
         this.router.events.subscribe(function (event) {
             if (event instanceof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* NavigationEnd */]) {
                 window.ga('set', 'page', event.urlAfterRedirects);
                 window.ga('send', 'pageview');
+                var newPath = _this.location.path();
+                _this.metrika.hit(newPath, {
+                    referer: prevPath,
+                });
+                prevPath = newPath;
             }
-        });
-        var prevPath = this.location.path();
-        this.router
-            .events
-            .filter(function (event) { return (event instanceof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* NavigationEnd */]); })
-            .subscribe(function () {
-            var newPath = _this.location.path();
-            _this.metrika.hit(newPath, {
-                referer: prevPath,
-            });
-            prevPath = newPath;
         });
     }
     AppComponent = __decorate([

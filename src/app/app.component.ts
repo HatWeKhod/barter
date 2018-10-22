@@ -29,26 +29,18 @@ export class AppComponent {
     else {
       localStorage.setItem('lang_key', 'en');
     }
-
+    let prevPath = this.location.path();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         (<any>window).ga('set', 'page', event.urlAfterRedirects);
         (<any>window).ga('send', 'pageview');
-      }
-    });
-
-    let prevPath = this.location.path();
-
-    this.router
-      .events
-      .filter(event => (event instanceof NavigationEnd))
-      .subscribe(() => {
         const newPath = this.location.path();
         this.metrika.hit(newPath, {
           referer: prevPath,
         });
         prevPath = newPath;
-      });
+      }
+    });
 
   }
 
