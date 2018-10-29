@@ -4,6 +4,14 @@ webpackJsonp(["main"],{
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./barter-system-egypt/barter-system-egypt.module": [
+		"./src/app/barter-system-egypt/barter-system-egypt.module.ts",
+		"barter-system-egypt.module"
+	],
+	"./barter-trade-venezuela/barter-trade-venezuela.module": [
+		"./src/app/barter-trade-venezuela/barter-trade-venezuela.module.ts",
+		"barter-trade-venezuela.module"
+	],
 	"./layout/layout.module": [
 		"./src/app/layout/layout.module.ts",
 		"layout.module"
@@ -48,7 +56,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 var routes = [
     { path: 'login', loadChildren: './login/login.module#LoginModule' },
-    { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [__WEBPACK_IMPORTED_MODULE_2__core_guard_auth_guard__["a" /* AuthGuard */]] }
+    { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [__WEBPACK_IMPORTED_MODULE_2__core_guard_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'barter-system-egypt', loadChildren: './barter-system-egypt/barter-system-egypt.module#BarterSystemEgyptModule' },
+    { path: 'barter-trade-venezuela', loadChildren: './barter-trade-venezuela/barter-trade-venezuela.module#BarterTradeVenezuelaModule' },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

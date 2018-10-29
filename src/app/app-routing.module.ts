@@ -4,7 +4,9 @@ import { AuthGuard } from './core/guard/auth.guard';
 
 const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginModule' },
-  { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [AuthGuard] }
+  { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [AuthGuard] },
+  { path: 'barter-system-egypt', loadChildren: './barter-system-egypt/barter-system-egypt.module#BarterSystemEgyptModule' },
+  { path: 'barter-trade-venezuela', loadChildren: './barter-trade-venezuela/barter-trade-venezuela.module#BarterTradeVenezuelaModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
