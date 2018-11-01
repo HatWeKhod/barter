@@ -1,0 +1,55 @@
+.login-block {
+  position: relative;
+}
+
+.fork-me_container {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  right: 0;
+  top: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.fork-me__header {
+  position: absolute;
+  border: 1px solid blue;
+  right: -31.75%;
+  top: 15%;
+  width: 100%;
+  background-color: #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed white;
+  border-left: none;
+  border-right: none;
+  box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 1),
+    0px -5px 0px 0px rgba(0, 0, 0, 1);
+  transform: rotate(45deg);
+}
+
+.fork-me__text {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  font-size: 1em;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.right_side_view .fork-me_container {
+  right: inherit;
+  left: 0;
+}
+
+.right_side_view .fork-me__header {
+  right: inherit;
+  left: -31.75%;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}

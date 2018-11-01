@@ -473,14 +473,14 @@ var ConversationComponent = /** @class */ (function () {
 /***/ "./src/app/core/components/footer/footer.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<footer class=\"py-2 bg-dark\">\r\n  <div class=\"container\">\r\n    <p class=\"m-0 text-center text-white\">{{'COPYRIGHT' | translate}} &copy; HatWeKhod</p>\r\n  </div>\r\n</footer>\r\n"
+module.exports = "<footer class=\"py-2 bg-dark\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-md-8 text-right\">\r\n        <ul>\r\n          <li> <a target=\"_blank\" href=\"https://www.facebook.com/hatwekhodbarter/\"><i class=\"fa fa-facebook\"\r\n                aria-hidden=\"true\"></i></a></li>\r\n          <li> <a target=\"_blank\" href=\"https://twitter.com/hatwekhod\"><i class=\"fa fa-twitter\" aria-hidden=\"true\"></i></a></li>\r\n          <li> <a target=\"_blank\" href=\"https://www.instagram.com/hatwekhod/\"><i class=\"fa fa-instagram\" aria-hidden=\"true\"></i></a></li>\r\n          <li> <a target=\"_blank\" href=\"https://www.pinterest.com/hatwekhod/\"><i class=\"fa fa-pinterest-square\"\r\n                aria-hidden=\"true\"></i></a></li>\r\n          <li> <a target=\"_blank\" href=\"https://plus.google.com/u/0/107237992379654410802\"><i class=\"fa fa-google\"\r\n                aria-hidden=\"true\"></i></a></li>\r\n        </ul>\r\n      </div>\r\n      <div class=\"col-md-4 text-left\">\r\n        <p class=\"m-0 text-white\">{{'COPYRIGHT' | translate}} &copy; HatWeKhod</p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</footer>\r\n"
 
 /***/ }),
 
 /***/ "./src/app/core/components/footer/footer.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "ul {\n  list-style: none; }\n  ul li {\n    display: inline-block;\n    margin: 0 5px; }\n  ul li a {\n      color: #fff; }\n  ul li a:hover {\n        color: #3498db; }\n"
 
 /***/ }),
 

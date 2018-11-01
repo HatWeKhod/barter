@@ -1,27 +1,90 @@
-# CrudBarter
+HatWeKhod
+======
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
+HatWeKhod is an interface that connects you to your community and allows you to trade items with other users and share the story behind them.
 
-## Development server
+HatWeKhod is currently available at http://hatwekhod.cfapps.io
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+![main](https://hatwekhod.cfapps.io/assets/images/home.png)
 
-## Code scaffolding
+# Contents
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Usage](#usage)
+- [Development](#development)
+  - [Repo Organization](#repo-organization)
+  - [Technology Used](#the-technology)
+  - [Author](#author)
 
-## Build
+# Usage
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Users sign in using their Facebook accounts to log in.
 
-## Running unit tests
+They can post items and use the map to browse through the posts.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![map](https://hatwekhod.cfapps.io/assets/images/home-with-popup.png)
 
-## Running end-to-end tests
+The dashboard is used to keep track of trade requests, messages, and posts.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+![dashbaord](https://hatwekhod.cfapps.io/assets/images/dashboard.png)
 
-## Further help
+# Development
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Repo Organization
+
+- bin: Crud application setup
+- config: Middleware setup, API, other server settings
+- controllers: Controllers for API endpoints
+- models: MongoDB schema
+- src: View directory (using Angular 5)
+    - app: Root directory
+        - barter-system-egypt: landing page
+        - barter-trade-venezuela: landing page
+        - core: shared module
+            - components: Exoptable component
+            - guard: Authentication
+            - services: Angular service
+            - `core.module.ts`: Initialization of shared module
+        - layout: Lazy loaded all module as per authentication
+        - login: Login module
+        - `app-routing.module.ts`: Root routing
+        - `app.component.ts`: Root component
+        - `app.module.ts`: Root module
+    - assets: External file (image, css, js, json)
+    - environments: Angular environments(development, production)
+    - `index.html`: Root html file
+- `server.js`: starts the server
+-`utils.js`: contains utility functions used in multiple controllers
+
+## The Technology
+
+### Tech Stack(Crud Application):
+
+- **Angular 5**: client-side framework(angular cli version 1.7.3)
+- **Lodash**: utility library
+- **Google Maps API(AGM)**: map
+- **Marker Clusterer(AGM Clusterer)**: clustering library for Google Maps
+- **Overlapping Marker Spiderfier**: clustering library for Google Maps
+- **Nodes.js**: service-side app platform
+- **Mongoose.js**: MongoDB ORM
+- **Passport**: user authentication
+  - **Passport-Facebook: facebook user authentication
+- **Superagent**: light-weight progressive ajax API
+- **Should**: client-side HTTP request library
+
+### Dev Tools
+- **git**: version control magician
+- **npm**: package commander-in-chief for back-end libraries
+- **Bower**: package commander-in-chief for front-end libraries
+- **Pivotal Web Services**: PaaS
+
+## Deployment
+- Login into your PWS account from https://login.run.pivotal.io/login. Go to Pivotal Web Services. Click on Tools Section . Firstly        Download and Install the Cloud Foundry CLI . After that Use "cf login -a api.run.pivotal.io"  Command for login. After Successful login, One can make changes into required files and use the following Command to update the app :
+  - git add --all
+  - git commit -m "your message"
+  - cf push "your app name"
+
+  These commands will update and deploy the files on PWS automatically.
+   
+## Author
+
+Derivative work of [Ryan Roxas](https://github.com/rohaus)
