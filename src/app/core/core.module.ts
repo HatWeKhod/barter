@@ -18,6 +18,7 @@ import { LoginService } from './services/login.service';
 import { DefaultInterceptorService } from './services/default-interceptor.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from './services/message.service';
+import { SeoService } from './services/seo.service';
 //===========================guard===============================//
 import { AuthGuard } from './guard/auth.guard';
 
@@ -138,7 +139,8 @@ export class CoreModule {
         LoginService,
         AuthGuard,
         CookieService,
-        MessageService
+        MessageService,
+        SeoService
       ]
     };
   }

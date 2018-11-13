@@ -53,3 +53,36 @@
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
+
+.log_area_sec {
+  margin-top: 30px;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+
+  ul {
+    list-style: none;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 20px;
+
+    li {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 5px;
+
+      a {
+        color: #fff;
+
+        &:hover {
+          color: #3498db;
+        }
+      }
+    }
+  }
+
+  p {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}

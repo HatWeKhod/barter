@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SeoService } from '../core/services/seo.service';
 
 @Component({
   selector: 'app-barter-system-egypt',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BarterSystemEgyptComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _seoService: SeoService,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.activatedRoute.data.subscribe((data) => {
+      this._seoService.updateTitle(data['title']);
+      this._seoService.updateDescription(data['description'])
+      this._seoService.updateKeywords(data['keywords'])
+    });
   }
 
 }

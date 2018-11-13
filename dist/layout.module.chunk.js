@@ -726,6 +726,8 @@ module.exports = ""
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngx_translate_core__ = __webpack_require__("./node_modules/@ngx-translate/core/@ngx-translate/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_services_login_service__ = __webpack_require__("./src/app/core/services/login.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_services_seo_service__ = __webpack_require__("./src/app/core/services/seo.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -738,14 +740,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var LayoutComponent = /** @class */ (function () {
-    function LayoutComponent(translate, loginService) {
+    function LayoutComponent(translate, loginService, _seoService, activatedRoute) {
         this.translate = translate;
         this.loginService = loginService;
+        this._seoService = _seoService;
+        this.activatedRoute = activatedRoute;
     }
     LayoutComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.translate.use(localStorage.getItem('lang_key'));
         // this.getLoginData();
+        this.activatedRoute.data.subscribe(function (data) {
+            _this._seoService.updateTitle(data['title']);
+            _this._seoService.updateDescription(data['description']);
+            _this._seoService.updateKeywords(data['keywords']);
+        });
     };
     LayoutComponent.prototype.getLoginData = function () {
         this.loginService.getLoginData().subscribe(function (res) {
@@ -764,7 +776,9 @@ var LayoutComponent = /** @class */ (function () {
             styles: [__webpack_require__("./src/app/layout/layout.component.scss")]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ngx_translate_core__["c" /* TranslateService */],
-            __WEBPACK_IMPORTED_MODULE_2__core_services_login_service__["a" /* LoginService */]])
+            __WEBPACK_IMPORTED_MODULE_2__core_services_login_service__["a" /* LoginService */],
+            __WEBPACK_IMPORTED_MODULE_4__core_services_seo_service__["a" /* SeoService */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]])
     ], LayoutComponent);
     return LayoutComponent;
 }());
