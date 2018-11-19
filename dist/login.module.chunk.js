@@ -101,6 +101,15 @@ var LoginComponent = /** @class */ (function () {
             this.translate.use(localStorage.getItem('lang_key'));
         }
     };
+    LoginComponent.prototype.canDeactivate = function () {
+        if (!localStorage.getItem('isLoggedin')) {
+            return true;
+        }
+        else {
+            this.router.navigate(['/']);
+            return false;
+        }
+    };
     LoginComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-login',

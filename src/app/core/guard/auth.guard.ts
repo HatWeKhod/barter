@@ -20,17 +20,17 @@ export class AuthGuard implements CanActivate {
             localStorage.setItem('isLoggedin', 'true')
             localStorage.setItem('fbId', res['fbId'])
             localStorage.setItem('name', res['name'])
-            this.router.navigate(['/home']);
+            this.router.navigate(['/home']);            
             return false;
           }
           else {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/barter-system-egypt']);
             return false;
           }
         },
         error => {
           console.log(error)
-          this.router.navigate(['/login']);
+          this.router.navigate(['/barter-system-egypt']);
           return false;
         }
       )

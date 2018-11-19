@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { LoginService } from '../core/services/login.service';
 import { SeoService } from '../core/services/seo.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-login',
@@ -39,6 +40,16 @@ export class LoginComponent implements OnInit {
       this.translate.use(localStorage.getItem('lang_key'));
     }
 
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    if (!localStorage.getItem('isLoggedin')) {
+      return true;
+    }
+    else {
+      this.router.navigate(['/']);
+      return false;
+    }
   }
 
 }

@@ -21,7 +21,7 @@ import { MessageService } from './services/message.service';
 import { SeoService } from './services/seo.service';
 //===========================guard===============================//
 import { AuthGuard } from './guard/auth.guard';
-
+import { CandeativateGuard } from './guard/candeativate.guard';
 
 // Material
 import {
@@ -138,6 +138,7 @@ export class CoreModule {
         PostService,
         LoginService,
         AuthGuard,
+        CandeativateGuard,
         CookieService,
         MessageService,
         SeoService

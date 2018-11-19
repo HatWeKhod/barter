@@ -41,6 +41,7 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_guard_auth_guard__ = __webpack_require__("./src/app/core/guard/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_guard_candeativate_guard__ = __webpack_require__("./src/app/core/guard/candeativate.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -50,13 +51,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
     {
-        path: 'login', loadChildren: './login/login.module#LoginModule',
+        path: 'login', loadChildren: './login/login.module#LoginModule', canActivate: [__WEBPACK_IMPORTED_MODULE_3__core_guard_candeativate_guard__["a" /* CandeativateGuard */]],
         data: {
             title: 'Bartering Online, Barter your items, goods and services - Hatwekhod.net',
             description: 'Bartering online in egypt and venezuela is the most innovative solution to become better at the art of survival.',
             keywords: 'bartering online in egypt, bartering onlinr in venezuela'
+        }
+    },
+    {
+        path: 'barter-system-egypt', loadChildren: './barter-system-egypt/barter-system-egypt.module#BarterSystemEgyptModule', canActivate: [__WEBPACK_IMPORTED_MODULE_3__core_guard_candeativate_guard__["a" /* CandeativateGuard */]],
+        data: {
+            title: 'Barter System in Egypt - Best Places to Trade Stuff Online',
+            description: 'Barter system in egypt is back to improve your life and make it better than before. Visit the hatwekhod.net community for amazing bartering experience and more.',
+            keywords: 'barter system in egypt,  bartering system in egypt, barter service in egypt'
         }
     },
     {
@@ -65,14 +76,6 @@ var routes = [
             title: 'Bartering Online, Barter your items, goods and services - Hatwekhod.net',
             description: 'Bartering online in egypt and venezuela is the most innovative solution to become better at the art of survival.',
             keywords: 'bartering online in egypt, bartering onlinr in venezuela'
-        }
-    },
-    {
-        path: 'barter-system-egypt', loadChildren: './barter-system-egypt/barter-system-egypt.module#BarterSystemEgyptModule',
-        data: {
-            title: 'Barter System in Egypt - Best Places to Trade Stuff Online',
-            description: 'Barter system in egypt is back to improve your life and make it better than before. Visit the hatwekhod.net community for amazing bartering experience and more.',
-            keywords: 'barter system in egypt,  bartering system in egypt, barter service in egypt'
         }
     },
 ];
@@ -88,6 +91,22 @@ var AppRoutingModule = /** @class */ (function () {
     return AppRoutingModule;
 }());
 
+// {
+//   path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [AuthGuard],
+//   data: {
+//     title: 'Bartering Online, Barter your items, goods and services - Hatwekhod.net',
+//     description: 'Bartering online in egypt and venezuela is the most innovative solution to become better at the art of survival.',
+//     keywords: 'bartering online in egypt, bartering onlinr in venezuela'
+//   }
+// },
+// {
+//   path: 'barter-system-egypt', loadChildren: './barter-system-egypt/barter-system-egypt.module#BarterSystemEgyptModule',
+//   data: {
+//     title: 'Barter System in Egypt - Best Places to Trade Stuff Online',
+//     description: 'Barter system in egypt is back to improve your life and make it better than before. Visit the hatwekhod.net community for amazing bartering experience and more.',
+//     keywords: 'barter system in egypt,  bartering system in egypt, barter service in egypt'
+//   }
+// },
 
 
 /***/ }),
@@ -944,16 +963,17 @@ var ViewConversationComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__services_message_service__ = __webpack_require__("./src/app/core/services/message.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_seo_service__ = __webpack_require__("./src/app/core/services/seo.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__guard_auth_guard__ = __webpack_require__("./src/app/core/guard/auth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__angular_material__ = __webpack_require__("./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_ngx_mat_select_search__ = __webpack_require__("./node_modules/ngx-mat-select-search/esm5/ngx-mat-select-search.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_header_header_component__ = __webpack_require__("./src/app/core/components/header/header.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_footer_footer_component__ = __webpack_require__("./src/app/core/components/footer/footer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_left_panel_left_panel_component__ = __webpack_require__("./src/app/core/components/left-panel/left-panel.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_loading_loading_component__ = __webpack_require__("./src/app/core/components/loading/loading.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_conversation_conversation_component__ = __webpack_require__("./src/app/core/components/conversation/conversation.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_view_conversation_view_conversation_component__ = __webpack_require__("./src/app/core/components/view-conversation/view-conversation.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_conversation_rating_conversation_rating_component__ = __webpack_require__("./src/app/core/components/conversation-rating/conversation-rating.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_ng_yandex_metrika__ = __webpack_require__("./node_modules/ng-yandex-metrika/ng-yandex-metrika.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__guard_candeativate_guard__ = __webpack_require__("./src/app/core/guard/candeativate.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__angular_material__ = __webpack_require__("./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_ngx_mat_select_search__ = __webpack_require__("./node_modules/ngx-mat-select-search/esm5/ngx-mat-select-search.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_header_header_component__ = __webpack_require__("./src/app/core/components/header/header.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_footer_footer_component__ = __webpack_require__("./src/app/core/components/footer/footer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_left_panel_left_panel_component__ = __webpack_require__("./src/app/core/components/left-panel/left-panel.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_loading_loading_component__ = __webpack_require__("./src/app/core/components/loading/loading.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_conversation_conversation_component__ = __webpack_require__("./src/app/core/components/conversation/conversation.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_view_conversation_view_conversation_component__ = __webpack_require__("./src/app/core/components/view-conversation/view-conversation.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_conversation_rating_conversation_rating_component__ = __webpack_require__("./src/app/core/components/conversation-rating/conversation-rating.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29_ng_yandex_metrika__ = __webpack_require__("./node_modules/ng-yandex-metrika/ng-yandex-metrika.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -980,6 +1000,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 //===========================guard===============================//
+
 
 // Material
 
@@ -1008,6 +1029,7 @@ var CoreModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_13__services_post_service__["a" /* PostService */],
                 __WEBPACK_IMPORTED_MODULE_14__services_login_service__["a" /* LoginService */],
                 __WEBPACK_IMPORTED_MODULE_18__guard_auth_guard__["a" /* AuthGuard */],
+                __WEBPACK_IMPORTED_MODULE_19__guard_candeativate_guard__["a" /* CandeativateGuard */],
                 __WEBPACK_IMPORTED_MODULE_15_ngx_cookie_service__["a" /* CookieService */],
                 __WEBPACK_IMPORTED_MODULE_16__services_message_service__["a" /* MessageService */],
                 __WEBPACK_IMPORTED_MODULE_17__services_seo_service__["a" /* SeoService */]
@@ -1039,25 +1061,25 @@ var CoreModule = /** @class */ (function () {
                 }),
                 __WEBPACK_IMPORTED_MODULE_11__agm_js_marker_clusterer__["a" /* AgmJsMarkerClustererModule */],
                 __WEBPACK_IMPORTED_MODULE_12__ng_select_ng_select__["a" /* NgSelectModule */],
-                __WEBPACK_IMPORTED_MODULE_28_ng_yandex_metrika__["b" /* MetrikaModule */].forRoot({ id: 47293767, webvisor: true }),
+                __WEBPACK_IMPORTED_MODULE_29_ng_yandex_metrika__["b" /* MetrikaModule */].forRoot({ id: 47293767, webvisor: true }),
                 //----------------Material----------------//
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["b" /* MatAutocompleteModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["c" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["d" /* MatButtonToggleModule */],
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["e" /* MatCardModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["f" /* MatCheckboxModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["g" /* MatChipsModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["F" /* MatStepperModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["h" /* MatDatepickerModule */],
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["j" /* MatDialogModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["l" /* MatExpansionModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["n" /* MatGridListModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["o" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["p" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["q" /* MatListModule */],
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["r" /* MatMenuModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["s" /* MatNativeDateModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["t" /* MatPaginatorModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["u" /* MatProgressBarModule */],
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["v" /* MatProgressSpinnerModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["w" /* MatRadioModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["x" /* MatRippleModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["m" /* MatFormFieldModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["z" /* MatSelectModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["A" /* MatSidenavModule */],
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["C" /* MatSliderModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["B" /* MatSlideToggleModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["D" /* MatSnackBarModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["E" /* MatSortModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["G" /* MatTableModule */],
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["H" /* MatTabsModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["I" /* MatToolbarModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["J" /* MatTooltipModule */], __WEBPACK_IMPORTED_MODULE_20_ngx_mat_select_search__["a" /* NgxMatSelectSearchModule */]
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["b" /* MatAutocompleteModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["c" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["d" /* MatButtonToggleModule */],
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["e" /* MatCardModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["f" /* MatCheckboxModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["g" /* MatChipsModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["F" /* MatStepperModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["h" /* MatDatepickerModule */],
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["j" /* MatDialogModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["l" /* MatExpansionModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["n" /* MatGridListModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["o" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["p" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["q" /* MatListModule */],
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["r" /* MatMenuModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["s" /* MatNativeDateModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["t" /* MatPaginatorModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["u" /* MatProgressBarModule */],
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["v" /* MatProgressSpinnerModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["w" /* MatRadioModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["x" /* MatRippleModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["m" /* MatFormFieldModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["z" /* MatSelectModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["A" /* MatSidenavModule */],
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["C" /* MatSliderModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["B" /* MatSlideToggleModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["D" /* MatSnackBarModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["E" /* MatSortModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["G" /* MatTableModule */],
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["H" /* MatTabsModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["I" /* MatToolbarModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["J" /* MatTooltipModule */], __WEBPACK_IMPORTED_MODULE_21_ngx_mat_select_search__["a" /* NgxMatSelectSearchModule */]
                 //----------------Material----------------//
             ],
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_21__components_header_header_component__["a" /* HeaderComponent */],
-                __WEBPACK_IMPORTED_MODULE_22__components_footer_footer_component__["a" /* FooterComponent */],
-                __WEBPACK_IMPORTED_MODULE_23__components_left_panel_left_panel_component__["a" /* LeftPanelComponent */],
-                __WEBPACK_IMPORTED_MODULE_24__components_loading_loading_component__["a" /* LoadingComponent */],
-                __WEBPACK_IMPORTED_MODULE_25__components_conversation_conversation_component__["a" /* ConversationComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__components_view_conversation_view_conversation_component__["a" /* ViewConversationComponent */],
-                __WEBPACK_IMPORTED_MODULE_27__components_conversation_rating_conversation_rating_component__["a" /* ConversationRatingComponent */]
+                __WEBPACK_IMPORTED_MODULE_22__components_header_header_component__["a" /* HeaderComponent */],
+                __WEBPACK_IMPORTED_MODULE_23__components_footer_footer_component__["a" /* FooterComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__components_left_panel_left_panel_component__["a" /* LeftPanelComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__components_loading_loading_component__["a" /* LoadingComponent */],
+                __WEBPACK_IMPORTED_MODULE_26__components_conversation_conversation_component__["a" /* ConversationComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__components_view_conversation_view_conversation_component__["a" /* ViewConversationComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__components_conversation_rating_conversation_rating_component__["a" /* ConversationRatingComponent */]
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_3__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */],
@@ -1067,28 +1089,28 @@ var CoreModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_6__ngx_translate_core__["b" /* TranslateModule */],
                 __WEBPACK_IMPORTED_MODULE_8_angular_font_awesome__["a" /* AngularFontAwesomeModule */],
                 __WEBPACK_IMPORTED_MODULE_9_ng2_img_max__["a" /* Ng2ImgMaxModule */],
-                __WEBPACK_IMPORTED_MODULE_21__components_header_header_component__["a" /* HeaderComponent */],
-                __WEBPACK_IMPORTED_MODULE_22__components_footer_footer_component__["a" /* FooterComponent */],
-                __WEBPACK_IMPORTED_MODULE_23__components_left_panel_left_panel_component__["a" /* LeftPanelComponent */],
-                __WEBPACK_IMPORTED_MODULE_24__components_loading_loading_component__["a" /* LoadingComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__components_header_header_component__["a" /* HeaderComponent */],
+                __WEBPACK_IMPORTED_MODULE_23__components_footer_footer_component__["a" /* FooterComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__components_left_panel_left_panel_component__["a" /* LeftPanelComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__components_loading_loading_component__["a" /* LoadingComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__agm_core__["a" /* AgmCoreModule */],
                 __WEBPACK_IMPORTED_MODULE_11__agm_js_marker_clusterer__["a" /* AgmJsMarkerClustererModule */],
                 __WEBPACK_IMPORTED_MODULE_12__ng_select_ng_select__["a" /* NgSelectModule */],
-                __WEBPACK_IMPORTED_MODULE_28_ng_yandex_metrika__["b" /* MetrikaModule */],
+                __WEBPACK_IMPORTED_MODULE_29_ng_yandex_metrika__["b" /* MetrikaModule */],
                 //----------------Material----------------//
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["b" /* MatAutocompleteModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["c" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["d" /* MatButtonToggleModule */],
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["e" /* MatCardModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["f" /* MatCheckboxModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["g" /* MatChipsModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["F" /* MatStepperModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["h" /* MatDatepickerModule */],
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["j" /* MatDialogModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["l" /* MatExpansionModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["n" /* MatGridListModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["o" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["p" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["q" /* MatListModule */],
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["r" /* MatMenuModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["s" /* MatNativeDateModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["t" /* MatPaginatorModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["u" /* MatProgressBarModule */],
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["v" /* MatProgressSpinnerModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["w" /* MatRadioModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["x" /* MatRippleModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["m" /* MatFormFieldModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["z" /* MatSelectModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["A" /* MatSidenavModule */],
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["C" /* MatSliderModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["B" /* MatSlideToggleModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["D" /* MatSnackBarModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["E" /* MatSortModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["G" /* MatTableModule */],
-                __WEBPACK_IMPORTED_MODULE_19__angular_material__["H" /* MatTabsModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["I" /* MatToolbarModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material__["J" /* MatTooltipModule */], __WEBPACK_IMPORTED_MODULE_20_ngx_mat_select_search__["a" /* NgxMatSelectSearchModule */]
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["b" /* MatAutocompleteModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["c" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["d" /* MatButtonToggleModule */],
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["e" /* MatCardModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["f" /* MatCheckboxModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["g" /* MatChipsModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["F" /* MatStepperModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["h" /* MatDatepickerModule */],
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["j" /* MatDialogModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["l" /* MatExpansionModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["n" /* MatGridListModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["o" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["p" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["q" /* MatListModule */],
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["r" /* MatMenuModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["s" /* MatNativeDateModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["t" /* MatPaginatorModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["u" /* MatProgressBarModule */],
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["v" /* MatProgressSpinnerModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["w" /* MatRadioModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["x" /* MatRippleModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["m" /* MatFormFieldModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["z" /* MatSelectModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["A" /* MatSidenavModule */],
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["C" /* MatSliderModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["B" /* MatSlideToggleModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["D" /* MatSnackBarModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["E" /* MatSortModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["G" /* MatTableModule */],
+                __WEBPACK_IMPORTED_MODULE_20__angular_material__["H" /* MatTabsModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["I" /* MatToolbarModule */], __WEBPACK_IMPORTED_MODULE_20__angular_material__["J" /* MatTooltipModule */], __WEBPACK_IMPORTED_MODULE_21_ngx_mat_select_search__["a" /* NgxMatSelectSearchModule */]
                 //----------------Material----------------//
             ],
             entryComponents: [
-                __WEBPACK_IMPORTED_MODULE_25__components_conversation_conversation_component__["a" /* ConversationComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__components_view_conversation_view_conversation_component__["a" /* ViewConversationComponent */],
-                __WEBPACK_IMPORTED_MODULE_27__components_conversation_rating_conversation_rating_component__["a" /* ConversationRatingComponent */]
+                __WEBPACK_IMPORTED_MODULE_26__components_conversation_conversation_component__["a" /* ConversationComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__components_view_conversation_view_conversation_component__["a" /* ViewConversationComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__components_conversation_rating_conversation_rating_component__["a" /* ConversationRatingComponent */]
             ]
         })
     ], CoreModule);
@@ -1141,12 +1163,12 @@ var AuthGuard = /** @class */ (function () {
                     return false;
                 }
                 else {
-                    _this.router.navigate(['/login']);
+                    _this.router.navigate(['/barter-system-egypt']);
                     return false;
                 }
             }, function (error) {
                 console.log(error);
-                _this.router.navigate(['/login']);
+                _this.router.navigate(['/barter-system-egypt']);
                 return false;
             });
         }
@@ -1156,6 +1178,50 @@ var AuthGuard = /** @class */ (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */], __WEBPACK_IMPORTED_MODULE_2__services_login_service__["a" /* LoginService */]])
     ], AuthGuard);
     return AuthGuard;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/core/guard/candeativate.guard.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CandeativateGuard; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var CandeativateGuard = /** @class */ (function () {
+    function CandeativateGuard(router) {
+        this.router = router;
+    }
+    CandeativateGuard.prototype.canActivate = function (next, state) {
+        if (!localStorage.getItem('isLoggedin')) {
+            console.log("check 1");
+            return true;
+        }
+        else {
+            console.log("check 2");
+            this.router.navigate(['/']);
+            return false;
+        }
+    };
+    CandeativateGuard = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]])
+    ], CandeativateGuard);
+    return CandeativateGuard;
 }());
 
 
