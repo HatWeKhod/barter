@@ -28,9 +28,12 @@ var getUserRating = function (fbId, callback) {
 // Send back all posts
 var posts = function (req, res, next) {
   //    5a69fd5893e95d0c1d1d7810
-  console.log(req.body.fb_friends);
-  if (req.body.fb_friends) {
+  //console.log(req.body.fb_friends);
+  console.log('here coming fb');
 
+  if (req.body.fb_friends) {
+	  res.send(200);
+	return false;
     function getFbData(accessToken, apiPath, callback) {
       var https = require('https');
 
@@ -185,6 +188,7 @@ var getpost = function (req, res, next) {
 
 // Create post and save it to the database
 var postItem = function (req, res, next) {
+	console.log('here coming in post');
   var image = req.body.image.resized.dataURL;
   var image_full = req.body.image.dataURL;
   var post = new Post({
@@ -199,6 +203,7 @@ var postItem = function (req, res, next) {
     },
     'image': image,
     'image_full': image_full,
+	'email':req.body.user_email,
   });
   utils.saveChanges(res, post, 201, 500);
 };

@@ -13,7 +13,10 @@
             <li>{{'BROWSE_ITEMS' | translate}}</li>
             <li>{{'FIND_ITEM' | translate}}</li>
           </ul>
-          <h2>&nbsp;</h2>
+          <div class='custom_login'>
+		  	  <button [routerLink]="['/user-register']" class='btn btn-primary'>Register</button>
+		  	  <button [routerLink]="['/user-login']" class='btn btn-primary'>Login</button>
+		  </div>
           <a type="button" class="btn btn-primary facebook-login" href='/auth/facebook'>
             <i class="fa fa-facebook" aria-hidden="true"></i> {{'LOGIN_FB' | translate}}</a>
         </div>

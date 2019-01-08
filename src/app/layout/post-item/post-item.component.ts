@@ -40,7 +40,10 @@ export class PostItemComponent implements OnInit {
   ngOnInit() {
     this.loading = LoadingState.Processing;
     this.name = localStorage.getItem('name')
+	
     this.fbId = localStorage.getItem('fbId')
+	
+
     this.trackMe();
     this.form = this.formBuilder.group({
       name: [this.name, Validators.required],
@@ -49,7 +52,8 @@ export class PostItemComponent implements OnInit {
       image: [this.image, Validators.required],
       itemName: ['', Validators.required],
       location: ['', Validators.required],
-      fbId: [this.fbId, Validators.required]
+      fbId: [this.fbId, Validators.required],
+	  user_email:localStorage.getItem('user_email')
     });
     this.loading = LoadingState.Ready;
   }
@@ -105,6 +109,10 @@ export class PostItemComponent implements OnInit {
   }
 
   addPost() {
+	  console.log(localStorage.getItem('user_email'));
+	  console.log(localStorage.getItem('fbId'));
+	  
+	  
     if (this.currentLat == undefined && this.currentLong == undefined) {
       this.toastr.error("Please allow your location, or set it manually on map", '', {
         timeOut: 3000,
@@ -116,13 +124,14 @@ export class PostItemComponent implements OnInit {
       this.form.patchValue({
         location: [this.currentLat, this.currentLong]
       })
-      console.log(this.form.value)
+
       if (this.base64textString == undefined) {
         this.file_error = true
       }
-      if (this.form.valid) {
+
+      if (this.form.valid){
+		 		 
         this.loading = LoadingState.Processing;
-        console.log(this.form.value)
         if (!this.file_error) {
           this.postService.postItem(this.form.value).subscribe(
             res => {

@@ -4,6 +4,9 @@ var mongoose = require('mongoose');
 var facebookUserSchema = new mongoose.Schema({
   'fbId': String,
   'name': String,
+  'email':String,
+  'login_type':String,
+  'password':String,
   'barter_score':  { 'type': Number, 'default': 0 },
     'people_rate_count':  { 'type': Number, 'default': 0 },
 });

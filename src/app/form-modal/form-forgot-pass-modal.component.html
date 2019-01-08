@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h4 class="modal-title cus_modal_header">Change Password</h4>
+  <button type="button" class="close" aria-label="Close"
+   (click)="activeModal.dismiss('Cross click')">
+  </button>
+</div>
+<div class="modal-body">
+  	<form [formGroup]="forgotForm" (ngSubmit)="forgotPass()">
+        <div id="user-data">	
+		<div *ngIf="!forgotForm.valid && (forgotForm.dirty || forgotForm.touched) "
+			class="alert alert-danger">
+		  <div>
+			Please enter valid details
+		  </div>
+		  </div>
+			<h5 class='err_msg'>{{form_error}}</h5>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control" ng-model="email"required >		 
+          </div>
+		<div class="form-group">
+            <label for="password">New Password</label>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="form-control" ng-model="password" >
+          </div>
+		  <div class="form-group">
+            <label for="password">Confirm Password</label>
+            <input
+              type="password"
+              id="c_password"
+              formControlName="c_password"
+              class="form-control" ng-model="c_password" >
+          </div>
+        </div>	
+		<div class="form_btn">
+			<button class="btn btn-primary" type="submit">Submit</button>
+			 <button class="btn btn-danger close_btn"(click)="activeModal.dismiss('Close clicked')">Close</button>
+		  </div>
+	  </form>
+	
+</div>
+<div class="modal-footer">
+	<div class="forgot_pass">
+		<button type="button" (click)="activeModal.dismiss('Close clicked')" (click)="openFormModal('register')"  class="btn btn-link">Register</button>
+	</div>
+</div>

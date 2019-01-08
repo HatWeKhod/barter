@@ -2,9 +2,18 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
 import { CandeativateGuard } from './core/guard/candeativate.guard';
+import { UserLoginComponent } from './layout/user-login/user-login.component';
+import { UserRegisterComponent } from './layout/user-register/user-register.component';
+import { ForgotPasswordComponent } from './layout/forgot-password/forgot-password.component';
+
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },  
+{ path: 'user-login', component: UserLoginComponent },
+{ path: 'user-register', component: UserRegisterComponent },
+{ path: 'forgot-password', component: ForgotPasswordComponent },
+ 
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+	
   {
     path: 'login', loadChildren: './login/login.module#LoginModule', canActivate: [CandeativateGuard],
     data: {
@@ -28,8 +37,8 @@ const routes: Routes = [
       description: 'Bartering online in egypt and venezuela is the most innovative solution to become better at the art of survival.',
       keywords: 'bartering online in egypt, bartering onlinr in venezuela'
     }
-  },
-
+  }
+   	
   // { path: 'barter-trade-venezuela', loadChildren: './barter-trade-venezuela/barter-trade-venezuela.module#BarterTradeVenezuelaModule' },
 ];
 @NgModule({

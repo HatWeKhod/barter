@@ -3,7 +3,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Metrika } from 'ng-yandex-metrika';
 import { Location } from '@angular/common';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormModalComponent } from './form-modal/form-modal.component';
+import { FormGroup, Validators, FormBuilder }  from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,6 +19,7 @@ export class AppComponent {
     private router: Router,
     private metrika: Metrika,
     private location: Location,
+	private modalService: NgbModal,
   ) {
     translate.setDefaultLang('en');
 
@@ -43,5 +46,14 @@ export class AppComponent {
     });
 
   }
+  openFormModal() {
+  const modalRef = this.modalService.open(FormModalComponent);
+  
+  modalRef.result.then((result) => {
+    console.log(result);
+  }).catch((error) => {
+    console.log(error);
+  });
+}
 
 }

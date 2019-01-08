@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
   getPostList() {
     this.postService.getDashboardPosts().subscribe(
       (res: any[]) => {
+		  console.log('getting post from here');
         console.log(res)
         this.post_list = res;
         this.yourPost();
@@ -108,6 +109,7 @@ export class DashboardComponent implements OnInit {
   yourCompletedPost() {
     this.post_type = 'Completed Posts';
     this.items = this.post_list.filter(x => x.fbId == this.fbId && x.completed == true);
+	console.log(this.items);
     this.assignCopy()
   }
 

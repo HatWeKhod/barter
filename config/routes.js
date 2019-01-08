@@ -3,13 +3,21 @@ module.exports = function (app, passport) {
     barterCtrl = require('../controllers/barter'),
     postCtrl = require('../controllers/post'),
     messageCtrl = require('../controllers/message');
-
+    registerCtrl = require('../controllers/register');
+	var localStorage = require('localStorage')
   // Middleware used to determine if the user is authenticated
   var auth = function (req, res, next) {
+	  console.log('session coming here');
+	  console.log(req.body);
+	  if(req.session.login_type = 'manual'){
+		  next();
+	  }else{
+		 !req.isAuthenticated() ? res.send(401) : next(); 
+	  }
     //          if(req.session.user) {
     //                next();
     //          } else {
-    !req.isAuthenticated() ? res.send(401) : next();
+    
     //          }
   };
   //    console.log(loginCtrl.index);
@@ -39,6 +47,9 @@ module.exports = function (app, passport) {
 
   app.get('/fbnotify', auth, barterCtrl.fbnotify);
   app.post('/fbnotify?fb_source=notification', loginCtrl.loggedIn);
+  app.post('/register', registerCtrl.registerUser);
+  app.post('/login_user', registerCtrl.loginUser);
+  app.post('/forgot_pass', registerCtrl.forgotPassowrd);
 
   // Post Controls
   app.get('/posts', auth, postCtrl.posts);

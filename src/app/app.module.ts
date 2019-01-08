@@ -7,22 +7,41 @@ import { AppComponent } from './app.component';
 
 // core
 import { CoreModule } from "./core/core.module";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormModalComponent } from './form-modal/form-modal.component';
+import { FormLoginModalComponent } from './form-modal/form-login-modal.component';
+import { FormForgotPassModalComponent } from './form-modal/form-forgot-pass-modal.component';
+import { UserLoginComponent } from './layout/user-login/user-login.component';
+import { UserRegisterComponent } from './layout/user-register/user-register.component';
+import { ForgotPasswordComponent } from './layout/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FormModalComponent,
+	FormLoginModalComponent,
+	FormForgotPassModalComponent,
+	UserLoginComponent,
+	UserRegisterComponent,
+	ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
+	NgbModule.forRoot(),
     CoreModule.forRoot(),
     ToastrModule.forRoot()
   ],
   providers: [
 
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+	  FormModalComponent,
+	  FormLoginModalComponent,
+	  FormForgotPassModalComponent
+	]
 })
 export class AppModule { }

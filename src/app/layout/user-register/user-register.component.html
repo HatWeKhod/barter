@@ -1,0 +1,56 @@
+<div class="login-box">
+    <div class="login-logo">
+        <a href=''><img class="img-fluid img-center login-logo" src="assets/images/logo.png"></a>
+    </div><!-- /.login-logo -->
+    <div class="login-box-body">
+			<p class='head_cap'>Register</p>
+        	<p class='form_err_msg'>{{form_error}}</p>
+				  <form [formGroup]="sigupForm" (ngSubmit)="onSubmit()">
+					<div id="user-data">			  
+					  <div class="form-group">
+						<label for="username">Full Name</label>
+						<input
+						  type="text"
+						  id="username"
+						  formControlName="username"
+						  class="form-control" required
+						   >	
+							<p class='err_msg'>{{username_err}}</p>
+					  </div>
+					  <div class="form-group">
+						<label for="email">Email</label>
+						<input
+						  type="email"
+						  id="email"
+						  formControlName="email"
+						  class="form-control" ng-model="email"required >
+						 <p class='err_msg'>{{email_err}}</p>
+					  </div>
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input
+						  type="password"
+						  id="password"
+						  formControlName="password"
+						  class="form-control" ng-model="password" >
+						  <p class='err_msg'>{{pass_error}}</p>
+					  </div>
+					  <div class="form-group">
+						<label for="password">Confirm Password</label>
+						<input
+						  type="password"
+						  id="c_password"
+						  formControlName="c_password"
+						  class="form-control" ng-model="c_password" >
+						  <p class='err_msg'>{{c_pass_error}}</p>
+					  </div> 
+					</div>
+					<div class="form_btn">
+						<button class="btn btn-primary" type="submit">Register</button>
+					</div>
+				  </form>
+				 <div class='other_links'>
+					<button type="button" [routerLink]="['/user-login']"  class="btn btn-link">Sign in</button>
+				  </div>
+            </div><!-- /.login-box-body -->
+</div>

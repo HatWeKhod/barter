@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit() {	  
     this.loading = LoadingState.Processing;
     this.name = localStorage.getItem('name')
     this.fbId = localStorage.getItem('fbId')
@@ -153,7 +153,8 @@ export class HomeComponent implements OnInit {
   }
 
   toggleFbPostList() {
-    this.fb_friends = !this.fb_friends;
+    //this.fb_friends = !this.fb_friends;
+    this.fb_friends = this.fb_friends;
     this.loading = LoadingState.Processing;
     this.getPostList();
   }
@@ -174,10 +175,13 @@ export class HomeComponent implements OnInit {
   }
 
   getPostList() {
+
     var data = { "fb_friends": this.fb_friends }
+	console.log('here coming data friends');
+	console.log(data);
     this.postService.getAllPost(data).subscribe(
       res => {
-        console.log(res)
+
         this.items = [];
         this.markers = [];
         this.all_post_list = [];

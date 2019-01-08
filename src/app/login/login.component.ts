@@ -5,7 +5,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../core/services/login.service';
 import { SeoService } from '../core/services/seo.service';
 import { Observable } from 'rxjs/Observable';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormModalComponent } from '../form-modal/form-modal.component';
+import { FormLoginModalComponent } from '../form-modal/form-login-modal.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +20,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private loginService: LoginService,
     private _seoService: SeoService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+	private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
@@ -41,7 +44,25 @@ export class LoginComponent implements OnInit {
     }
 
   }
-
+	openFormModal(page) {
+		
+		if(page == 'register'){
+			const modalRef = this.modalService.open(FormModalComponent);
+		modalRef.result.then((result) => {
+			console.log(result);
+		  }).catch((error) => {
+			console.log(error);
+		  });
+		}else if(page == 'login'){
+			const modalRef = this.modalService.open(FormLoginModalComponent);
+			modalRef.result.then((result) => {
+				console.log(result);
+			  }).catch((error) => {
+				console.log(error);
+			  });
+		}
+	  
+	}
   canDeactivate(): Observable<boolean> | boolean {
     if (!localStorage.getItem('isLoggedin')) {
       return true;

@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
     else {
       this.loginService.getLoginData().subscribe(
         res => {
+			console.log('here is coming response1');
           console.log(res)
           if (res['fbId'] != undefined) {
             localStorage.setItem('isLoggedin', 'true')

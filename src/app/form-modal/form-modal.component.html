@@ -1,0 +1,64 @@
+<div class="modal-header">
+  <h4 class="modal-title cus_modal_header">Register Your Account</h4>
+  <button type="button" class="close" aria-label="Close"
+   (click)="activeModal.dismiss('Cross click')">
+  </button>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+	<p class='form_err_msg'>{{form_error}}</p>
+      <form [formGroup]="sigupForm" (ngSubmit)="onSubmit()">
+        <div id="user-data">			  
+          <div class="form-group">
+            <label for="username">Full Name</label>
+            <input
+              type="text"
+              id="username"
+              formControlName="username"
+              class="form-control" required
+			   >	
+				<p class='err_msg'>{{username_err}}</p>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control" ng-model="email"required >
+			 <p class='err_msg'>{{email_err}}</p>
+          </div>
+		<div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="form-control" ng-model="password" >
+			  <p class='err_msg'>{{pass_error}}</p>
+          </div>
+		  <div class="form-group">
+            <label for="password">Confirm Password</label>
+            <input
+              type="password"
+              id="c_password"
+              formControlName="c_password"
+              class="form-control" ng-model="c_password" >
+			  <p class='err_msg'>{{c_pass_error}}</p>
+          </div> 
+        </div>
+		<div class="form_btn">
+			<button class="btn btn-primary" type="submit">Register</button>
+			<button class="btn btn-danger close_btn"(click)="activeModal.dismiss('Close clicked')"> Close</button>
+		</div>
+      </form>
+	 
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+   <div class="forgot_pass">
+			Already a member? <a  (click)="activeModal.dismiss('Close clicked')" (click)="openFormModal('login')"  class="btn-link custom_lnk">Click here</a> to login to your account.
+		</div>
+</div>

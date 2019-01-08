@@ -13,9 +13,9 @@
             <i class="fa fa-map-marker" aria-hidden="true"></i> {{'SEARCH_NEARBY' | translate}}</button>
           <button type="button" class="btn btn-secondary half-btn" [routerLink]="['/post-item']">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i> {{'POST_ITEM' | translate}}</button>
+          <!-- <button  type="button" class="btn btn-secondary full-btn" *ngIf="!fb_friends" (click)="toggleFbPostList()">
+            <i class="fa fa-facebook" aria-hidden="true"></i> {{'POSTS_FB_FRIENDS' | translate}} </button> -->
           <button type="button" class="btn btn-secondary full-btn" *ngIf="!fb_friends" (click)="toggleFbPostList()">
-            <i class="fa fa-facebook" aria-hidden="true"></i> {{'POSTS_FB_FRIENDS' | translate}} </button>
-          <button type="button" class="btn btn-secondary full-btn" *ngIf="fb_friends" (click)="toggleFbPostList()">
             {{'ALL_POSTS' | translate}} </button>
         </div>
       </div>

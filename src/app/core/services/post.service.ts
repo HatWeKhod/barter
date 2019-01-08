@@ -11,8 +11,6 @@ export class PostService {
   ) {
   }
 
-
-
   getAllPost(data): Observable<any> {
     return this.http.post(environment.apiEndpoint + 'posts', data)
   }

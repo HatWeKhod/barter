@@ -689,3 +689,40 @@ li {
 .right_side_view .infobox,.right_side_view .conversation_form,.right_side_view.rating_sec {
   text-align: right;
 }
+.custom_login{
+	width: 100%;
+	text-align: center;
+	margin-top: 7px;
+}
+.forgot_pass{
+	text-align:center;
+	width: 100%;
+}
+.cus_modal_header{
+	width: 100%;
+    text-align: center;
+}
+.close_btn{
+	float:right;
+}
+.custom_lnk{
+	cursor:pointer;
+	font-weight:600;
+}
+.err_msg{
+	color: red;
+	margin-bottom: 0;
+    text-align: left;
+    font-size: 12px;
+    line-height: 15px;
+}
+.form_err_msg{
+	color: red;
+    text-align: center;
+}
+.login_form_err_msg{
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 15px;  
+	color: red;	
+}	

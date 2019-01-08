@@ -14,6 +14,19 @@ export class LoginService {
     return this.http.get(environment.apiEndpoint + 'auth/facebook')
   }
 
+  postRegister(data) {
+	return this.http.post(environment.apiEndpoint + 'register', data)
+  }
+  postLoginUser(data) {
+	return this.http.post(environment.apiEndpoint + 'login_user', data)
+  }
+  postForgotPass(data) {
+	return this.http.post(environment.apiEndpoint + 'forgot_pass', data)
+  } 
+  postLogin(data) {
+    return this.http.post(environment.apiEndpoint + 'login', data)
+  }
+
   getLoginData() {
     return this.http.get(environment.apiEndpoint + 'loggedIn')
   }
