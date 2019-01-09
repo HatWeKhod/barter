@@ -21,6 +21,8 @@ export class LoginService {
 	return this.http.post(environment.apiEndpoint + 'login_user', data)
   }
   postForgotPass(data) {
+	  console.log('forgotpass data');
+	  console.log(data);
 	return this.http.post(environment.apiEndpoint + 'forgot_pass', data)
   } 
   postLogin(data) {

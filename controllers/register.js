@@ -80,14 +80,19 @@ var loginUser = function (req, res, done) {
 
 // Forgot password
 var forgotPassowrd = function (req, res, done) {
+	console.log('forgot password body');
+	console.log(req.body);
+	
 	var myquery = { email: req.body.email };
 	
 	 FbUsers.findOne({
 		email: req.body.email
 	  }, function (err, fbuser) {
 		if (fbuser) {
-			req.session.fbid = '0';			
-			var readHTMLFile = function(path, callback) {
+			
+			res.send({status: "200", message: 'Working'});
+			//req.session.fbid = '0';			
+			/* var readHTMLFile = function(path, callback) {
 				fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
 					if (err) {
 						throw err;
@@ -129,7 +134,7 @@ var forgotPassowrd = function (req, res, done) {
 					res.send({status: "200", message: 'Success','user':fbuser})
 					}
 				});
-			});
+			}); */
 			
 			
 			
