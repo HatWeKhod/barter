@@ -51,14 +51,14 @@ var registerUser = function (req, res, done) {
 				  keys = (env === 'production') ? require('../config/productionKeys')[env] : require('../config/keys')[env];
 
 				
-				var nodemailer = require('nodemailer');
+				//var nodemailer = require('nodemailer');
 				var transporter = nodemailer.createTransport({
 				  host: 'smtp.gmail.com',
 				port: 587,
 				secure: false,
 					auth: {
-						user: 'brstdev7@gmail.com',
-						pass: 'Brstdev#$%468'
+						user: 'brstdev18@gmail.com',
+						pass: 'brstdeveloper18'
 					}
 				});
 				var template = handlebars.compile(signup_email_temp);
@@ -189,14 +189,14 @@ var forgotPassowrd = function (req, res, done) {
 	  }, function (err, fbuser) {
 		if (fbuser) {
 			
-			var nodemailer = require('nodemailer');
+			//var nodemailer = require('nodemailer');
 				var transporter = nodemailer.createTransport({
 				  host: 'smtp.gmail.com',
 				port: 587,
 				secure: false,
 					auth: {
-						user: 'brstdev7@gmail.com',
-						pass: 'Brstdev#$%468'
+						user: 'brstdev18@gmail.com',
+						pass: 'brstdeveloper18'
 					}
 				});
 				var template = handlebars.compile(forgot_pass_temp);
