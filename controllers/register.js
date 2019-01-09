@@ -57,8 +57,8 @@ var registerUser = function (req, res, done) {
 				port: 587,
 				secure: false,
 					auth: {
-						user: 'brstdev18@gmail.com',
-						pass: 'brstdeveloper18'
+						user: 'brstdev7@gmail.com',
+						pass: 'Brstdev#$%468'
 					}
 				});
 				var template = handlebars.compile(signup_email_temp);
@@ -195,8 +195,8 @@ var forgotPassowrd = function (req, res, done) {
 				port: 587,
 				secure: false,
 					auth: {
-						user: 'brstdev18@gmail.com',
-						pass: 'brstdeveloper18'
+						user: 'brstdev7@gmail.com',
+						pass: 'Brstdev#$%468'
 					}
 				});
 				var template = handlebars.compile(forgot_pass_temp);
