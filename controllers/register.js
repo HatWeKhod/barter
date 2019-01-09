@@ -3,6 +3,7 @@ var nodemailer = require('nodemailer');
 var path = require('path');
 var handlebars = require('handlebars');
 var fs = require('fs');
+var smtpTransport = require('nodemailer-smtp-transport');
 var template_file_path = path.join(__dirname + '/email_template/email_template.html');
 var forgot_pass_temp = fs.readFileSync(template_file_path,{encoding:'utf-8'});
 var signup_template_file_path = path.join(__dirname + '/email_template/signup_email_template.html');
@@ -52,7 +53,7 @@ var registerUser = function (req, res, done) {
 
 				
 				//var nodemailer = require('nodemailer');
-				var transporter = nodemailer.createTransport({
+			/* 	var transporter = nodemailer.createTransport({
 				  host: 'smtp.gmail.com',
 				port: 587,
 				secure: false,
@@ -60,7 +61,17 @@ var registerUser = function (req, res, done) {
 						user: 'brstdev18@gmail.com',
 						pass: 'brstdeveloper18'
 					}
-				});
+				}); */
+				
+				var transporter = nodemailer.createTransport(smtpTransport({
+					service: 'gmail',
+					auth: {
+						user: 'brstdev18@gmail.com', // my mail
+						pass: 'brstdeveloper18'
+					}
+				}));
+				
+				
 				var template = handlebars.compile(signup_email_temp);
 				var replacements = {
 					 username: newUser.name,
@@ -190,7 +201,7 @@ var forgotPassowrd = function (req, res, done) {
 		if (fbuser) {
 			
 			//var nodemailer = require('nodemailer');
-				var transporter = nodemailer.createTransport({
+				/* var transporter = nodemailer.createTransport({
 				  host: 'smtp.gmail.com',
 				port: 587,
 				secure: false,
@@ -198,7 +209,14 @@ var forgotPassowrd = function (req, res, done) {
 						user: 'brstdev18@gmail.com',
 						pass: 'brstdeveloper18'
 					}
-				});
+				}); */
+				var transporter = nodemailer.createTransport(smtpTransport({
+					service: 'gmail',
+					auth: {
+						user: 'brstdev18@gmail.com', // my mail
+						pass: 'brstdeveloper18'
+					}
+				}));
 				var template = handlebars.compile(forgot_pass_temp);
 				var replacements = {
 					 username: fbuser.name,
