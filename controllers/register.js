@@ -1,5 +1,5 @@
 var FbUsers = require('../models/facebook').FbUsers;
-const nodemailer = require('nodemailer');
+var nodemailer = require('nodemailer');
 var path = require('path');
 var handlebars = require('handlebars');
 var fs = require('fs');
@@ -90,9 +90,9 @@ var forgotPassowrd = function (req, res, done) {
 	  }, function (err, fbuser) {
 		if (fbuser) {
 			
-			res.send({status: "200", message: 'Working'});
+			//res.send({status: "200", message: 'Working'});
 			//req.session.fbid = '0';			
-			/* var readHTMLFile = function(path, callback) {
+			var readHTMLFile = function(path, callback) {
 				fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
 					if (err) {
 						throw err;
@@ -120,7 +120,7 @@ var forgotPassowrd = function (req, res, done) {
 				};
 				var htmlToSend = template(replacements);
 				var mailOptions = {
-					from: 'my@email.com',
+					from: 'hatwekhod@yandex.com',
 					to : req.body.email,
 					subject : 'Password reset request from HatWeKhod',
 					html : htmlToSend
@@ -134,10 +134,8 @@ var forgotPassowrd = function (req, res, done) {
 					res.send({status: "200", message: 'Success','user':fbuser})
 					}
 				});
-			}); */
-			
-			
-			
+			}); 
+
 			/* var smtpTrans = nodemailer.createTransport({
 			   service: 'Gmail',
 				auth: {
