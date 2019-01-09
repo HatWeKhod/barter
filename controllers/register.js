@@ -111,6 +111,7 @@ var forgotPassowrd = function (req, res, done) {
 					pass: 'brstdeveloper18'
 				}
 			  });
+			  console.log(smtpTrans);
 			readHTMLFile(template_file_path, function(err, html) {
 				var template = handlebars.compile(html);
 				var replacements = {
@@ -119,12 +120,14 @@ var forgotPassowrd = function (req, res, done) {
 					 brand_name: 'HatWeKhod'
 				};
 				var htmlToSend = template(replacements);
+				console.log(smtpTrans);
 				var mailOptions = {
 					from: 'hatwekhod@yandex.com',
 					to : req.body.email,
 					subject : 'Password reset request from HatWeKhod',
 					html : htmlToSend
 				 };
+				 console.log(mailOptions);
 				smtpTrans.sendMail(mailOptions, function (error, response) {
 					if (error) {
 						console.log(error);
