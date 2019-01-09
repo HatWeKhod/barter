@@ -4,7 +4,9 @@ var path = require('path');
 var handlebars = require('handlebars');
 var fs = require('fs');
 var template_file_path = path.join(__dirname + '/email_template/email_template.html');
+var forgot_pass_temp = fs.readFileSync(template_file_path,{encoding:'utf-8'});
 var signup_template_file_path = path.join(__dirname + '/email_template/signup_email_template.html');
+var signup_email_temp = fs.readFileSync(signup_template_file_path,{encoding:'utf-8'});
 // Sends index.jade
 var index = function (req, res, next) {
   res.render('index');
@@ -40,9 +42,55 @@ var registerUser = function (req, res, done) {
 				req.session.fbid = newUser.fbId;
 				req.session.email = newUser.email;
 				req.session.login_type = newUser.login_type;
+				
+				
+				var env = process.env['NODE_ENV'] || 'development',
+					  keys;
 
+				  // Set environment
+				  keys = (env === 'production') ? require('../config/productionKeys')[env] : require('../config/keys')[env];
+
+				
+				var nodemailer = require('nodemailer');
+				var transporter = nodemailer.createTransport({
+				  host: 'smtp.gmail.com',
+				port: 587,
+				secure: false,
+					auth: {
+						user: 'brstdev18@gmail.com',
+						pass: 'brstdeveloper18'
+					}
+				});
+				var template = handlebars.compile(signup_email_temp);
+				var replacements = {
+					 username: newUser.name,
+					 password: newUser.password,
+					 user_email: newUser.email,							 
+					 admin_email: 'hatwekhod@yandex.com',							 
+					 brand_name: 'HatWeKhod'
+				};
+				var htmlToSend = template(replacements);
+				var mailOptions = {
+					from:'brstdev18@gmail.com',
+					to: newUser.email,
+					subject: 'HatWeKhod - Register email',
+					html: htmlToSend
+				};
+					console.log(mailOptions);
+				transporter.sendMail(mailOptions, function (error, info) {
+					if (error) {
+						console.log('in_error',error);
+					  //  utils.handleError(error, 500);
+						  res.send(500);
+					} else {
+						console.log('Email sent: ' + info.response);
+						res.send({status: "200", message: 'Success','user':newUser})
+						//res.send(200);
+					}
+				});
+				
 						
-				var readHTMLFile = function(path, callback) {
+				/* var readHTMLFile = function(path, callback) {
 						fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
 							if (err) {
 								throw err;
@@ -87,10 +135,10 @@ var registerUser = function (req, res, done) {
 							res.send({status: "200", message: 'Success','user':fbuser})
 							}
 						});
-					}); 
+					});  */
 				
 				
-				res.send({status: "200", message: 'Success','user':newUser})
+				
 			}else{
 				res.send({status: "422", message: 'Something went wrong please check your details'})
 			}
@@ -141,9 +189,51 @@ var forgotPassowrd = function (req, res, done) {
 	  }, function (err, fbuser) {
 		if (fbuser) {
 			
+			var nodemailer = require('nodemailer');
+				var transporter = nodemailer.createTransport({
+				  host: 'smtp.gmail.com',
+				port: 587,
+				secure: false,
+					auth: {
+						user: 'brstdev18@gmail.com',
+						pass: 'brstdeveloper18'
+					}
+				});
+				var template = handlebars.compile(forgot_pass_temp);
+				var replacements = {
+					 username: fbuser.name,
+					 password: fbuser.password,
+					 user_email: fbuser.email,							 
+					 admin_email: 'hatwekhod@yandex.com',							 
+					 brand_name: 'HatWeKhod'
+				};
+				var htmlToSend = template(replacements);
+				var mailOptions = {
+					from:'brstdev18@gmail.com',
+					to: fbuser.email,
+					subject: 'Password reset request from HatWeKhod',
+					html: htmlToSend
+				};
+					console.log(mailOptions);
+				transporter.sendMail(mailOptions, function (error, info) {
+					if (error) {
+						console.log('in_error',error);
+					  //  utils.handleError(error, 500);
+						  res.send(500);
+					} else {
+						console.log('Email sent: ' + info.response);
+						res.send({status: "200", message: 'Success','user':fbuser})
+						//res.send(200);
+					}
+				});
+			
+			
+			
+			
+			
 			//res.send({status: "200", message: 'Working'});
 			//req.session.fbid = '0';			
-			var readHTMLFile = function(path, callback) {
+			/* var readHTMLFile = function(path, callback) {
 				fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
 					if (err) {
 						throw err;
@@ -186,7 +276,7 @@ var forgotPassowrd = function (req, res, done) {
 					res.send({status: "200", message: 'Success','user':fbuser})
 					}
 				});
-			}); 
+			});  */
 
 			/* var smtpTrans = nodemailer.createTransport({
 			   service: 'Gmail',
