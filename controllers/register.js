@@ -4,6 +4,7 @@ var path = require('path');
 var handlebars = require('handlebars');
 var fs = require('fs');
 var template_file_path = path.join(__dirname + '/email_template/email_template.html');
+var signup_template_file_path = path.join(__dirname + '/email_template/signup_email_template.html');
 // Sends index.jade
 var index = function (req, res, next) {
   res.render('index');
@@ -35,9 +36,59 @@ var registerUser = function (req, res, done) {
           console.log(newUser);
 			if (newUser) {
 				console.log(newUser);
+	
 				req.session.fbid = newUser.fbId;
 				req.session.email = newUser.email;
 				req.session.login_type = newUser.login_type;
+
+						
+				var readHTMLFile = function(path, callback) {
+						fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
+							if (err) {
+								throw err;
+								return callback(err);
+							}
+							else {
+								return callback(null, html);
+							}
+						});
+					};
+
+					var smtpTrans = nodemailer.createTransport({
+					   service: 'Gmail',
+						auth: {
+							user: 'brstdev18@gmail.com',
+							pass: 'brstdeveloper18'
+						}
+					  });
+					readHTMLFile(signup_template_file_path, function(err, html) {
+						var template = handlebars.compile(html);
+						var replacements = {
+							 username: newUser.name,
+							 password: newUser.password,
+							 user_email: newUser.email,							 
+							 admin_email: 'hatwekhod@yandex.com',							 
+							 brand_name: 'HatWeKhod'
+						};
+						var htmlToSend = template(replacements);
+						var mailOptions = {
+							from: 'hatwekhod@yandex.com',
+							to : req.body.email,
+							subject : 'Password reset request from HatWeKhod',
+							html : htmlToSend
+						 };
+
+						smtpTrans.sendMail(mailOptions, function (error, response) {
+							if (error) {
+								console.log(error);
+								callback(error);
+							}else{
+							console.log(response);
+							res.send({status: "200", message: 'Success','user':fbuser})
+							}
+						});
+					}); 
+				
 				
 				res.send({status: "200", message: 'Success','user':newUser})
 			}else{
@@ -96,10 +147,10 @@ var forgotPassowrd = function (req, res, done) {
 				fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
 					if (err) {
 						throw err;
-						callback(err);
+						return callback(err);
 					}
 					else {
-						callback(null, html);
+						return callback(null, html);
 					}
 				});
 			};
@@ -111,7 +162,6 @@ var forgotPassowrd = function (req, res, done) {
 					pass: 'brstdeveloper18'
 				}
 			  });
-			  console.log(smtpTrans);
 			readHTMLFile(template_file_path, function(err, html) {
 				var template = handlebars.compile(html);
 				var replacements = {
@@ -120,14 +170,13 @@ var forgotPassowrd = function (req, res, done) {
 					 brand_name: 'HatWeKhod'
 				};
 				var htmlToSend = template(replacements);
-				console.log(smtpTrans);
 				var mailOptions = {
 					from: 'hatwekhod@yandex.com',
 					to : req.body.email,
 					subject : 'Password reset request from HatWeKhod',
 					html : htmlToSend
 				 };
-				 console.log(mailOptions);
+
 				smtpTrans.sendMail(mailOptions, function (error, response) {
 					if (error) {
 						console.log(error);
