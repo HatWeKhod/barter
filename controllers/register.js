@@ -289,11 +289,9 @@ var forgotPassowrd = function (req, res, done) {
 								console.log('fbuser coming');
 								console.log(fbid_user);
 								var today = new Date();
-								var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-								var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-								var dateTime = date+' '+time;
+								console.log(today);
 								var myquery = { email: fbuser.email };
-								  var newvalues = { $set: {token: encrypted_code, created_at: dateTime } };
+								  var newvalues = { $set: {token: encrypted_code, created_at: today } };
 								  FbUsers.updateOne(myquery,newvalues, function(err, res) {
 									if (err) throw err;
 									console.log("1 document updated");
