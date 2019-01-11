@@ -2055,7 +2055,13 @@ var ResetPasswordComponent = /** @class */ (function () {
                     var token_date_time = new Date(token_date);
                     var timestamp2 = token_date_time.getTime() + 600000;
                     console.log(timestamp2);
-                    if (timestamp2 > timestamp1) {
+                    var current_time = new Date().getTime();
+                    var token_time = new Date(token_date).getTime();
+                    var token_time_after_10_min = new Date(token_date).getTime() + 600000;
+                    console.log(current_time);
+                    console.log(token_time);
+                    console.log(token_time_after_10_min);
+                    if (token_time <= current_time && current_time <= token_time_after_10_min) {
                         _this.form_show = true;
                         _this.user_email = u_email;
                     }
