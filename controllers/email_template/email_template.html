@@ -411,14 +411,15 @@
                   <tr>
                     <td class="content-cell">
                       <h1>Hi {{username}},</h1>
-                      <p>This is an email from HatWeKhod, as you have requested for the password. Here is your password <strong>{{password}}</strong></p>
+                      <p>This is an email from HatWeKhod, as you have requested for reset the password. Here is a link down below to reset the password.
                       <!-- Action -->
                       <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                           <td align="center">
                             <!-- Border based button
+							
                        https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->
-                            
+                            <a href="https://hatwekhod.cfapps.io/#/reset-password?token={{encrypted_code}}"><button class='button--green'>Reset Password</button></a>
                           </td>
                         </tr>
                       </table>

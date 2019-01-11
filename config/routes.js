@@ -46,10 +46,12 @@ module.exports = function (app, passport) {
   });
 
   app.get('/fbnotify', auth, barterCtrl.fbnotify);
+  app.post('/userdata', auth, registerCtrl.userData);
   app.post('/fbnotify?fb_source=notification', loginCtrl.loggedIn);
   app.post('/register', registerCtrl.registerUser);
   app.post('/login_user', registerCtrl.loginUser);
   app.post('/forgot_pass', registerCtrl.forgotPassowrd);
+  app.post('/resetPass', registerCtrl.resetPassowrd);
 
   // Post Controls
   app.get('/posts', auth, postCtrl.posts);

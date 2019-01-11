@@ -5,10 +5,12 @@ import { CandeativateGuard } from './core/guard/candeativate.guard';
 import { UserLoginComponent } from './layout/user-login/user-login.component';
 import { UserRegisterComponent } from './layout/user-register/user-register.component';
 import { ForgotPasswordComponent } from './layout/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './layout/reset-password/reset-password.component';
 
 
 const routes: Routes = [
 { path: 'user-login', component: UserLoginComponent },
+{ path: 'reset-password', component: ResetPasswordComponent },
 { path: 'user-register', component: UserRegisterComponent },
 { path: 'forgot-password', component: ForgotPasswordComponent },
  

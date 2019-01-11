@@ -45,6 +45,7 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__layout_user_login_user_login_component__ = __webpack_require__("./src/app/layout/user-login/user-login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__layout_user_register_user_register_component__ = __webpack_require__("./src/app/layout/user-register/user-register.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__layout_forgot_password_forgot_password_component__ = __webpack_require__("./src/app/layout/forgot-password/forgot-password.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__layout_reset_password_reset_password_component__ = __webpack_require__("./src/app/layout/reset-password/reset-password.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58,8 +59,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var routes = [
     { path: 'user-login', component: __WEBPACK_IMPORTED_MODULE_4__layout_user_login_user_login_component__["a" /* UserLoginComponent */] },
+    { path: 'reset-password', component: __WEBPACK_IMPORTED_MODULE_7__layout_reset_password_reset_password_component__["a" /* ResetPasswordComponent */] },
     { path: 'user-register', component: __WEBPACK_IMPORTED_MODULE_5__layout_user_register_user_register_component__["a" /* UserRegisterComponent */] },
     { path: 'forgot-password', component: __WEBPACK_IMPORTED_MODULE_6__layout_forgot_password_forgot_password_component__["a" /* ForgotPasswordComponent */] },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -241,6 +244,7 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__layout_user_login_user_login_component__ = __webpack_require__("./src/app/layout/user-login/user-login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__layout_user_register_user_register_component__ = __webpack_require__("./src/app/layout/user-register/user-register.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__layout_forgot_password_forgot_password_component__ = __webpack_require__("./src/app/layout/forgot-password/forgot-password.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__layout_reset_password_reset_password_component__ = __webpack_require__("./src/app/layout/reset-password/reset-password.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -262,6 +266,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -274,7 +279,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_10__form_modal_form_forgot_pass_modal_component__["a" /* FormForgotPassModalComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__layout_user_login_user_login_component__["a" /* UserLoginComponent */],
                 __WEBPACK_IMPORTED_MODULE_12__layout_user_register_user_register_component__["a" /* UserRegisterComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__layout_forgot_password_forgot_password_component__["a" /* ForgotPasswordComponent */]
+                __WEBPACK_IMPORTED_MODULE_13__layout_forgot_password_forgot_password_component__["a" /* ForgotPasswordComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__layout_reset_password_reset_password_component__["a" /* ResetPasswordComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1316,12 +1322,18 @@ var LoginService = /** @class */ (function () {
         return this.http.post(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].apiEndpoint + 'login_user', data);
     };
     LoginService.prototype.postForgotPass = function (data) {
-        console.log('forgotpass data');
-        console.log(data);
         return this.http.post(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].apiEndpoint + 'forgot_pass', data);
     };
     LoginService.prototype.postLogin = function (data) {
         return this.http.post(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].apiEndpoint + 'login', data);
+    };
+    LoginService.prototype.postUserData = function (data) {
+        console.log('userdata coming here');
+        console.log(data);
+        return this.http.post(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].apiEndpoint + 'userdata', data);
+    };
+    LoginService.prototype.postResetPass = function (data) {
+        return this.http.post(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].apiEndpoint + 'resetPass', data);
     };
     LoginService.prototype.getLoginData = function () {
         return this.http.get(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].apiEndpoint + 'loggedIn');
@@ -1943,7 +1955,7 @@ var ForgotPasswordComponent = /** @class */ (function () {
             }
             else {
                 console.log(res);
-                _this.form_error = 'We have sent an email with password!';
+                _this.form_error = 'We have send a password reset link to your email ';
                 return false;
             }
         }, function (error) {
@@ -1960,6 +1972,178 @@ var ForgotPasswordComponent = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_2__core_services_login_service__["a" /* LoginService */]])
     ], ForgotPasswordComponent);
     return ForgotPasswordComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/layout/reset-password/reset-password.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"login-box\">\n    <div class=\"login-logo\">\n         <a href=''><img class=\"img-fluid img-center login-logo\" src=\"assets/images/logo.png\"></a>\n    </div><!-- /.login-logo -->\n    <div class=\"login-box-body\">\n\t\t\t<p class='head_cap'>Reset Your passwrod</p>\n        \t<p class='login_form_err_msg'>{{form_error}}</p>\n        \t<p class='forgot_form_success_msg'>{{success_form_msg}}</p>\n\t\t\t\t<form [formGroup]=\"resetForm\" (ngSubmit)=\"onPasswordUpdate()\">\n\t\t\t\t\t<div id=\"user-data\" *ngIf=\"form_show === true;else second\">\t\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\n\t\t\t\t\t\t<input\n\t\t\t\t\t\t  type=\"hidden\"\n\t\t\t\t\t\t  id=\"user_email\"\n\t\t\t\t\t\t  formControlName=\"user_email\"\n\t\t\t\t\t\t  class=\"form-control\" [(ngModel)]=\"user_email\">\n\t\t\t\t\t  </div>\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t<label for=\"password\">New Password</label>\n\t\t\t\t\t\t<input\n\t\t\t\t\t\t  type=\"password\"\n\t\t\t\t\t\t  id=\"New_password\"\n\t\t\t\t\t\t  formControlName=\"New_password\"\n\t\t\t\t\t\t  class=\"form-control\" ng-model=\"New_password\" >\n\t\t\t\t\t\t  <p class='err_msg'>{{new_pass_error}}</p>\n\t\t\t\t\t  </div>\n\t\t\t\t\t  \n\t\t\t\t\t  <div class=\"form-group\">\n\t\t\t\t\t\t<label for=\"password\">Confirm Password</label>\n\t\t\t\t\t\t<input\n\t\t\t\t\t\t  type=\"password\"\n\t\t\t\t\t\t  id=\"c_New_password\"\n\t\t\t\t\t\t  formControlName=\"c_New_password\"\n\t\t\t\t\t\t  class=\"form-control\" ng-model=\"c_New_password\" >\n\t\t\t\t\t\t  <p class='err_msg'>{{c_new_pass_error}}</p>\n\t\t\t\t\t  </div>\n\t\t\t\t\t  <div class=\"form_btn\">\n\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"submit\">Reset</button>\n\t\t\t\t\t  </div>\t\t\t\t\t  \n\t\t\t\t\t</div>\n\t\t\t\t  </form>\n\t\t\t\t  <div class='other_links'>\n\t\t\t\t\t<button type=\"button\" [routerLink]=\"['/user-login']\"  class=\"btn btn-link\">Sign in</button>\n\t\t\t\t  </div>\n\t\t\t\t  <ng-template #second>\n\t\t\t\t\t\t<div *ngIf=\"form_show === false;else third\">\n\t\t\t\t\t\t\t<p class='login_form_err_msg'>{{expire_err}}</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</ng-template>\n\t\t\t\t\t\n\t\t\t\t\t<ng-template #third>\n\t\t\t\t\t\t\t<p class='login_form_err_msg'>{{bad_req_err}}</p>\n\t\t\t\t\t</ng-template>\n            </div><!-- /.login-box-body -->\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/layout/reset-password/reset-password.component.scss":
+/***/ (function(module, exports) {
+
+module.exports = ".form-control {\n  background-color: #ffffff;\n  background-image: none;\n  border: 1px solid #999999;\n  border-radius: 0;\n  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;\n          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;\n  color: #333333;\n  display: block;\n  font-size: 14px;\n  height: 34px;\n  line-height: 1.42857;\n  padding: 6px 12px;\n  -webkit-transition: border-color 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;\n  transition: border-color 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;\n  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;\n  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;\n  width: 100%; }\n\n.login-box, .register-box {\n  width: 360px;\n  margin: 7% auto; }\n\n.login-page, .register-page {\n  background: #d2d6de; }\n\n.login-logo, .register-logo {\n  font-size: 35px;\n  text-align: center;\n  margin-bottom: 25px;\n  font-weight: 300; }\n\n.login-box-msg, .register-box-msg {\n  margin: 0;\n  text-align: center;\n  padding: 0 20px 20px 20px; }\n\n.login-box-body, .register-box-body {\n  background: #fff;\n  padding: 20px;\n  border-top: 0;\n  color: #666; }\n\n.has-feedback {\n  position: relative; }\n\n.form-group {\n  margin-bottom: 15px; }\n\n.has-feedback .form-control {\n  padding-right: 42.5px; }\n\n.login-box-body .form-control-feedback, .register-box-body .form-control-feedback {\n  color: #777; }\n\n.form-control-feedback {\n  position: absolute;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  display: block;\n  width: 34px;\n  height: 34px;\n  line-height: 34px;\n  text-align: center;\n  pointer-events: none; }\n\n.checkbox, .radio {\n  position: relative;\n  display: block;\n  margin-top: 10px;\n  margin-bottom: 10px; }\n\n.icheck > label {\n  padding-left: 0; }\n\n.checkbox label, .radio label {\n  min-height: 20px;\n  padding-left: 20px;\n  margin-bottom: 0;\n  font-weight: 400;\n  cursor: pointer; }\n\n.head_cap {\n  font-size: 22px;\n  text-align: center; }\n\n.other_links {\n  text-align: center;\n  margin-top: 10px; }\n\n.forgot_form_success_msg {\n  font-size: 14px;\n  text-align: center;\n  margin-bottom: 15px;\n  color: green; }\n"
+
+/***/ }),
+
+/***/ "./src/app/layout/reset-password/reset-password.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ResetPasswordComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_services_login_service__ = __webpack_require__("./src/app/core/services/login.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ResetPasswordComponent = /** @class */ (function () {
+    function ResetPasswordComponent(router, loginService, activatedRoute) {
+        this.router = router;
+        this.loginService = loginService;
+        this.activatedRoute = activatedRoute;
+        this.random_no = '';
+        this.form_error = '';
+        this.new_pass_error = '';
+        this.c_new_pass_error = '';
+        this.confirm_pass = '';
+        this.user_email = '';
+        this.username_err = '';
+        this.expire_err = '';
+        this.bad_req_err = '';
+        this.success_form_msg = '';
+    }
+    ResetPasswordComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.resetForm = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["d" /* FormGroup */]({
+            'New_password': new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormControl */](null),
+            'c_New_password': new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormControl */](null),
+            'user_email': new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormControl */]()
+        });
+        this.activatedRoute.queryParams.subscribe(function (params) {
+            var token = params['token'];
+            console.log(token);
+            if (token != 'undefined' || token != '') {
+                var reset_token = { token: token };
+                _this.loginService.postUserData(reset_token).subscribe(function (res) {
+                    var token_date = res['user'].created_at;
+                    var u_email = res['user'].email;
+                    var today = new Date();
+                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var current_date = date + ' ' + time;
+                    var current_date_time = new Date(current_date);
+                    var timestamp1 = today.getTime();
+                    console.log(timestamp1);
+                    var token_date_time = new Date(token_date);
+                    var timestamp2 = token_date_time.getTime() + 600000;
+                    console.log(timestamp2);
+                    if (timestamp2 > timestamp1) {
+                        _this.form_show = true;
+                        _this.user_email = u_email;
+                    }
+                    else {
+                        _this.form_show = false;
+                        _this.expire_err = 'Sorry, your password reset link expired!';
+                    }
+                    //var	token_time = 	
+                    //this.router.navigate(['/home']);
+                }, function (error) {
+                    console.log(error);
+                });
+            }
+            else {
+                _this.bad_req_err = 'Bad request';
+            }
+        });
+    };
+    ResetPasswordComponent.prototype.onPasswordUpdate = function () {
+        var _this = this;
+        console.log(this.resetForm);
+        if (this.resetForm.value.New_password == '' || this.resetForm.value.New_password == null) {
+            this.new_pass_error = '*Please enter a password';
+            return false;
+        }
+        if (this.resetForm.value.c_New_password == '' || this.resetForm.value.c_New_password == null) {
+            this.c_new_pass_error = '*Please enter confirm password';
+            return false;
+        }
+        if (this.resetForm.value.New_password != this.resetForm.value.c_New_password) {
+            this.c_new_pass_error = '*Password does not match';
+            return false;
+        }
+        this.loginService.postResetPass(this.resetForm.value).subscribe(function (res) {
+            if (res['status'] == '422') {
+                _this.form_error = res['message'];
+                return false;
+            }
+            else {
+                console.log(res);
+                _this.success_form_msg = 'Your password updated successfully, please sign in into you account!';
+                return false;
+            }
+        }, function (error) {
+            console.log(error);
+        });
+        /* if(this.forgotForm.value.email == '' || this.forgotForm.value.email == null){
+            this.email_err = '*Please enter a valid email address';
+            return false;
+        }else{
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            var email = this.forgotForm.value.email;
+            if(email.match(mailformat)){
+                //nothing to do
+            }
+            else{
+                this.email_err = '*Please enter a valid email address';
+                return false;
+            }
+        }
+    
+    this.loginService.postForgotPass(this.forgotForm.value).subscribe(
+      res => {
+            if(res['status'] == '422'){
+              this.form_error = res['message'];
+              return false;
+          }else{
+              console.log(res);
+                this.form_error = 'We have send a password reset link to your email ';
+                return false;
+          }
+      },
+      error => {
+          console.log(error)
+      }
+    ) */
+    };
+    ResetPasswordComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-reset-password',
+            template: __webpack_require__("./src/app/layout/reset-password/reset-password.component.html"),
+            styles: [__webpack_require__("./src/app/layout/reset-password/reset-password.component.scss")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_2__core_services_login_service__["a" /* LoginService */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]])
+    ], ResetPasswordComponent);
+    return ResetPasswordComponent;
 }());
 
 

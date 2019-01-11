@@ -14,6 +14,7 @@ import { FormForgotPassModalComponent } from './form-modal/form-forgot-pass-moda
 import { UserLoginComponent } from './layout/user-login/user-login.component';
 import { UserRegisterComponent } from './layout/user-register/user-register.component';
 import { ForgotPasswordComponent } from './layout/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './layout/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ForgotPasswordComponent } from './layout/forgot-password/forgot-passwor
 	FormForgotPassModalComponent,
 	UserLoginComponent,
 	UserRegisterComponent,
-	ForgotPasswordComponent
+	ForgotPasswordComponent,
+	ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

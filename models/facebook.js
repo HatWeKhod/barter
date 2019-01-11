@@ -7,6 +7,8 @@ var facebookUserSchema = new mongoose.Schema({
   'email':String,
   'login_type':String,
   'password':String,
+  'token':String,
+  'created_at': String,
   'barter_score':  { 'type': Number, 'default': 0 },
     'people_rate_count':  { 'type': Number, 'default': 0 },
 });

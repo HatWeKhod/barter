@@ -188,6 +188,29 @@ var loginUser = function (req, res, done) {
 };
 
 
+// getting user data
+var userData = function (req, res, done) {
+	console.log(req.body);
+	console.log('req body');
+	 FbUsers.findOne({
+    token: req.body.token
+  }, function (err, fbuser) {
+    if (fbuser) {
+		console.log('fbuser coming');
+		console.log(fbuser);
+		
+		var token_created_at = fbuser.created_at;
+		res.send({status: "200", message: 'Success',user : fbuser})
+    }else{
+		res.send({status: "422", message: 'Something went wrong please check your details'})
+	}
+
+  });
+	
+	
+};
+
+
 // Forgot password
 var forgotPassowrd = function (req, res, done) {
 	console.log('forgot password body');
@@ -210,6 +233,23 @@ var forgotPassowrd = function (req, res, done) {
 						pass: 'brstdeveloper18'
 					}
 				}); */
+				
+				
+				
+				  function makeid() {
+					  var text = "";
+					  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+					  for (var i = 0; i < 15; i++)
+						text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+					  return text;
+					}
+
+				console.log(makeid());
+				var encrypted_code = makeid();
+
+				
 				var transporter = nodemailer.createTransport(smtpTransport({
 					service: 'gmail',
 					auth: {
@@ -222,7 +262,8 @@ var forgotPassowrd = function (req, res, done) {
 					 username: fbuser.name,
 					 password: fbuser.password,
 					 user_email: fbuser.email,							 
-					 admin_email: 'hatwekhod@yandex.com',							 
+					 admin_email: 'hatwekhod@yandex.com',
+					 encrypted_code	: encrypted_code,	
 					 brand_name: 'HatWeKhod'
 				};
 				var htmlToSend = template(replacements);
@@ -240,7 +281,31 @@ var forgotPassowrd = function (req, res, done) {
 						  res.send(500);
 					} else {
 						console.log('Email sent: ' + info.response);
-						res.send({status: "200", message: 'Success','user':fbuser})
+						
+						FbUsers.findOne({
+							email: fbuser.email
+						  }, function (err, fbid_user) {
+							if (fbid_user) {
+								console.log('fbuser coming');
+								console.log(fbid_user);
+								var today = new Date();
+								var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+								var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+								var dateTime = date+' '+time;
+								var myquery = { email: fbuser.email };
+								  var newvalues = { $set: {token: encrypted_code, created_at: dateTime } };
+								  FbUsers.updateOne(myquery,newvalues, function(err, res) {
+									if (err) throw err;
+									console.log("1 document updated");
+								  });
+
+								res.send({status: "200", message: 'Success','user':fbuser})
+							}else{
+								res.send({status: "422", message: 'Something went wrong please try again!'})
+							}
+
+						  });
+						
 						//res.send(200);
 					}
 				});
@@ -339,6 +404,45 @@ var forgotPassowrd = function (req, res, done) {
 };
 
 
+
+
+
+
+// getting user data
+var resetPassowrd = function (req, res, done) {
+	console.log(req.body);
+	console.log('req body');
+	
+	
+	var myquery = { email: req.body.user_email };
+  var newvalues = { $set: {password: req.body.New_password} };
+  FbUsers.updateOne(myquery, newvalues, function(err, response) {
+    if(err){		
+		res.send({status: "422", message: 'Something went wrong please check your details'})
+	}else{
+		res.send({status: "200", message: 'Success' })
+	}
+  });
+	
+	
+	/*  FbUsers.findOne({
+    email: req.body.user_email
+  }, function (err, fbuser) {
+    if (fbuser) {
+		console.log('fbuser coming');
+		console.log(fbuser);
+		
+		var token_created_at = fbuser.created_at;
+		res.send({status: "200", message: 'Success',user : fbuser})
+    }else{
+		res.send({status: "422", message: 'Something went wrong please check your details'})
+	}
+
+  }); */
+	
+	
+};
+
 // Logs the user out and redirects to landing page
 var loggedOut = function (req, res){
   req.logOut();
@@ -351,5 +455,7 @@ module.exports = {
   loggedOut: loggedOut,
   registerUser:registerUser,
   loginUser:loginUser,
-  forgotPassowrd:forgotPassowrd
+  forgotPassowrd:forgotPassowrd,
+  userData:userData,
+  resetPassowrd:resetPassowrd
 };

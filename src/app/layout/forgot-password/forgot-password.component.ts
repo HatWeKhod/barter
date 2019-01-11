@@ -20,6 +20,7 @@ export class ForgotPasswordComponent implements OnInit {
 	  this.forgotForm = new FormGroup({
 		  'email': new FormControl(null)
 		});
+		
   }
   
   forgotPass(){
@@ -47,7 +48,7 @@ export class ForgotPasswordComponent implements OnInit {
 					  return false;
 				  }else{
 					  console.log(res);
-						this.form_error = 'We have sent an email with password!';
+						this.form_error = 'We have send a password reset link to your email ';
 						return false;
 				  }
 			  },
