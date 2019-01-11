@@ -53,12 +53,10 @@ export class ResetPasswordComponent implements OnInit {
 					
 					var current_date_time = new Date(current_date);
 					var timestamp1 = today.getTime();
-					console.log(timestamp1);
-					
+
 					var token_date_time = new Date(token_date);
 					var timestamp2 = token_date_time.getTime() + 600000;
-					console.log(timestamp2);
-					
+
 					
 					var current_time = new Date().getTime();
 					
@@ -69,6 +67,10 @@ export class ResetPasswordComponent implements OnInit {
 					console.log(current_time);
 					console.log(token_time);
 					console.log(token_time_after_10_min);
+					
+					console.log(new Date(current_time));
+					console.log(new Date(token_time));
+					console.log(new Date(token_time_after_10_min));
 					
 					
 					if(token_time <= current_time && current_time <= token_time_after_10_min){
