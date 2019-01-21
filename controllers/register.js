@@ -77,14 +77,15 @@ var registerUser = function (req, res, done) {
 					 username: newUser.name,
 					 password: newUser.password,
 					 user_email: newUser.email,							 
-					 admin_email: 'hatwekhod@yandex.com',							 
+					 admin_email: 'admin@hatwekhod.net',							 
 					 brand_name: 'HatWeKhod'
 				};
 				var htmlToSend = template(replacements);
 				var mailOptions = {
-					from:'brstdev18@gmail.com',
+					//from:'brstdev18@gmail.com', 
+					from:'donotreply@hatwekhod.net',
 					to: newUser.email,
-					subject: 'HatWeKhod - Register email',
+					subject: 'HatWeKhod - Registration email',
 					html: htmlToSend
 				};
 					console.log(mailOptions);
@@ -268,7 +269,8 @@ var forgotPassowrd = function (req, res, done) {
 				};
 				var htmlToSend = template(replacements);
 				var mailOptions = {
-					from:'brstdev18@gmail.com',
+					//from:'brstdev18@gmail.com',
+					from:'contact@hatwekhod.net',
 					to: fbuser.email,
 					subject: 'Password reset request from HatWeKhod',
 					html: htmlToSend
