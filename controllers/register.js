@@ -64,10 +64,10 @@ var registerUser = function (req, res, done) {
 				}); */
 				
 				var transporter = nodemailer.createTransport(smtpTransport({
-					service: 'gmail',
+					service: 'yandex',
 					auth: {
-						user: 'brstdev18@gmail.com', // my mail
-						pass: 'brstdeveloper18'
+						user: 'hatwekhod@yandex.com', // my mail
+						pass: 'gephszbzxgdwojwa'
 					}
 				}));
 				
@@ -77,13 +77,13 @@ var registerUser = function (req, res, done) {
 					 username: newUser.name,
 					 password: newUser.password,
 					 user_email: newUser.email,							 
-					 admin_email: 'admin@hatwekhod.net',							 
+					 admin_email: 'hatwekhod@yandex.com',							 
 					 brand_name: 'HatWeKhod'
 				};
 				var htmlToSend = template(replacements);
 				var mailOptions = {
 					//from:'brstdev18@gmail.com', 
-					from:'donotreply@hatwekhod.net',
+					from:'DoNotReply@yandex.com',
 					to: newUser.email,
 					subject: 'HatWeKhod - Registration email',
 					html: htmlToSend
@@ -252,10 +252,10 @@ var forgotPassowrd = function (req, res, done) {
 
 				
 				var transporter = nodemailer.createTransport(smtpTransport({
-					service: 'gmail',
+					service: 'yandex',
 					auth: {
-						user: 'brstdev18@gmail.com', // my mail
-						pass: 'brstdeveloper18'
+						user: 'hatwekhod@yandex.com', // my mail
+						pass: 'gephszbzxgdwojwa'
 					}
 				}));
 				var template = handlebars.compile(forgot_pass_temp);
@@ -263,14 +263,14 @@ var forgotPassowrd = function (req, res, done) {
 					 username: fbuser.name,
 					 password: fbuser.password,
 					 user_email: fbuser.email,							 
-					 admin_email: 'hatwekhod@yandex.com',
+					 admin_email: 'admin@hatwekhod.net',
 					 encrypted_code	: encrypted_code,	
 					 brand_name: 'HatWeKhod'
 				};
 				var htmlToSend = template(replacements);
 				var mailOptions = {
 					//from:'brstdev18@gmail.com',
-					from:'contact@hatwekhod.net',
+					from:'DoNotReply@hatwekhod.net',
 					to: fbuser.email,
 					subject: 'Password reset request from HatWeKhod',
 					html: htmlToSend
