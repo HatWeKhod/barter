@@ -34,9 +34,6 @@ app.use(stylus.middleware({
   compile: compile
 }));
 /* https redirect start */
-app.use('/', require('redirect-https')({
-  body: '<!-- Hello Mr Developer! Please use HTTPS instead -->'
-}));
 /* https redirect end */
 app.use(bodyParser.urlencoded({
   extended: true,
