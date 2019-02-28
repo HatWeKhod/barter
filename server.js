@@ -20,6 +20,16 @@ const MongoStore = require('connect-mongo')(session);
 var compile = function (str, path) {
   return stylus(str).set('filename', path);
 };
+app.use(function (req, res, next) {
+ if (req.protocol === 'https') {
+	console.log(req.protocol, req.secure);
+	console.log("not redirected");
+   // next();
+} else {
+	console.log('redirected');
+	res.redirect('https://' + req.headers.host + req.url);
+}
+});
 keys = (env === 'production') ? require('./config/productionKeys')[env] : require('./config/keys')[env];
 mongoose.Promise = require('bluebird');
 mongoose.connect(keys.DB, {
