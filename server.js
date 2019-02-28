@@ -82,7 +82,13 @@ app.use(function (req, res, next) {
 	res.setHeader('Access-Control-Allow-Credentials', true);
 	res.setHeader('X-Forwarded-Proto', 'https');
   // Pass to next layer of middleware
-  next();
+  if (req.protocol === 'https') {
+	console.log(req.protocol, req.secure);
+	next();
+	} else {
+	console.log('redirected');
+	res.redirect('https://' + req.headers.host + req.url);
+	}
 });
 
 // error handler
