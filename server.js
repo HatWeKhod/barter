@@ -21,6 +21,13 @@ var compile = function (str, path) {
   return stylus(str).set('filename', path);
 };
 
+app.use(function(req, res, next) {
+  if ((req.get('X-Forwarded-Proto') !== 'https')) {
+	res.redirect('https://' + req.get('Host') + req.url);
+  } else
+	next();
+});
+
 keys = (env === 'production') ? require('./config/productionKeys')[env] : require('./config/keys')[env];
 mongoose.Promise = require('bluebird');
 mongoose.connect(keys.DB, {
