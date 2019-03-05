@@ -53,23 +53,23 @@ var registerUser = function (req, res, done) {
 
 				
 				//var nodemailer = require('nodemailer');
-			/* 	var transporter = nodemailer.createTransport({
+			var transporter = nodemailer.createTransport({
 				  host: 'smtp.gmail.com',
 				port: 587,
 				secure: false,
 					auth: {
-						user: 'brstdev18@gmail.com',
-						pass: 'brstdeveloper18'
+						user: 'brstcheck@gmail.com',
+						pass: 'brstdeveloper1'
 					}
-				}); */
-				
-				var transporter = nodemailer.createTransport(smtpTransport({
+				});
+			
+				/* var transporter = nodemailer.createTransport(smtpTransport({
 					service: 'yandex',
 					auth: {
 						user: 'hatwekhod@yandex.com', // my mail
 						pass: 'gephszbzxgdwojwa'
 					}
-				}));
+				})); */
 				
 				
 				var template = handlebars.compile(signup_email_temp);
@@ -82,8 +82,8 @@ var registerUser = function (req, res, done) {
 				};
 				var htmlToSend = template(replacements);
 				var mailOptions = {
-					//from:'brstdev18@gmail.com', 
-					from:'DoNotReply@yandex.com',
+					from:'brstdev18@gmail.com', 
+					//from:'DoNotReply@yandex.com',
 					to: newUser.email,
 					subject: 'HatWeKhod - Registration email',
 					html: htmlToSend
