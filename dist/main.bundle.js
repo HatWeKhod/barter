@@ -2358,12 +2358,18 @@ var UserRegisterComponent = /** @class */ (function () {
             return false;
         }
         this.loginService.postRegister(this.sigupForm.value).subscribe(function (res) {
-            console.log(res);
-            localStorage.setItem('isLoggedin', 'true');
-            localStorage.setItem('fbId', res['user'].fbId);
-            localStorage.setItem('name', res['user'].name);
-            localStorage.setItem('user_email', res['user'].email);
-            _this.router.navigate(['/home']);
+            if (res['status'] == '422') {
+                _this.form_error = res['message'];
+                return false;
+            }
+            else {
+                console.log(res);
+                localStorage.setItem('isLoggedin', 'true');
+                localStorage.setItem('fbId', res['user'].fbId);
+                localStorage.setItem('name', res['user'].name);
+                localStorage.setItem('user_email', res['user'].email);
+                _this.router.navigate(['/home']);
+            }
         }, function (error) {
             console.log(error);
         });

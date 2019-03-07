@@ -67,12 +67,18 @@ export class UserRegisterComponent implements OnInit {
 		
 		this.loginService.postRegister(this.sigupForm.value).subscribe(
 		  res => {
-			  console.log(res);
-			localStorage.setItem('isLoggedin', 'true')
-            localStorage.setItem('fbId', res['user'].fbId)
-            localStorage.setItem('name', res['user'].name)
-			localStorage.setItem('user_email', res['user'].email)
-            this.router.navigate(['/home']);  
+			  if(res['status'] == '422'){
+					  this.form_error = res['message'];
+					  return false;
+				  }else{
+					  console.log(res);
+						localStorage.setItem('isLoggedin', 'true')
+						localStorage.setItem('fbId', res['user'].fbId)
+						localStorage.setItem('name', res['user'].name)
+						localStorage.setItem('user_email', res['user'].email)
+						this.router.navigate(['/home']);  
+				  }
+			  
 		  },
 		  error => {
 			  console.log(error)

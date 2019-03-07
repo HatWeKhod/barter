@@ -28,101 +28,59 @@ var loggedIn = function (req, res) {
 var registerUser = function (req, res, done) {
     console.log(req.body);
 	var rand_fbid = Math.floor(Math.random() * (99999999999999-100000000)+100000000);
-	var newUser = new FbUsers({
-          fbId: rand_fbid,
-          name: req.body.username,
-		  login_type:'manual',
-		  email: req.body.email,
-		  password:req.body.password
-        }).save(function (err, newUser) {
-          if (err) throw err;
-          console.log(newUser);
-			if (newUser) {
-				console.log(newUser);
 	
-				req.session.fbid = newUser.fbId;
-				req.session.email = newUser.email;
-				req.session.login_type = newUser.login_type;
-				
-				
-				var env = process.env['NODE_ENV'] || 'development',
-					  keys;
-
-				  // Set environment
-				  keys = (env === 'production') ? require('../config/productionKeys')[env] : require('../config/keys')[env];
-
-				
-				//var nodemailer = require('nodemailer');
-			/* var transporter = nodemailer.createTransport({
-				  host: 'smtp.gmail.com',
-				port: 587,
-				secure: false,
-					auth: {
-						user: 'brstcheck@gmail.com',
-						pass: 'brstdeveloper1'
-					}
-				}); */
+	 FbUsers.findOne({
+		email: req.body.email
+	  }, function (err, fbuser_exist) {
+		if (fbuser_exist) {
+			res.send({status: "422", message: 'That email is taken. Try another.'})
 			
-				var transporter = nodemailer.createTransport(smtpTransport({
-					service: 'yandex',
-					auth: {
-						user: 'hatwekhod@yandex.com', // my mail
-						pass: 'gephszbzxgdwojwa'
-					}
-				})); 
-				
-				
-				var template = handlebars.compile(signup_email_temp);
-				var replacements = {
-					 username: newUser.name,
-					 password: newUser.password,
-					 user_email: newUser.email,							 
-					 admin_email: 'hatwekhod@yandex.com',							 
-					 brand_name: 'HatWeKhod'
-				};
-				var htmlToSend = template(replacements);
-				var mailOptions = {
-					//from:'brstdev18@gmail.com', 
-					from:'DoNotReply@yandex.com',
-					to: newUser.email,
-					subject: 'HatWeKhod - Registration email',
-					html: htmlToSend
-				};
-					console.log(mailOptions);
-				transporter.sendMail(mailOptions, function (error, info) {
-					if (error) {
-						console.log('in_error',error);
-					  //  utils.handleError(error, 500);
-						  res.send(500);
-					} else {
-						console.log('Email sent: ' + info.response);
-						res.send({status: "200", message: 'Success','user':newUser})
-						//res.send(200);
-					}
-				});
-				
+		}else{
+			var newUser = new FbUsers({
+				  fbId: rand_fbid,
+				  name: req.body.username,
+				  login_type:'manual',
+				  email: req.body.email,
+				  password:req.body.password
+				}).save(function (err, newUser) {
+				  if (err) throw err;
+				  console.log(newUser);
+					if (newUser) {
+						console.log(newUser);
+			
+						req.session.fbid = newUser.fbId;
+						req.session.email = newUser.email;
+						req.session.login_type = newUser.login_type;
 						
-				/* var readHTMLFile = function(path, callback) {
-						fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
-							if (err) {
-								throw err;
-								return callback(err);
-							}
-							else {
-								return callback(null, html);
-							}
-						});
-					};
+						
+						var env = process.env['NODE_ENV'] || 'development',
+							  keys;
 
-					var smtpTrans = nodemailer.createTransport({
-					   service: 'Gmail',
-						auth: {
-							user: 'brstdev18@gmail.com',
-							pass: 'brstdeveloper18'
-						}
-					  });
-					readHTMLFile(signup_template_file_path, function(err, html) {
-						var template = handlebars.compile(html);
+						  // Set environment
+						  keys = (env === 'production') ? require('../config/productionKeys')[env] : require('../config/keys')[env];
+
+						
+						//var nodemailer = require('nodemailer');
+					/* var transporter = nodemailer.createTransport({
+						  host: 'smtp.gmail.com',
+						port: 587,
+						secure: false,
+							auth: {
+								user: 'brstcheck@gmail.com',
+								pass: 'brstdeveloper1'
+							}
+						});  */
+					
+						var transporter = nodemailer.createTransport(smtpTransport({
+							service: 'yandex',
+							auth: {
+								user: 'hatwekhod@yandex.com', // my mail
+								pass: 'gephszbzxgdwojwa'
+							}
+						})); 
+						
+						
+						var template = handlebars.compile(signup_email_temp);
 						var replacements = {
 							 username: newUser.name,
 							 password: newUser.password,
@@ -132,30 +90,87 @@ var registerUser = function (req, res, done) {
 						};
 						var htmlToSend = template(replacements);
 						var mailOptions = {
-							from: 'hatwekhod@yandex.com',
-							to : req.body.email,
-							subject : 'Password reset request from HatWeKhod',
-							html : htmlToSend
-						 };
-
-						smtpTrans.sendMail(mailOptions, function (error, response) {
+							//from:'brstdev18@gmail.com', 
+							from:'DoNotReply@yandex.com',
+							to: newUser.email,
+							subject: 'HatWeKhod - Registration email',
+							html: htmlToSend
+						};
+							console.log(mailOptions);
+						transporter.sendMail(mailOptions, function (error, info) {
 							if (error) {
-								console.log(error);
-								callback(error);
-							}else{
-							console.log(response);
-							res.send({status: "200", message: 'Success','user':fbuser})
+								console.log('in_error',error);
+							  //  utils.handleError(error, 500);
+								  res.send(500);
+							} else {
+								console.log('Email sent: ' + info.response);
+								res.send({status: "200", message: 'Success','user':newUser})
+								//res.send(200);
 							}
 						});
-					});  */
-				
-				
-				
-			}else{
-				res.send({status: "422", message: 'Something went wrong please check your details'})
-			}
-		  
-        });
+						
+								
+						/* var readHTMLFile = function(path, callback) {
+								fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
+									if (err) {
+										throw err;
+										return callback(err);
+									}
+									else {
+										return callback(null, html);
+									}
+								});
+							};
+
+							var smtpTrans = nodemailer.createTransport({
+							   service: 'Gmail',
+								auth: {
+									user: 'brstdev18@gmail.com',
+									pass: 'brstdeveloper18'
+								}
+							  });
+							readHTMLFile(signup_template_file_path, function(err, html) {
+								var template = handlebars.compile(html);
+								var replacements = {
+									 username: newUser.name,
+									 password: newUser.password,
+									 user_email: newUser.email,							 
+									 admin_email: 'hatwekhod@yandex.com',							 
+									 brand_name: 'HatWeKhod'
+								};
+								var htmlToSend = template(replacements);
+								var mailOptions = {
+									from: 'hatwekhod@yandex.com',
+									to : req.body.email,
+									subject : 'Password reset request from HatWeKhod',
+									html : htmlToSend
+								 };
+
+								smtpTrans.sendMail(mailOptions, function (error, response) {
+									if (error) {
+										console.log(error);
+										callback(error);
+									}else{
+									console.log(response);
+									res.send({status: "200", message: 'Success','user':fbuser})
+									}
+								});
+							});  */
+						
+						
+						
+					}else{
+						res.send({status: "422", message: 'Something went wrong please check your details'})
+					}
+				  
+				});
+		}
+
+	  });
+	
+	
+	
+	
 	
 	
 //    if(req.isAuthenticated()) {
@@ -251,21 +266,32 @@ var forgotPassowrd = function (req, res, done) {
 				var encrypted_code = makeid();
 
 				
-				var transporter = nodemailer.createTransport(smtpTransport({
+				 var transporter = nodemailer.createTransport(smtpTransport({
 					service: 'yandex',
 					auth: {
 						user: 'hatwekhod@yandex.com', // my mail
 						pass: 'gephszbzxgdwojwa'
 					}
-				}));
+				})); 
+				
+				/* var transporter = nodemailer.createTransport({
+				  host: 'smtp.gmail.com',
+				port: 587,
+				secure: false,
+					auth: {
+						user: 'brstcheck@gmail.com',
+						pass: 'brstdeveloper1'
+					}
+				}); */
+				
 				var template = handlebars.compile(forgot_pass_temp);
 				var replacements = {
-					 username: fbuser.name,
-					 password: fbuser.password,
-					 user_email: fbuser.email,							 
-					 admin_email: 'admin@hatwekhod.net',
-					 encrypted_code	: encrypted_code,	
-					 brand_name: 'HatWeKhod'
+					username: fbuser.name,
+					password: fbuser.password,
+					user_email: fbuser.email,							 
+					admin_email: 'hatwekhod@yandex.com',	
+					encrypted_code	: encrypted_code,	
+					brand_name: 'HatWeKhod'
 				};
 				var htmlToSend = template(replacements);
 				var mailOptions = {
