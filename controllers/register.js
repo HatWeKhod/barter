@@ -61,7 +61,7 @@ var registerUser = function (req, res, done) {
 
 						
 						//var nodemailer = require('nodemailer');
-					var transporter = nodemailer.createTransport({
+					/* var transporter = nodemailer.createTransport({
 						  host: 'smtp.gmail.com',
 						port: 587,
 						secure: false,
@@ -69,15 +69,15 @@ var registerUser = function (req, res, done) {
 								user: 'brstcheck@gmail.com',
 								pass: 'brstdeveloper1'
 							}
-						}); 
+						});  */
 					
-						/* var transporter = nodemailer.createTransport(smtpTransport({
+						var transporter = nodemailer.createTransport(smtpTransport({
 							service: 'yandex',
 							auth: {
-								user: '***********', // my Yandex mail
-								pass: '***********'// my Yandex password
+								user: 'hatwekhod@yandex.com', // my mail
+								pass: 'gephszbzxgdwojwa'
 							}
-						}));  */
+						})); 
 						
 						
 						var template = handlebars.compile(signup_email_temp);
@@ -85,7 +85,7 @@ var registerUser = function (req, res, done) {
 							 username: newUser.name,
 							 password: newUser.password,
 							 user_email: newUser.email,							 
-							 admin_email: '**********',	// admin email						 
+							 admin_email: 'hatwekhod@yandex.com',	// admin email						 
 							 brand_name: 'HatWeKhod'
 						};
 						var htmlToSend = template(replacements);
@@ -277,15 +277,15 @@ var forgotPassowrd = function (req, res, done) {
 				var encrypted_code = makeid();
 
 				
-				 /* var transporter = nodemailer.createTransport(smtpTransport({
+				var transporter = nodemailer.createTransport(smtpTransport({
 					service: 'yandex',
 					auth: {
-						user: '***********', // my Yandex mail
-						pass: '***********'// my Yandex password
+						user: 'hatwekhod@yandex.com', // my mail
+						pass: 'gephszbzxgdwojwa'
 					}
-				})); */ 
+				})); 
 				
-				var transporter = nodemailer.createTransport({
+				/* var transporter = nodemailer.createTransport({
 				  host: 'smtp.gmail.com',
 				port: 587,
 				secure: false,
@@ -293,14 +293,14 @@ var forgotPassowrd = function (req, res, done) {
 						user: 'brstcheck@gmail.com',
 						pass: 'brstdeveloper1'
 					}
-				}); 
+				});  */
 				
 				var template = handlebars.compile(forgot_pass_temp);
 				var replacements = {
 					username: fbuser.name,
 					password: fbuser.password,
 					user_email: fbuser.email,							 
-					admin_email: '************',// admin email	
+					admin_email: 'hatwekhod@yandex.com',// admin email	
 					encrypted_code	: encrypted_code,	
 					brand_name: 'HatWeKhod'
 				};
