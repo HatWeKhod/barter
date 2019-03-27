@@ -61,7 +61,7 @@ var registerUser = function (req, res, done) {
 
 						
 						//var nodemailer = require('nodemailer');
-					/* var transporter = nodemailer.createTransport({
+					var transporter = nodemailer.createTransport({
 						  host: 'smtp.gmail.com',
 						port: 587,
 						secure: false,
@@ -69,15 +69,15 @@ var registerUser = function (req, res, done) {
 								user: 'brstcheck@gmail.com',
 								pass: 'brstdeveloper1'
 							}
-						});  */
+						}); 
 					
-						var transporter = nodemailer.createTransport(smtpTransport({
+						/* var transporter = nodemailer.createTransport(smtpTransport({
 							service: 'yandex',
 							auth: {
 								user: '***********', // my Yandex mail
 								pass: '***********'// my Yandex password
 							}
-						})); 
+						}));  */
 						
 						
 						var template = handlebars.compile(signup_email_temp);
@@ -181,29 +181,40 @@ var registerUser = function (req, res, done) {
 
 // manual user login
 var loginUser = function (req, res, done) {
-	 FbUsers.findOne({
-    email: req.body.email,
-	password:req.body.password
-  }, function (err, fbuser) {
-    if (fbuser) {
-		console.log('fbuser coming');
-		console.log(fbuser);
-		
-		req.session.fbid = fbuser.fbId;
-		req.session.email = fbuser.email;
-		req.session.login_type = fbuser.login_type;
-		
-		res.send({status: "200", message: 'Success','user':fbuser})
-    }else{
-		res.send({status: "422", message: 'Something went wrong please check your details'})
-	}
-
-  });
+	var email = req.body.email;
 	
+	if (validateEmail(email)) {
+		FbUsers.findOne({
+			email: req.body.email,
+			password:req.body.password
+		  }, function (err, fbuser) {
+			if (fbuser) {
+				console.log('fbuser coming');
+				console.log(fbuser);
+				
+				req.session.fbid = fbuser.fbId;
+				req.session.email = fbuser.email;
+				
+				
+				
+				req.session.login_type = fbuser.login_type;
+				
+				res.send({status: "200", message: 'Success','user':fbuser})
+			}else{
+				res.send({status: "422", message: 'Something went wrong please check your details'})
+			}
+
+		  });
+	} else {
+		res.send({status: "500", message: 'Please enter a valid email address. '})
+	}
 	
 };
 
-
+function validateEmail(email) {
+	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(String(email).toLowerCase());
+}
 // getting user data
 var userData = function (req, res, done) {
 	console.log(req.body);
@@ -266,15 +277,15 @@ var forgotPassowrd = function (req, res, done) {
 				var encrypted_code = makeid();
 
 				
-				 var transporter = nodemailer.createTransport(smtpTransport({
+				 /* var transporter = nodemailer.createTransport(smtpTransport({
 					service: 'yandex',
 					auth: {
 						user: '***********', // my Yandex mail
 						pass: '***********'// my Yandex password
 					}
-				})); 
+				})); */ 
 				
-				/* var transporter = nodemailer.createTransport({
+				var transporter = nodemailer.createTransport({
 				  host: 'smtp.gmail.com',
 				port: 587,
 				secure: false,
@@ -282,7 +293,7 @@ var forgotPassowrd = function (req, res, done) {
 						user: 'brstcheck@gmail.com',
 						pass: 'brstdeveloper1'
 					}
-				}); */
+				}); 
 				
 				var template = handlebars.compile(forgot_pass_temp);
 				var replacements = {
