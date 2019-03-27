@@ -63,7 +63,17 @@ export class UserRegisterComponent implements OnInit {
 		if(this.sigupForm.value.password != this.sigupForm.value.c_password){
 			this.c_pass_error = '*Those passwords did not match. Try again.';
 			return false;
-		}
+		}else{
+			var pass = this.sigupForm.value.password;
+			var check_pass = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])";
+			if(pass.match(check_pass)){
+				//nothing to do
+			}
+			else{
+				this.pass_error = '*The password must contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character.';
+				return false;
+			}
+		} 
 		
 		this.loginService.postRegister(this.sigupForm.value).subscribe(
 		  res => {
