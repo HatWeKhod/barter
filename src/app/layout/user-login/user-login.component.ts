@@ -35,9 +35,6 @@ export class UserLoginComponent implements OnInit {
 			if(this.loginForm.value.email == '' || this.loginForm.value.email == null){
 				this.email_err = '*Please enter a valid email address';
 				return false;
-			}else if(this.loginForm.value.email.length > 25) {
-				this.email_err = '*Email more than 25 charcters is not allowed.';
-				return false;
 			}else{
 				var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 				var email = this.loginForm.value.email;
@@ -48,27 +45,11 @@ export class UserLoginComponent implements OnInit {
 					this.email_err = '*Please enter a valid email address';
 					return false;
 				}
-			} 
+			}
 			if(this.loginForm.value.password == '' || this.loginForm.value.password == null){
 				this.pass_error = '*Please enter a password';
 				return false;
-			}else if(this.loginForm.value.password.length > 25) {
-				this.pass_error = '*Password more than 25 charcters is not allowed.';
-				return false;
-			}else{
-				var pass = this.loginForm.value.password;
-				var check_pass = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])";
-				if(pass.match(check_pass)){
-					//nothing to do
-				}
-				else{
-					this.pass_error = '*The password must contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character.';
-					return false;
-				}
 			}
-			  
-			
-			
 			this.loginService.postLoginUser(this.loginForm.value).subscribe(
 			  res => {
 				  
