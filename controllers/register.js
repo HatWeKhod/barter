@@ -74,8 +74,8 @@ var registerUser = function (req, res, done) {
 						var transporter = nodemailer.createTransport(smtpTransport({
 							service: 'yandex',
 							auth: {
-								user: 'hatwekhod@yandex.com', // my mail
-								pass: 'gephszbzxgdwojwa'
+								user: '***********', // my mail
+								pass: '***********'
 							}
 						})); 
 						
@@ -85,7 +85,7 @@ var registerUser = function (req, res, done) {
 							 username: newUser.name,
 							 password: newUser.password,
 							 user_email: newUser.email,							 
-							 admin_email: 'hatwekhod@yandex.com',	// admin email						 
+							 admin_email: '********',	// admin email						 
 							 brand_name: 'HatWeKhod'
 						};
 						var htmlToSend = template(replacements);
@@ -280,8 +280,8 @@ var forgotPassowrd = function (req, res, done) {
 				var transporter = nodemailer.createTransport(smtpTransport({
 					service: 'yandex',
 					auth: {
-						user: 'hatwekhod@yandex.com', // my mail
-						pass: 'gephszbzxgdwojwa'
+						user: '***********', // my mail
+						pass: '***********'
 					}
 				})); 
 				
@@ -300,7 +300,7 @@ var forgotPassowrd = function (req, res, done) {
 					username: fbuser.name,
 					password: fbuser.password,
 					user_email: fbuser.email,							 
-					admin_email: 'hatwekhod@yandex.com',// admin email	
+					admin_email: '************',// admin email	
 					encrypted_code	: encrypted_code,	
 					brand_name: 'HatWeKhod'
 				};
